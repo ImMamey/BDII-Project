@@ -119,6 +119,12 @@ CREATE TABLE SUCESO(
 
 CREATE TABLE E_P(
  fk_piloto_id BIGINT NOT NULL,
- fk_suceso_id BIGINT NOT NULL,
+ fk_equipo_id BIGINT NOT NULL,
  PRIMARY KEY(fk_piloto_id,fk_suceso_id)
 );
+
+CREATE TABLE S_P(
+ fk_suceso_id BIGINT NOT NULL,
+ fk_piloto_id BIGINT NOT NULL,
+ PRIMARY KEY(fk_suceso_id,fk_piloto)
+)
