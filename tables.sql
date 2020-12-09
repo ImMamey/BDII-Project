@@ -10,15 +10,15 @@ fecha_fallecimiento DATE,
 ) ;
 
 CREATE TYPE  FECHA AS(
-dia day,
-mes month,
-ano year
+dia BIGINT,
+mes BIGINT,
+ano BIGINT
 );
 
 CREATE TYPE TIEMPO AS(
-hora HOUR,
-minuto MINUTE,
-segundo SECOND
+hora BIGINT,
+minuto BIGINT,
+segundo BIGINT
 );
 ---========== TABLE's================
 CREATE TABLE MARCA_AUTO(
@@ -30,6 +30,7 @@ CREATE TABLE MARCA_AUTO(
 CREATE TABLE EQUIPO(
  id BIGINT NOT NULL,
  nombre VARCHAR NOT NULL,
+ foto BYTEA NOT NULL,
  nacionalidad VARCHAR NOT NULL,
  fk_marca_auto_id BIGINT,
  fk_vehiculo_id BIGINT,
@@ -39,7 +40,6 @@ CREATE TABLE EQUIPO(
 CREATE TABLE VEHICULO(
  id BIGINT NOT NULL,
  nombre VARCHAR NOT NULL,
- foto BYTEA NOT NULL,
  tipo VARCHAR NOT NULL,
  fk_marca_auto_id BIGINT NOT NULL,
  PRIMARY KEY (id)
