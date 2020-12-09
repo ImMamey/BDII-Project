@@ -71,14 +71,50 @@ CREATE TABLE PILOTO(
  identificacion  NOMBRE NOT NULL,
  foto BYTEA NOT NULL,
  lugar_nacimiento VARCHAR NOT NULL,
- nacionalidad VARCHAR[] NOT NULL,
+ nacionalidad VARCHAR() NOT NULL,
  genero VARCHAR NOT NULL,
  coeficientes Varchar[][] NOT NULL,
  PRIMARY KEY(id)
 );
 
 CREATE TABLE SECCION(
+ id BIGINT NOT NULL,
+ nombre VARCHAR NOT NULL,
+ dificultad VARCHAR NOT NULL,
+ ancho_sec VARCHAR NOT NULL,
+ PRIMARY KEY(id)
+)
 
+CREATE TABLE EVENTO(
+ id BIGINT NOT NULL,
+ ano DATE NOT NULL,
+ tipo VARCHAR,
+ PRIMARY KEY(id)
+)
+
+CREATE TABLE PISTA(
+    id BIGINT NOT NULL,
+    nombre VARCHAR NOT NULL,
+    fk_evento_id BIGINT,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE P_S(
+ fk_seccion_id BIGINT,
+ fk_pista_id BIGINT,
+ PRIMARY KEY(pk_seccion_id,pk_pista_id)
+)
+
+CREATE TABLE SUCESO(
+ id BIGINT NOT NULL,
+ tipo_suceso VARCHAR NOT NULL,
+ momento_suceso TIEMPO,  --TDA TIEMPO
+ clima_momento VARCHAR(4) NOT NULL,
+ causa VARCHAR(3),
+ tipo_bandera VARCHAR,
+ fk_p_s_fk_seccion_id BIGINT,
+ fk_p_s_fk_pista_id BIGINT,
+ PRIMARY KEY(id)
 )
 
 CREATE TABLE E_P(
