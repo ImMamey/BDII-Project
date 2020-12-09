@@ -27,14 +27,11 @@ CREATE TABLE MARCA_AUTO(
  PRIMARY KEY(id)
 );
 
-CREATE TABLE EQUIPO(
- id BIGINT NOT NULL,
- nombre VARCHAR NOT NULL,
- foto BYTEA NOT NULL,
- nacionalidad VARCHAR NOT NULL,
- fk_marca_auto_id BIGINT,
- fk_vehiculo_id BIGINT,
- PRIMARY KEY(id)
+CREATE TABLE MOTOR(
+    id BIGINT NOT NULL,
+    nombre VARCHAR NOT NULL,
+    cilindraje VARCHAR NOT NULL,
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE VEHICULO(
@@ -51,11 +48,14 @@ fk_vehiculo_id BIGINT NOT NULL,
 PRIMARY KEY(fk_motor_id,fk_vehiculo_id)
 );
 
-CREATE TABLE MOTOR(
-    id BIGINT NOT NULL,
-    nombre VARCHAR NOT NULL,
-    cilindraje VARCHAR NOT NULL,
-    PRIMARY KEY(id)
+CREATE TABLE EQUIPO(
+ id BIGINT NOT NULL,
+ nombre VARCHAR NOT NULL,
+ foto BYTEA NOT NULL,
+ nacionalidad VARCHAR NOT NULL,
+ fk_marca_auto_id BIGINT,
+ fk_vehiculo_id BIGINT,
+ PRIMARY KEY(id)
 );
 
 CREATE TABLE INVENTARIO(
@@ -88,20 +88,20 @@ CREATE TABLE SECCION(
 CREATE TABLE EVENTO(
  id BIGINT NOT NULL,
  ano DATE NOT NULL,
- tipo VARCHAR,
+ tipo VARCHAR NOT NULL,
+ fk_pista_id BIGINT NOT NULL,
  PRIMARY KEY(id)
 )
 
 CREATE TABLE PISTA(
     id BIGINT NOT NULL,
     nombre VARCHAR NOT NULL,
-    fk_evento_id BIGINT,
     PRIMARY KEY (id)
 )
 
 CREATE TABLE P_S(
- fk_seccion_id BIGINT,
- fk_pista_id BIGINT,
+ fk_seccion_id BIGINT NOT NULL,
+ fk_pista_id BIGINT NOT NULL,
  PRIMARY KEY(pk_seccion_id,pk_pista_id)
 )
 
