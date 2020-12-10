@@ -60,7 +60,8 @@ CREATE TABLE EQUIPO(
 
 CREATE TABLE INVENTARIO(
  id BIGINT NOT NULL,
- producto VARCHAR[][] NOT NULL,
+ producto VARCHAR[][] NOT NULL, --ó producto ARRAY NOT NULL
+ ---https://www.postgresql.org/docs/9.2/arrays.html
  cantidad BIGINT NOT NULL,
  fk_equipo_id BIGINT NOT NULL,
  PRIMARY KEY(id)
@@ -71,9 +72,10 @@ CREATE TABLE PILOTO(
  identificacion  NOMBRE NOT NULL,
  foto BYTEA NOT NULL,
  lugar_nacimiento VARCHAR NOT NULL,
- nacionalidad VARCHAR() NOT NULL,
+ nacionalidad VARCHAR NOT NULL,
  genero VARCHAR NOT NULL,
- coeficientes Varchar[][] NOT NULL,
+ coeficientes VARCHAR[2][2] NOT NULL,--ó producto ARRAY NOT NULL
+  ---https://www.postgresql.org/docs/9.2/arrays.html
  PRIMARY KEY(id)
 );
 
