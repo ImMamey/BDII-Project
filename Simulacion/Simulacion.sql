@@ -4,7 +4,7 @@
 
 ---===============================================================
 CREATE OR REPLACE FUNCTION start_race(competitor E_P.fk_equipo_id%TYPE) RETURNS TABLE(
-    team_name text,
+    team_name EQUIPO.nombre%TYPE,
     race_position BIGINT,
     distance FLOAT,
     loops BIGINT,
@@ -27,9 +27,8 @@ BEGIN
   LOOP
      ---CODIGO AQUI
      --- SELECT "startTimer"()
-  END IF
-    --- CODIGO AQUI
-END LOOP; 
+  END LOOP;
+
 RETURNS TABLE; 
 END;
 $func$LANGUAGE plpgsql;
