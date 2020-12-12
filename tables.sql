@@ -30,7 +30,7 @@ CREATE TABLE MARCA_AUTO(
 CREATE TABLE MOTOR(
     id BIGINT NOT NULL,
     nombre VARCHAR NOT NULL,
-    cilindraje VARCHAR NOT NULL,
+    cilindraje INT NOT NULL,
     PRIMARY KEY(id)
 );
 
@@ -73,6 +73,7 @@ CREATE TABLE PILOTO(
  foto BYTEA NOT NULL,
  lugar_nacimiento VARCHAR NOT NULL,
  nacionalidad VARCHAR NOT NULL,
+ manejo INT NOT NULL,
  genero VARCHAR NOT NULL,
  coeficientes VARCHAR[2][2] NOT NULL,--ó producto ARRAY NOT NULL
   ---https://www.postgresql.org/docs/9.2/arrays.html
@@ -82,8 +83,8 @@ CREATE TABLE PILOTO(
 CREATE TABLE SECCION(
  id BIGINT NOT NULL,
  nombre VARCHAR NOT NULL,
- dificultad VARCHAR NOT NULL,
- ancho_sec VARCHAR NOT NULL,
+ dificultad INT NOT NULL,
+ ancho_sec  INT NOT NULL,
  PRIMARY KEY(id)
 )
 
