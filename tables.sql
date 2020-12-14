@@ -163,3 +163,17 @@ CREATE TABLE E_R(
         fk_e_p_fk_equipo_id
         )
 )
+
+CREATE TABLE RANKING_HORA(
+    id BIGINT NOT NULL,
+    hora BIGINT NOT NULL,
+    puesto BIGINT NOT NULL,
+     fk_ranking_id BIGINT NOT NULL,
+     fk_e_p_fk_piloto_id BIGINT NOT NULL,
+     fk_e_p_fk_equipo_id BIGINT NOT NULL,
+        PRIMARY KEY(
+        fk_ranking_id,
+        fk_e_p_fk_piloto_id,
+        fk_e_p_fk_equipo_id
+        )
+)
