@@ -198,6 +198,7 @@ CREATE TABLE E_R(
 ALTER TABLE E_R ADD CONSTRAINT e_r_ranking_fk FOREIGN KEY (fk_ranking_id,fk_ranking_evento_id) REFERENCES RANKING (id,fk_evento_id);
 ALTER TABLE E_R ADD CONSTRAINT e_r_p_id_fk FOREIGN KEY (fk_e_p_fk_piloto_id,fk_e_p_fk_equipo_id) REFERENCES E_P (fk_piloto_id,fk_equipo_id);
 
+
 CREATE TABLE RANKING_HORA(
     id BIGINT NOT NULL,
     hora BIGINT NOT NULL,
@@ -208,12 +209,13 @@ CREATE TABLE RANKING_HORA(
     fk_e_r_fk_equipo_id BIGINT NOT NULL,
         PRIMARY KEY(
         id,
-        fk_ranking_id,
-        fk_ranking_evento_id,
-        fk_e_p_fk_piloto_id,
-        fk_e_p_fk_equipo_id
+        fk_e_r_ranking_id,
+        fk_e_r_ranking_evento_id,
+        fk_e_r_fk_piloto_id,
+        fk_e_r_fk_equipo_id
         )
 );
 
 ALTER TABLE RANKING_HORA ADD CONSTRAINT hora_e_r_id_fk FOREIGN KEY (fk_e_r_ranking_id,fk_e_r_ranking_evento_id,fk_e_r_fk_piloto_id,fk_e_r_fk_equipo_id) REFERENCES E_R (fk_ranking_id,fk_ranking_evento_id,fk_e_p_fk_piloto_id,fk_e_p_fk_equipo_id);
+
 
