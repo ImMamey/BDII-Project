@@ -5,7 +5,7 @@ segundo_nombre VARCHAR(15),
 primer_apellido VARCHAR(15),
 segundo_apellido VARCHAR(15),
 fecha_nacimiento DATE, 
-fecha_fallecimiento DATE, 
+fecha_fallecimiento DATE 
 --CALL edad(fecha_nacimiento); 
 ) ;
 
@@ -51,7 +51,6 @@ PRIMARY KEY(fk_motor_id,fk_vehiculo_id)
 CREATE TABLE EQUIPO(
  id BIGINT NOT NULL,
  nombre VARCHAR NOT NULL,
- foto BYTEA NOT NULL,
  nacionalidad VARCHAR NOT NULL,
  fk_marca_auto_id BIGINT,
  fk_vehiculo_id BIGINT NOT NULL,
@@ -86,7 +85,7 @@ CREATE TABLE SECCION(
  dificultad INT NOT NULL,
  ancho_sec  INT NOT NULL,
  PRIMARY KEY(id)
-)
+);
 
 CREATE TABLE EVENTO(
  id BIGINT NOT NULL,
@@ -94,19 +93,19 @@ CREATE TABLE EVENTO(
  tipo VARCHAR NOT NULL,
  fk_pista_id BIGINT NOT NULL,
  PRIMARY KEY(id)
-)
+);
 
 CREATE TABLE PISTA(
     id BIGINT NOT NULL,
     nombre VARCHAR NOT NULL,
     PRIMARY KEY (id)
-)
+);
 
 CREATE TABLE P_S(
  fk_seccion_id BIGINT NOT NULL, --revisar
  fk_pista_id BIGINT NOT NULL, --revisar
- PRIMARY KEY(pk_seccion_id,pk_pista_id)
-)
+ PRIMARY KEY(fk_seccion_id,fk_pista_id)
+);
 
 CREATE TABLE SUCESO(
  id BIGINT NOT NULL,
@@ -118,25 +117,25 @@ CREATE TABLE SUCESO(
  fk_p_s_fk_seccion_id BIGINT,
  fk_p_s_fk_pista_id BIGINT,
  PRIMARY KEY(id)
-)
+);
 
 CREATE TABLE E_P(
  fk_piloto_id BIGINT NOT NULL,
  fk_equipo_id BIGINT NOT NULL,
- PRIMARY KEY(fk_piloto_id,fk_suceso_id)
+ PRIMARY KEY(fk_piloto_id,fk_equipo_id)
 );
 
 CREATE TABLE S_P(
  fk_suceso_id BIGINT NOT NULL,
  fk_piloto_id BIGINT NOT NULL,
- PRIMARY KEY(fk_suceso_id,fk_piloto)
-)
+ PRIMARY KEY(fk_suceso_id,fk_piloto_id)
+);
 
 CREATE TABLE S_I(
  fk_inventario_id BIGINT NOT NULL,
  fk_suceso_id BIGINT NOT NULL,
  PRIMARY KEY(fk_suceso_id,fk_inventario_id )
-)
+);
 
 CREATE TABLE RANKING(
     id BIGINT NOT NULL,
@@ -148,13 +147,14 @@ CREATE TABLE RANKING(
     distancia_km FLOAT,
     fk_evento_id BIGINT NOT NULL,
     PRIMARY KEY(id, fk_evento_id)
-)
+);
 
 CREATE TABLE E_R(
     categoria VARCHAR NOT NULL,
     numero_equipo BIGINT NOT NULL,
     marca_cauchos VARCHAR NOT NULL,
     fk_ranking_id BIGINT NOT NULL,
+     foto BYTEA NOT NULL,
      fk_e_p_fk_piloto_id BIGINT NOT NULL,
      fk_e_p_fk_equipo_id BIGINT NOT NULL,
     PRIMARY KEY(
@@ -162,4 +162,18 @@ CREATE TABLE E_R(
         fk_e_p_fk_piloto_id,
         fk_e_p_fk_equipo_id
         )
-)
+);
+
+CREATE TABLE RANKING_HORA(
+    id BIGINT NOT NULL,
+    hora BIGINT NOT NULL,
+    puesto BIGINT NOT NULL,
+     fk_ranking_id BIGINT NOT NULL,
+     fk_e_p_fk_piloto_id BIGINT NOT NULL,
+     fk_e_p_fk_equipo_id BIGINT NOT NULL,
+        PRIMARY KEY(
+        fk_ranking_id,
+        fk_e_p_fk_piloto_id,
+        fk_e_p_fk_equipo_id
+        )
+);
