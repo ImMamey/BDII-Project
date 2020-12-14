@@ -135,8 +135,7 @@ CREATE TABLE SUCESO(
  PRIMARY KEY(id)
 );
 
-ALTER TABLE SUCESO ADD CONSTRAINT suceso_seccion_id_fk FOREIGN KEY (fk_p_s_fk_seccion_id) REFERENCES P_S (fk_seccion_id);
-ALTER TABLE SUCESO ADD CONSTRAINT suceso_pista_id_fk FOREIGN KEY (fk_p_s_fk_pista_id) REFERENCES P_S (fk_pista_id);
+ALTER TABLE SUCESO ADD CONSTRAINT suceso_p_s_id_fk FOREIGN KEY (fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) REFERENCES P_S (fk_seccion_id,fk_pista_id);
 
 CREATE TABLE E_P(
  fk_piloto_id BIGINT NOT NULL,
@@ -195,8 +194,7 @@ CREATE TABLE E_R(
 );
 
 ALTER TABLE E_R ADD CONSTRAINT e_r_ranking_id_fk FOREIGN KEY (fk_ranking_id) REFERENCES RANKING (id);
-ALTER TABLE E_R ADD CONSTRAINT e_r_piloto_id_fk FOREIGN KEY (fk_e_p_fk_piloto_id) REFERENCES E_P (fk_piloto_id);
-ALTER TABLE E_R ADD CONSTRAINT e_r_equipo_id_fk FOREIGN KEY (fk_e_p_fk_equipo_id) REFERENCES E_P (fk_equipo_id);
+ALTER TABLE E_R ADD CONSTRAINT e_r_p_id_fk FOREIGN KEY (fk_e_p_fk_piloto_id,fk_e_p_fk_equipo_id) REFERENCES E_P (fk_piloto_id,fk_equipo_id);
 
 CREATE TABLE RANKING_HORA(
     id BIGINT NOT NULL,
@@ -213,6 +211,5 @@ CREATE TABLE RANKING_HORA(
         )
 );
 
-ALTER TABLE RANKING_HORA ADD CONSTRAINT hora_ranking_id_fk FOREIGN KEY (fk_ranking_id) REFERENCES E_R (fk_ranking_id);
-ALTER TABLE RANKING_HORA ADD CONSTRAINT hora_piloto_id_fk FOREIGN KEY (fk_e_r_fk_piloto_id) REFERENCES E_R (fk_e_p_fk_piloto_id);
-ALTER TABLE RANKING_HORA ADD CONSTRAINT hora_equipo_id_fk FOREIGN KEY (fk_e_r_fk_equipo_id) REFERENCES E_R (fk_e_p_fk_equipo_id);
+ALTER TABLE RANKING_HORA ADD CONSTRAINT hora_e_r_id_fk FOREIGN KEY (fk_ranking_id,fk_e_r_fk_piloto_id,fk_e_r_fk_equipo_id) REFERENCES E_R (fk_ranking_id,fk_e_p_fk_piloto_id,fk_e_p_fk_equipo_id);
+
