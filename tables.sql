@@ -64,9 +64,7 @@ CREATE TABLE EQUIPO(
 );
 
 ALTER TABLE EQUIPO ADD CONSTRAINT equipo_marca_id_fk FOREIGN KEY (fk_marca_auto_id) REFERENCES MARCA_AUTO (id);
-ALTER TABLE EQUIPO ADD CONSTRAINT equipo_motor_id_fk FOREIGN KEY (fk_v_m_motor_id) REFERENCES V_M (fk_motor_id);
-ALTER TABLE EQUIPO ADD CONSTRAINT equipo_vehiculo_id_fk FOREIGN KEY (fk_v_m_vehiculo_id) REFERENCES V_M (fk_vehiculo_id);
-
+ALTER TABLE EQUIPO ADD CONSTRAINT equipo_v_m_id_fk FOREIGN KEY (fk_v_m_motor_id,fk_v_m_vehiculo_id) REFERENCES V_M (fk_motor_id,fk_vehiculo_id);
 
 CREATE TABLE INVENTARIO(
  id BIGINT NOT NULL,
