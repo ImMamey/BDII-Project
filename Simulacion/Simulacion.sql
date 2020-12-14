@@ -5,7 +5,7 @@
 ---===============================================================
 
 --Falta que pilotos vana competir. se tiene que elegir un año.
-CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE) as 
+CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE, carrera_num int ) as 
 $func$
 DECLARE
      r E_P%ROWTYPE; --fila
@@ -24,7 +24,11 @@ BEGIN
 
   FOR E_P IN competidores LOOP
      /*
-     If competidor tiempo is <=24h then:
+     IF tablacompetidor.cantidad == 10 then
+
+     ó
+
+     IF tablaTwo.cantidad == 10 then
      */
      SELECT "startTimer"() -- por cada competidor
 
