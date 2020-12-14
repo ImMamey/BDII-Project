@@ -51,7 +51,6 @@ PRIMARY KEY(fk_motor_id,fk_vehiculo_id)
 CREATE TABLE EQUIPO(
  id BIGINT NOT NULL,
  nombre VARCHAR NOT NULL,
- foto BYTEA NOT NULL,
  nacionalidad VARCHAR NOT NULL,
  fk_marca_auto_id BIGINT,
  fk_vehiculo_id BIGINT NOT NULL,
@@ -155,6 +154,7 @@ CREATE TABLE E_R(
     numero_equipo BIGINT NOT NULL,
     marca_cauchos VARCHAR NOT NULL,
     fk_ranking_id BIGINT NOT NULL,
+     foto BYTEA NOT NULL,
      fk_e_p_fk_piloto_id BIGINT NOT NULL,
      fk_e_p_fk_equipo_id BIGINT NOT NULL,
     PRIMARY KEY(
