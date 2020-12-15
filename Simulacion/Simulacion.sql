@@ -1,20 +1,21 @@
 ---Función que inicia la carrera
----1) Empieza la iteración de la competencia, Interactuan cada uno de los competidores de la carrera.
+---1) Empieza la iteración de la competencia, interactuan cada uno de los competidores de la carrera (dependiendo del año), para ello se inserta un numero del 1 al 10 (1950 a 1959)
+---2) El año se decide con numero del 1 al 10. 1= 1950, 2=1951, 3=1952, 4=1953, etc.
 
 
 ---===============================================================
 
 --Falta que pilotos vana competir. se tiene que elegir un año.
-CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE, carrera_num int ) as 
+CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE,IN carrera_num int ) as 
 $func$
 DECLARE
      r E_P%ROWTYPE; --fila
      --a geto
      --anno number%type; IN 
  
-     competidores CURSOR FOR SELECT *
-       FROM E_P tabla --WHERE donde se especifique el año.
-       ORDER BY tabla.fk_equipo_id; 
+     competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_fk_equipo_id; 
+     eventos CURSOR FOR SELECT * FROM EVENTO tablaDos ORDER BY tablaDos.id;
+      
 BEGIN
  --init variables
   competitor_id := 0;
@@ -22,21 +23,26 @@ BEGIN
   tiempo_m:=0 BIGINT;
   tiempo_s:=0 BIGINT;
 
-  FOR E_P IN competidores LOOP
-     /*
-     IF tablacompetidor.cantidad == 10 then
+  variable1 BIGINT;
+  verificar:=false boolean;
 
-     ó
+  FOR E_R IN competidores LOOP
+      variable1 := E_R.fk_ranking_evento_id; --puede eliminarse
+      verificar:=false;
 
-     IF tablaTwo.cantidad == 10 then
-     */
+      FOR EVENTO IN eventos LOOP
+        IF EVENTO.ano = carrera_num then
+          verificar:=true;
+        END IF;
+      END LOOP;
+      --si el numero ingresado del año es iugal a el numero del evento de ese año.
+      IF carrera_num=E_R.fk_ranking_evento_id and then
+       
+      END IF;
+
+
      SELECT "startTimer"() -- por cada competidor
-
-     --END IF;
-     -- else
-    --- asdfasdfasdf
   END LOOP;
- -- END TIME LOOP;
 RETURNS TABLE; 
 END;
 $func$LANGUAGE plpgsql;
