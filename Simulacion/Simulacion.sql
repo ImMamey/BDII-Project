@@ -8,7 +8,7 @@
 CREATE OR REPLACE PROCEDURE start_race(IN carrera_anno int) as 
 $func$
 DECLARE
-     r E_P%ROWTYPE; --fila
+     --r E_P%ROWTYPE; --fila
  
      competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_fk_equipo_id; 
       
@@ -23,6 +23,7 @@ BEGIN
   verificar_evento:=false boolean;
 
   FOR E_R IN competidores LOOP
+  ---NO, tengo que usar el fk_ranking_evento_id de E_R o de ranking para buscar el año, revisar!!!!!!!!!!!!!!!!!!!
       verificar_evento:= SELECT verificar_ano_corredor(carrera_anno);
       --si el numero ingresado del año es iugal a el numero del evento de ese año.
       IF carrera_anno=E_R.fk_ranking_evento_id and verificar_evento = true then
