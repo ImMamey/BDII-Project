@@ -13,36 +13,40 @@ DECLARE
       
 BEGIN
  --===init variables==
-
-  --Declaracion universal de tiempo
-  tiempo_h:=0 BIGINT;
-  tiempo_m:=0 BIGINT;
-  tiempo_s:=0 BIGINT;
-
-  --variables por equipo
+ 
+  --variables por equipo !!!!!!!!!revisar
   equipo_num BIGINT;
   marca_cauchos CHAR VARYING;
   ranking BIGINT;
   foto bytea;
   evento_id BIGINT;
 
+  ---Dato del nuevo evento de revalida
+  nuevo_evento BIGINT;
+
   --Declaracion de boolean de verificacion de pariticpacion de evento
   verificar_evento:=false boolean;
 
   --=== end  of INIT==
+  nuevo_evento:=SELECT "crear_evento"();
 
   FOR E_R IN competidores LOOP
   ---NO, tengo que usar el fk_ranking_evento_id de E_R o de ranking para buscar el año, revisar!!!!!!!!!!!!!!!!!!!
 
-      --verificar_evento:= SELECT verificar_ano_corredor(carrera_anno);
       --si el numero ingresado del año es iugal a el numero del evento de ese año.
       IF carrera_anno=E_R.fk_ranking_evento_id  = true then
+
        --guardado de los datos del competidor
+
        equipo_num:= E_R.numero_equipo;
        marca_cauchos:= E_R.marca_cauchos;
        ranking:= E_R.fk_ranking_id;
        foto:= E_R.foto;
        evento_id:=E_R.fk_ranking_evento_id;
+
+       
+        SELECT "crear_ranking"();
+
        SELECT "startTimer"();
       END IF;
 
@@ -53,7 +57,14 @@ RETURNS TABLE;
 END;
 $func$LANGUAGE plpgsql;
 
+
+---===========funcion que genera un evento---------
+CREATE Or REPLACE PROCEDURE crear_evento() RETURNS as $function$
+
+
+
 ---===========funcion que regresa un dato tipo boolean si encuentra un año especifico en un evento=================
+
 
 CREATE OR REPLACE FUNCTION verificar_ano_corredor(numero int) RETURNS boolean as $function$
 DECLARE
