@@ -99,7 +99,7 @@ INSERT INTO EVENTO (id, ano, tipo, fk_pista_id) VALUES
     (20,(19,6,1959),'Ensayo',2);
 
 
-INSERT INTO E_P (fk_piloto_id, fk_equipo_id) VALUES
+INSERT INTO E_P (id,fk_piloto_id, fk_equipo_id) VALUES
     (1,1,1),
     (2,2,1),
     (3,3,2),
