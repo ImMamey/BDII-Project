@@ -1,8 +1,8 @@
 INSERT INTO MARCA_AUTO (id, nombre) VALUES
     (1,'HEALEY'),
-    (2,'ASTON MARTIN')
-    (3,'ALLARD')
-    (4,'TALBOT')
+    (2,'ASTON MARTIN'),
+    (3,'ALLARD'),
+    (4,'TALBOT');
 
 INSERT INTO MOTOR (id, nombre, cilindraje) VALUES
     (1,'TALBOT L6',4483),
@@ -24,9 +24,9 @@ INSERT INTO V_M (fk_motor_id,fk_vehiculo_id) VALUES
     (3,4)
     (4,5)
 
-INSERT INTO EQUIPO (id, nombre, nacionalidad, fk_marca_auto_id,fk_vehiculo_id) VALUES
-    (1,'L. Rosier','frances',4,1)
-    (2,'P. Meyrat','frances',4,2)
-    (3,'L. Rosier','frances',4,1)
-    (4,'L. Rosier','frances',4,1)
-    (5,'L. Rosier','frances',4,1)
+INSERT INTO EQUIPO (id, nombre, nacionalidad, fk_marca_auto_id,fk_v_m_vehiculo_id,fk_v_m_motor_id) VALUES
+    (1,'L. Rosier','frances',4,1,1)
+    (2,'P. Meyrat','frances',4,2,1)
+    (3,'S. Allard','britanico',3,3,2)
+    (4,'Healey motors company ltd','britanico',1,4,3)
+    (5,'Aston Martin cars ltd','britanico',2,5,4)
