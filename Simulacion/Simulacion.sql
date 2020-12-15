@@ -3,30 +3,29 @@
 ---2) El año se decide con numero del 1 al 10. 1= 1950, 2=1951, 3=1952, 4=1953, etc.
 
 
----===============================================================
+---=======================Funcion principal, inicia la carrera con un año dado=================================
 
---Falta que pilotos vana competir. se tiene que elegir un año.
-CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE,IN carrera_num int) as 
+CREATE OR REPLACE PROCEDURE start_race(IN carrera_anno int) as 
 $func$
 DECLARE
      r E_P%ROWTYPE; --fila
-     --anno number%type; IN 
  
      competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_fk_equipo_id; 
       
 BEGIN
- --init variables
-  competitor_id := 0;
+ --===init variables==
+
+  --Declaracion universal de tiempo
   tiempo_h:=0 BIGINT;
   tiempo_m:=0 BIGINT;
   tiempo_s:=0 BIGINT;
-
-  verificar:=false boolean;
+  --Declaracion de boolean de verificacion de pariticpacion de evento
+  verificar_evento:=false boolean;
 
   FOR E_R IN competidores LOOP
-      verificar:= SELECT verificar_ano_corredor(carrera_num);
+      verificar_evento:= SELECT verificar_ano_corredor(carrera_anno);
       --si el numero ingresado del año es iugal a el numero del evento de ese año.
-      IF carrera_num=E_R.fk_ranking_evento_id and verificar = true then
+      IF carrera_anno=E_R.fk_ranking_evento_id and verificar_evento = true then
        SELECT "startTimer"()
       END IF;
 
@@ -37,7 +36,7 @@ RETURNS TABLE;
 END;
 $func$LANGUAGE plpgsql;
 
----================================
+---===========funcion que regresa un dato tipo boolean si encuentra un año especifico en un evento=================
 
 CREATE OR REPLACE FUNCTION verificar_ano_corredor(numero int) RETURNS boolean as $function$
 DECLARE
@@ -52,7 +51,7 @@ BEGIN
 END;
 $function$ LANGUAGE plpgsql;
 
----================================
+---===========Funcion que genera numeros aleatoreos controlados para el uso del proyecto==========
 CREATE OR REPLACE FUNCTION random_i(prob competidor.coeficiente%TYPE, prob_race competidor.habilidad%TYPE) RETURNS interger as $function$
 DECLARE
  result interger;
