@@ -18,11 +18,16 @@ BEGIN
   tiempo_h:=0 BIGINT;
   tiempo_m:=0 BIGINT;
   tiempo_s:=0 BIGINT;
+  equipo:=0 int;
+
   --Declaracion de boolean de verificacion de pariticpacion de evento
   verificar_evento:=false boolean;
 
+  --=== end  of INIT==
+
   FOR E_R IN competidores LOOP
   ---NO, tengo que usar el fk_ranking_evento_id de E_R o de ranking para buscar el año, revisar!!!!!!!!!!!!!!!!!!!
+
       verificar_evento:= SELECT verificar_ano_corredor(carrera_anno);
       --si el numero ingresado del año es iugal a el numero del evento de ese año.
       -- falta verificar el tipo (ensayo o no) tabla evento.
