@@ -77,7 +77,7 @@ INSERT INTO P_S (fk_seccion_id,fk_pista_id) VALUES
     (13,2)
 
 INSERT INTO EVENTO (id, ano, tipo, fk_pista_id) VALUES
-    (1,'1950-6-24','Carrera',1)
+    (1,(24,6,1950),'Carrera',1)
     (2,'1951-6-23','Carrera',1)
     (3,'1952-6-14','Carrera',1)
     (4,'1953-6-13','Carrera',1)
@@ -97,6 +97,7 @@ INSERT INTO EVENTO (id, ano, tipo, fk_pista_id) VALUES
     (18,'1957-6-21','Ensayo',2)
     (19,'1958-6-20','Ensayo',2)
     (20,'1959-6-19','Ensayo',2)
+
 
 INSERT INTO E_P (fk_piloto_id, fk_equipo_id) VALUES
     (1,1)
