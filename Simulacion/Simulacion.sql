@@ -6,15 +6,13 @@
 ---===============================================================
 
 --Falta que pilotos vana competir. se tiene que elegir un año.
-CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE,IN carrera_num int ) as 
+CREATE OR REPLACE PROCEDURE start_race(competitor E_P.fk_equipo_id%TYPE,IN carrera_num int) as 
 $func$
 DECLARE
      r E_P%ROWTYPE; --fila
-     --a geto
      --anno number%type; IN 
  
      competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_fk_equipo_id; 
-     eventos CURSOR FOR SELECT * FROM EVENTO tablaDos ORDER BY tablaDos.id;
       
 BEGIN
  --init variables
@@ -23,21 +21,13 @@ BEGIN
   tiempo_m:=0 BIGINT;
   tiempo_s:=0 BIGINT;
 
-  variable1 BIGINT;
   verificar:=false boolean;
 
   FOR E_R IN competidores LOOP
-      variable1 := E_R.fk_ranking_evento_id; --puede eliminarse
-      verificar:=false;
-
-      FOR EVENTO IN eventos LOOP
-        IF EVENTO.ano = carrera_num then
-          verificar:=true;
-        END IF;
-      END LOOP;
+      verificar:= SELECT verificar_ano_corredor(carrera_num);
       --si el numero ingresado del año es iugal a el numero del evento de ese año.
-      IF carrera_num=E_R.fk_ranking_evento_id and then
-       
+      IF carrera_num=E_R.fk_ranking_evento_id and verificar = true then
+       SELECT "startTimer"()
       END IF;
 
 
@@ -46,6 +36,21 @@ BEGIN
 RETURNS TABLE; 
 END;
 $func$LANGUAGE plpgsql;
+
+---================================
+
+CREATE OR REPLACE FUNCTION verificar_ano_corredor(numero int) RETURNS boolean as $function$
+DECLARE
+  eventos CURSOR FOR SELECT * FROM EVENTO tablaDos ORDER BY tablaDos.id;
+BEGIN
+       FOR EVENTO IN eventos LOOP
+        IF EVENTO.ano = numero then
+          RETURN true;
+        END IF;
+      END LOOP;
+      RETURN FALSE;
+END;
+$function$ LANGUAGE plpgsql;
 
 ---================================
 CREATE OR REPLACE FUNCTION random_i(prob competidor.coeficiente%TYPE, prob_race competidor.habilidad%TYPE) RETURNS interger as $function$
