@@ -100,16 +100,16 @@ INSERT INTO EVENTO (id, ano, tipo, fk_pista_id) VALUES
 
 
 INSERT INTO E_P (fk_piloto_id, fk_equipo_id) VALUES
-    (1,1),
-    (2,1),
-    (3,2),
-    (4,2),
-    (5,3),
-    (6,3),
-    (7,4),
-    (8,4),
-    (9,5),
-    (10,5);
+    (1,1,1),
+    (2,2,1),
+    (3,3,2),
+    (4,4,2),
+    (5,5,3),
+    (6,6,3),
+    (7,7,4),
+    (8,8,4),
+    (9,9,5),
+    (10,10,5);
 
 INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
     (1,24,1,144.38,(4,53,3),256,3465.12,1),
