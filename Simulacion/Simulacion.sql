@@ -46,8 +46,7 @@ BEGIN
 
        
         SELECT "crear_ranking"();
-
-       SELECT "startTimer"();
+        --SELECT "startTimer"();
       END IF;
 
 
@@ -104,10 +103,8 @@ BEGIN
 END;
 $function$ LANGUAGE plpgsql;
 
-
-
 ---===========funcion que regresa un dato tipo boolean si encuentra un año especifico en un evento=================
-
+---Revisar, no util en el momento
 
 CREATE OR REPLACE FUNCTION verificar_ano_corredor(numero int) RETURNS boolean as $function$
 DECLARE
@@ -136,4 +133,12 @@ BEGIN
  --more random functions if needed
 END;
 $function$ LANGUAGE plpgsql; 
----================================
+---===============Funcion crear ranking para cada corredor=================
+--id, hora, puesto, , vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id
+CREATE OR REPLACE FUNCTION crear_ranking() as $body$
+DECLARE
+ 
+BEGIN
+ 
+END; 
+$body$ LANGUAGE plpgsql;
