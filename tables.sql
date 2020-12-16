@@ -6,7 +6,7 @@ primer_apellido VARCHAR(15),
 segundo_apellido VARCHAR(15),
 fecha_nacimiento DATE, 
 fecha_fallecimiento DATE 
---CALL edad(fecha_nacimiento); 
+ 
 ) ;
 
 CREATE TYPE  FECHA AS(
