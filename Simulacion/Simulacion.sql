@@ -47,7 +47,7 @@ BEGIN
       E_P_id:=E_R.fk_e_p_id;
        
       nuevo_ranking:= (SELECT "crear_ranking"(nuevo_evento));
-      nuevo_E_R    := (SELECT "crear_E_R"(new_categoria,new_equipo_num,new_marca_cauchos,nuevo_ranking,new_foto,nuevo_evento,E_P_id));
+      nuevo_E_R    := (SELECT "crear_e_r"(new_categoria,new_equipo_num,new_marca_cauchos,nuevo_ranking,new_foto,nuevo_evento,E_P_id));
       --SELECT "startTimer"();           varchar       ,bigint        ,varchar          ,bigint       ,bytea   ,bigint      ,bigint
     END IF;
   END LOOP;
@@ -162,14 +162,7 @@ END;
 $body$ LANGUAGE plpgsql;
 
 ---==============FUNCION crear E_R para cada corredor e la nueva iteracion===========
-CREATE OR REPLACE FUNCTION crear_E_R(
-  new_categoria VARCHAR,
-  new_equipo_num BIGINT,
-  new_marca_cauchos VARCHAR,
-  new_ranking_id BIGINT,
-  new_foto bytea,
-  new_evento_id BIGINT,
-  new_E_P_id BIGINT) 
+CREATE OR REPLACE FUNCTION crear_e_r(new_categoria VARCHAR,new_equipo_num BIGINT,new_marca_cauchos VARCHAR,new_ranking_id BIGINT,new_foto bytea,new_evento_id BIGINT,new_E_P_id BIGINT) 
   returns BIGINT as $body$
 DECLARE
  E_Rs CURSOR FOR SELECT * FROM E_R er ORDER BY er.fk_e_p_id;
