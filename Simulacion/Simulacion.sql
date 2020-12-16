@@ -44,8 +44,20 @@ BEGIN
        foto:= E_R.foto;
        evento_id:=E_R.fk_ranking_evento_id;
 
+
+        /*
+          new_id BIGINT;
+          new_hora BIGINT;
+          new_puesto BIGINT;
+          new_velocidad_media DOUBLE PRECISION;
+          new_vuelta_rapida TIEMPO;
+          new_numero_vuelta BIGINT;
+          new_distancia_km DOUBLE PRECISION;
+          new_fk_evento_id BIGINT;
+        */
        
-        SELECT "crear_ranking"();
+        nuevo_ranking:= SELECT "crear_ranking"(nuevo_evento);
+        --SELECT crear_E_R();
         --SELECT "startTimer"();
       END IF;
 
@@ -133,12 +145,28 @@ BEGIN
  --more random functions if needed
 END;
 $function$ LANGUAGE plpgsql; 
+
 ---===============Funcion crear ranking para cada corredor=================
 --id, hora, puesto, , vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id
-CREATE OR REPLACE FUNCTION crear_ranking() as $body$
+CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) as $body$
 DECLARE
- 
+ new_id BIGINT;
+ new_hora BIGINT;
+ new_puesto BIGINT;
+ new_velocidad_media DOUBLE PRECISION;
+ new_vuelta_rapida TIEMPO;
+ new_numero_vuelta BIGINT;
+ new_distancia_km DOUBLE PRECISION;
+ new_fk_evento_id BIGINT;
+
+  rankings CURSOR FOR SELECT * FROM RANKING r ORDER BY r.id;
 BEGIN
- 
+ FOR ranking in rankings LOOP
+  new_id:= ranking.id;
+ END LOOP;
+  new_id:=new_id+1;
+  INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
+  (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,0);
+--(1     ,24,1,144.38,(4,53,3),256,3465.12,1),
 END; 
 $body$ LANGUAGE plpgsql;
