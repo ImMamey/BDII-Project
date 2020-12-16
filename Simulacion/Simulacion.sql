@@ -13,7 +13,7 @@ DECLARE
       
 BEGIN
  --===init variables==
- 
+
   --variables por equipo !!!!!!!!!revisar
   equipo_num BIGINT;
   marca_cauchos CHAR VARYING;
@@ -59,7 +59,18 @@ $func$LANGUAGE plpgsql;
 
 
 ---===========funcion que genera un evento---------
-CREATE Or REPLACE PROCEDURE crear_evento() RETURNS as $function$
+CREATE Or REPLACE PROCEDURE crear_evento() RETURNS BIGINT as $function$
+DECLARE
+ eventos CURSOR FOR SELECT * FROM evento e ORDER BY e.id;
+ num BIGINT;
+BEGIN
+ FOR evento IN eventos LOOP
+  num:= evento.id;
+ END LOOP;
+  num:=num+1;
+ return num;
+END;
+$function$ LANGUAGE plpgsql;
 
 
 
