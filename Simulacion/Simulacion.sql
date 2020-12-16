@@ -61,14 +61,30 @@ $func$LANGUAGE plpgsql;
 ---===========funcion que genera un evento---------
 CREATE Or REPLACE PROCEDURE crear_evento() RETURNS BIGINT as $function$
 DECLARE
+
  eventos CURSOR FOR SELECT * FROM evento e ORDER BY e.id;
- num BIGINT;
-BEGIN
+
+ id BIGINT;
+ ano FECHA;
+ nuevo_ano BIGINT;
+ tipo CHAR VARYING;
+ id_pista BIGINT;
+ tipo VARCHAR;
+
+ BEGIN
+
  FOR evento IN eventos LOOP
-  num:= evento.id;
+  id:= evento.id;
+  ano:= evento.ano;
+  tipo:= evento.tipo;
  END LOOP;
-  num:=num+1;
- return num;
+  
+ nuevo_ano := SELECT ano.ano FROM evento e WHERE id=e.id;
+ nuevo_ano:=nuevo_ano+1;
+
+  INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
+   (id,???, tipo, 
+ return id;
 END;
 $function$ LANGUAGE plpgsql;
 
