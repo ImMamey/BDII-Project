@@ -28,7 +28,7 @@ BEGIN
   verificar_evento:=false boolean;
 
   --=== end  of INIT==
-  nuevo_evento:=SELECT "crear_evento"();
+  nuevo_evento:=SELECT "crear_evento"(carrera_anno);
 
   FOR E_R IN competidores LOOP
   ---NO, tengo que usar el fk_ranking_evento_id de E_R o de ranking para buscar el año, revisar!!!!!!!!!!!!!!!!!!!
@@ -59,7 +59,7 @@ $func$LANGUAGE plpgsql;
 
 
 ---===========funcion que genera un evento---------
-CREATE Or REPLACE PROCEDURE crear_evento() RETURNS BIGINT as $function$
+CREATE Or REPLACE PROCEDURE crear_evento(num int) RETURNS BIGINT as $function$
 DECLARE
 
  eventos CURSOR FOR SELECT * FROM evento e ORDER BY e.id;
@@ -79,8 +79,16 @@ DECLARE
   tipo:= evento.tipo;
  END LOOP;
   
- nuevo_ano := SELECT ano.ano FROM evento e WHERE id=e.id;
+ nuevo_ano := SELECT ano.ano FROM evento ev WHERE id=ev.id;
  nuevo_ano:=nuevo_ano+1;
+
+ id:=id+1;
+ tipo:='Carrera';
+ IF num <7 then
+  id_pista:=1;
+  else
+  id_pista:=2;
+ END IF;
 
   INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
    (id,???, tipo, 
