@@ -66,24 +66,32 @@ DECLARE
 
  id BIGINT;
  ano FECHA;
+
  nuevo_ano BIGINT;
+ nuevo_mes BIGINT;
+ nuevo_dia BIGINT;
+
  tipo CHAR VARYING;
  id_pista BIGINT;
  tipo VARCHAR;
 
- BEGIN
+BEGIN
 
  FOR evento IN eventos LOOP
-  id:= evento.id;
-  ano:= evento.ano;
-  tipo:= evento.tipo;
+   id:= evento.id;
+   ano:= evento.ano;
+   tipo:= evento.tipo;
+   nuevo_ano := SELECT ano.ano FROM evento  WHERE id=evento.id;
+   nuevo_mes := SELECT ano.mes FROM evento  WHERE id=evento.id;
+   nuevo_dia := SELECT ano.dia FROM evento  WHERE id=evento.id;
  END LOOP;
   
- nuevo_ano := SELECT ano.ano FROM evento ev WHERE id=ev.id;
+ 
  nuevo_ano:=nuevo_ano+1;
-
  id:=id+1;
+
  tipo:='Carrera';
+
  IF num <7 then
   id_pista:=1;
   else
@@ -91,8 +99,9 @@ DECLARE
  END IF;
 
   INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
-   (id,???, tipo, 
- return id;
+   (id,(nuevo_dia,nuevo_mes,nuevo_ano), tipo, id_pista);
+
+ RETURN id;
 END;
 $function$ LANGUAGE plpgsql;
 
