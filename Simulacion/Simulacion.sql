@@ -48,7 +48,7 @@ BEGIN
        
       nuevo_ranking:= (SELECT "crear_ranking"(nuevo_evento));
       nuevo_E_R    := (SELECT "crear_e_r"(new_categoria,new_equipo_num,new_marca_cauchos,nuevo_ranking,new_foto,nuevo_evento,E_P_id));
-      --SELECT "startTimer"();           varchar       ,bigint        ,varchar          ,bigint       ,bytea   ,bigint      ,bigint
+      --SELECT "startTimer"();
     END IF;
   END LOOP;
 END;
@@ -103,7 +103,6 @@ $function$ LANGUAGE plpgsql;
 
 ---===========funcion que regresa un dato tipo boolean si encuentra un año especifico en un evento=================
 ---Revisar, no util en el momento
-
 CREATE OR REPLACE FUNCTION verificar_ano_corredor(numero int) RETURNS boolean as $function$
 DECLARE
   eventos CURSOR FOR SELECT * FROM EVENTO tablaDos ORDER BY tablaDos.id;
@@ -133,18 +132,6 @@ END;
 $function$ LANGUAGE plpgsql; 
 
 ---===============Funcion crear ranking para cada corredor=================
---id, hora, puesto, , vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id
-/*    
-id BIGINT NOT NULL,
-hora BIGINT NOT NULL,
-puesto BIGINT NOT NULL,
-velocidad_media FLOAT,
-vuelta_rapida TIEMPO, --TDA tiempo
-numero_vuelta BIGINT,
-distancia_km FLOAT,
-fk_evento_id BIGINT NOT NULL,
-PRIMARY KEY(id, fk_evento_id)*/
-
 CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) returns BIGINT as $body$
 DECLARE
   new_id BIGINT;
@@ -156,7 +143,6 @@ BEGIN
   new_id:=new_id+1;
   INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
   (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,evento);
---(1     ,24,1,144.38,(4,53,3),256,3465.12,1),
  RETURN new_id;
 END; 
 $body$ LANGUAGE plpgsql;
