@@ -54,6 +54,7 @@ END;
 $func$LANGUAGE plpgsql;
 
 ---===========FUncion que inicia la simulacion vuelta por vuelta=====================
+---crear estimulado coeficiente manejo dificultad de la pista y clima
 CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT) as $body$
 DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
@@ -67,7 +68,9 @@ BEGIN
       if E_R.fk_ranking_evento_id = id_evento then
         FOR ranking IN rankings LOOP
          if E_R.fk_ranking_id = ranking.id then
-            
+            --condicinoal de entrade por 24h de corredor
+
+            ---SIMULACION
          end if;
         END LOOP;
         --iff tiempo -24 then todos_terminaron_competencia:= false nd if;
