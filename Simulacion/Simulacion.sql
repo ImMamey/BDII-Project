@@ -57,8 +57,25 @@ $func$LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT) as $body$
 DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
+ rankings     CURSOR FOR SELECT * FROM ranking e ORDER BY e.id;
+ todos_terminaron_competencia boolean;
 BEGIN
+ todos_terminaron_competencia:=true;
+ Loop
+    FOR E_R IN competidores LOOP
 
+      if E_R.fk_ranking_evento_id = id_evento then
+        FOR ranking IN rankings LOOP
+         if E_R.fk_ranking_id = ranking.id then
+            
+         end if;
+        END LOOP;
+        --iff tiempo -24 then todos_terminaron_competencia:= false nd if;
+      end if;
+    END LOOP;
+  EXIT WHEN todos_terminaron_competencia=true;
+  END LOOP;
+ --while todos_terminaron competenica=true; 
 END;
 $body$LANGUAGE plpgsql;
 
@@ -109,20 +126,6 @@ BEGIN
 END;
 $function$ LANGUAGE plpgsql;
 
----===========funcion que regresa un dato tipo boolean si encuentra un año especifico en un evento=================
----Revisar, no util en el momento
-CREATE OR REPLACE FUNCTION verificar_ano_corredor(numero int) RETURNS boolean as $function$
-DECLARE
-  eventos CURSOR FOR SELECT * FROM EVENTO tablaDos ORDER BY tablaDos.id;
-BEGIN
-       FOR EVENTO IN eventos LOOP
-        IF EVENTO.ano = numero then
-          RETURN true;
-        END IF;
-      END LOOP;
-      RETURN FALSE;
-END;
-$function$ LANGUAGE plpgsql;
 
 ---===========Funcion que genera numeros aleatoreos controlados para el uso del proyecto==========
 CREATE OR REPLACE FUNCTION random_i(prob competidor.coeficiente%TYPE, prob_race competidor.habilidad%TYPE) RETURNS interger as $function$
