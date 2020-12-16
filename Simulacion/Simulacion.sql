@@ -148,7 +148,7 @@ $function$ LANGUAGE plpgsql;
 
 ---===============Funcion crear ranking para cada corredor=================
 --id, hora, puesto, , vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id
-CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) as $body$
+CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) returns BIGINT as $body$
 DECLARE
  new_id BIGINT;
  new_hora BIGINT;
@@ -168,5 +168,6 @@ BEGIN
   INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
   (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,0);
 --(1     ,24,1,144.38,(4,53,3),256,3465.12,1),
+ RETURN new_id;
 END; 
 $body$ LANGUAGE plpgsql;
