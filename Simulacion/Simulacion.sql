@@ -59,12 +59,12 @@ $func$LANGUAGE plpgsql;
 
 
 ---===========funcion que genera un evento---------
-CREATE Or REPLACE PROCEDURE crear_evento(num int) RETURNS BIGINT as $function$
+CREATE Or REPLACE FUNCTION crear_evento(num int) RETURNS BIGINT as $function$
 DECLARE
 
  eventos CURSOR FOR SELECT * FROM evento e ORDER BY e.id;
 
- id BIGINT;
+ new_id BIGINT;
  ano FECHA;
 
  nuevo_ano BIGINT;
@@ -73,22 +73,21 @@ DECLARE
 
  tipo CHAR VARYING;
  id_pista BIGINT;
- tipo VARCHAR;
 
 BEGIN
 
  FOR evento IN eventos LOOP
-   id:= evento.id;
+   new_id:= evento.id;
    ano:= evento.ano;
    tipo:= evento.tipo;
-   nuevo_ano := SELECT ano.ano FROM evento  WHERE id=evento.id;
-   nuevo_mes := SELECT ano.mes FROM evento  WHERE id=evento.id;
-   nuevo_dia := SELECT ano.dia FROM evento  WHERE id=evento.id;
+   nuevo_ano := (SELECT ano.ano FROM evento e WHERE new_id=e.id);
+   nuevo_mes := (SELECT ano.mes FROM evento e WHERE new_id=e.id);
+   nuevo_dia := (SELECT ano.dia FROM evento e WHERE new_id=e.id);
  END LOOP;
   
  
  nuevo_ano:=nuevo_ano+1;
- id:=id+1;
+ new_id:=new_id+1;
 
  tipo:='Carrera';
 
@@ -99,9 +98,9 @@ BEGIN
  END IF;
 
   INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
-   (id,(nuevo_dia,nuevo_mes,nuevo_ano), tipo, id_pista);
+   (new_id,(nuevo_dia,nuevo_mes,nuevo_ano), tipo, id_pista);
 
- RETURN id;
+ RETURN new_id;
 END;
 $function$ LANGUAGE plpgsql;
 
@@ -138,10 +137,3 @@ BEGIN
 END;
 $function$ LANGUAGE plpgsql; 
 ---================================
-
-
-CREATE OR REPLACE FUNCTION startTimer(%ROWTYPE)
-RETURNS voids as $teamito$
-BEGIN
-END;
-$teamito$ LANGUAGE plpgsql;
