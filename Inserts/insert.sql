@@ -118,6 +118,18 @@ INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vu
     (4,24,4,141.037,(5,19,00),250,3384.88,1),
     (5,24,5,140.427,(5,23,0),249,3370.24,1);
 
+    (6,24,1,160.83,(5,02,00),0,0,2),
+    (7,24,2,0,(NULL,NULL,NULL),0,0,2), 
+    (8,24,3,0,(NULL,NULL,NULL),0,0,2),
+    (9,24,4,0,(NULL,NULL,NULL),0,0,2),
+    (10,24,5,141.61,(5,43,0),0,0,2),
+    
+    (6,24,6,135.67,(5,58,00),0,0,2),
+    (7,24,7,0,(NULL,NULL,NULL),0,0,2), 
+    (8,24,8,0,(NULL,NULL,NULL),0,0,2),
+    (9,24,9,0,(NULL,NULL,NULL),0,0,2),
+    (10,24,10,142.86,(5,40,0),0,0,2);
+
 INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_fk_piloto_id, fk_e_p_fk_equipo_id) VALUES
     ()
 
