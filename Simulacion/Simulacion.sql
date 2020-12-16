@@ -37,30 +37,30 @@ BEGIN
     --si el numero ingresado del año es iugal a el numero del evento de ese año.
     IF carrera_anno=E_R.fk_ranking_evento_id  = true then
 
-       --guardado de los datos del equipo a competir (de la tabla E_R)
+      --guardado de los datos del equipo a competir (de la tabla E_R)
 
-       new_categoria:= E_R.new_categoria;
-       new_equipo_num:= E_R.numero_equipo;
-       new_marca_cauchos:= E_R.new_marca_cauchos;
-       ranking:= E_R.fk_ranking_id;
-       new_foto:=E_R.foto;
-       evento_id:=E_R.fk_ranking_evento_id;
-       E_P_id:=E_R.fk_e_p_id;
+      new_categoria:= E_R.new_categoria;
+      new_equipo_num:= E_R.numero_equipo;
+      new_marca_cauchos:= E_R.new_marca_cauchos;
+      --ranking:= E_R.fk_ranking_id;
+      new_foto:=E_R.foto;
+      --evento_id:=E_R.fk_ranking_evento_id;
+      E_P_id:=E_R.fk_e_p_id;
        
-        nuevo_ranking:= SELECT "crear_ranking"(nuevo_evento);
-        nuevo_E_R    := SELECT "crear_E_R"(new_categoria,
+      nuevo_ranking:= SELECT "crear_ranking"(nuevo_evento);
+      nuevo_E_R    := SELECT "crear_E_R"(new_categoria,
                                            new_equipo_num,
                                            new_marca_cauchos,
                                            nuevo_ranking,
-                                           foto,
-                                           nuevo_evento);
-        --SELECT "startTimer"();
-      END IF;
+                                           new_foto,
+                                           nuevo_evento,
+                                           E_P_id);
+      --SELECT "startTimer"();
+    END IF;
 
 
-     SELECT "startTimer"() -- por cada competidor
   END LOOP;
-RETURNS TABLE; 
+
 END;
 $func$LANGUAGE plpgsql;
 
