@@ -9,7 +9,6 @@ $func$
 DECLARE
   --r E_P%ROWTYPE; --fila
   competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
-  nuevos_competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
 
   --variables por equipo
   new_categoria VARCHAR;
@@ -49,13 +48,19 @@ BEGIN
     END IF;
   END LOOP;
  
-  --Inicia el proceso de la simulación
-  FOR E_R IN nuevos_competidores LOOP
-  
-  END LOOP;
-  --SELECT "startTimer"();
+  --Inicia el proceso de la simulacion
+  SELECT "startSimulation"(nuevo_evento);
 END;
 $func$LANGUAGE plpgsql;
+
+---===========FUncion que inicia la simulacion vuelta por vuelta=====================
+CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT) as $body$
+DECLARE
+ competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
+BEGIN
+
+END;
+$body$LANGUAGE plpgsql;
 
 
 ---===========funcion que genera un evento---------
