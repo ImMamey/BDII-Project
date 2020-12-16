@@ -9,6 +9,7 @@ $func$
 DECLARE
   --r E_P%ROWTYPE; --fila
   competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
+  nuevos_competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
 
   --variables por equipo
   new_categoria VARCHAR;
@@ -25,13 +26,10 @@ DECLARE
   nuevo_evento BIGINT;
       
 BEGIN
-
-  --Declaracion de boolean de verificacion de pariticpacion de evento
   verificar_evento:=false;
-
-  --=== end  of INIT==
   nuevo_evento:=(SELECT "crear_evento"(carrera_anno));
-
+ 
+ --Inicia y prepara los datos de los competidores para la siguiente competencia
   FOR E_R IN competidores LOOP
     --si el numero ingresado del año es iugal a el numero del evento de ese año.
     IF carrera_anno=E_R.fk_ranking_evento_id  then
@@ -48,9 +46,14 @@ BEGIN
        
       nuevo_ranking:= (SELECT "crear_ranking"(nuevo_evento));
       nuevo_E_R    := (SELECT "crear_e_r"(new_categoria,new_equipo_num,new_marca_cauchos,nuevo_ranking,new_foto,nuevo_evento,E_P_id));
-      --SELECT "startTimer"();
     END IF;
   END LOOP;
+ 
+  --Inicia el proceso de la simulación
+  FOR E_R IN nuevos_competidores LOOP
+  
+  END LOOP;
+  --SELECT "startTimer"();
 END;
 $func$LANGUAGE plpgsql;
 
@@ -153,12 +156,8 @@ CREATE OR REPLACE FUNCTION crear_e_r(new_categoria VARCHAR,new_equipo_num BIGINT
 DECLARE
  E_Rs CURSOR FOR SELECT * FROM E_R er ORDER BY er.fk_e_p_id;
 BEGIN
-
  INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_id) VALUES
    (new_categoria,new_equipo_num,new_marca_cauchos,new_ranking_id,new_foto,new_evento_id,new_E_P_id);
- 
- --FOR E_R in E_Rs LOOP
- --END LOOP;
  return new_E_P_id;
 END;
 $body$ LANGUAGE plpgsql;
