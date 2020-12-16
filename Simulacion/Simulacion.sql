@@ -13,7 +13,7 @@ DECLARE
   --variables por equipo
   new_categoria VARCHAR;
   new_equipo_num BIGINT;
-  new_marca_cauchos CHAR VARYING;
+  new_marca_cauchos VARCHAR;
   nuevo_ranking BIGINT;
   new_foto bytea;
   evento_id BIGINT;
@@ -47,14 +47,8 @@ BEGIN
       E_P_id:=E_R.fk_e_p_id;
        
       nuevo_ranking:= (SELECT "crear_ranking"(nuevo_evento));
-      nuevo_E_R    := (SELECT "crear_E_R"(new_categoria,
-                                         new_equipo_num,
-                                         new_marca_cauchos,
-                                         nuevo_ranking,
-                                         new_foto,
-                                         nuevo_evento,
-                                         E_P_id));
-      --SELECT "startTimer"();
+      nuevo_E_R    := (SELECT "crear_E_R"(new_categoria,new_equipo_num,new_marca_cauchos,nuevo_ranking,new_foto,nuevo_evento,E_P_id));
+      --SELECT "startTimer"();           varchar       ,bigint        ,varchar          ,bigint       ,bytea   ,bigint      ,bigint
     END IF;
   END LOOP;
 END;
@@ -140,6 +134,17 @@ $function$ LANGUAGE plpgsql;
 
 ---===============Funcion crear ranking para cada corredor=================
 --id, hora, puesto, , vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id
+/*    
+id BIGINT NOT NULL,
+hora BIGINT NOT NULL,
+puesto BIGINT NOT NULL,
+velocidad_media FLOAT,
+vuelta_rapida TIEMPO, --TDA tiempo
+numero_vuelta BIGINT,
+distancia_km FLOAT,
+fk_evento_id BIGINT NOT NULL,
+PRIMARY KEY(id, fk_evento_id)*/
+
 CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) returns BIGINT as $body$
 DECLARE
   new_id BIGINT;
@@ -150,7 +155,7 @@ BEGIN
  END LOOP;
   new_id:=new_id+1;
   INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
-  (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,0);
+  (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,evento);
 --(1     ,24,1,144.38,(4,53,3),256,3465.12,1),
  RETURN new_id;
 END; 
@@ -160,7 +165,7 @@ $body$ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION crear_E_R(
   new_categoria VARCHAR,
   new_equipo_num BIGINT,
-  new_marca_cauchos CHAR VARYING,
+  new_marca_cauchos VARCHAR,
   new_ranking_id BIGINT,
   new_foto bytea,
   new_evento_id BIGINT,
@@ -175,5 +180,6 @@ BEGIN
  
  --FOR E_R in E_Rs LOOP
  --END LOOP;
+ return new_E_P_id;
 END;
 $body$ LANGUAGE plpgsql;
