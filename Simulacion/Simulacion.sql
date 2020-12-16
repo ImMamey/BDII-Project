@@ -43,21 +43,9 @@ BEGIN
        ranking:= E_R.fk_ranking_id;
        foto:= E_R.foto;
        evento_id:=E_R.fk_ranking_evento_id;
-
-
-        /*
-          new_id BIGINT;
-          new_hora BIGINT;
-          new_puesto BIGINT;
-          new_velocidad_media DOUBLE PRECISION;
-          new_vuelta_rapida TIEMPO;
-          new_numero_vuelta BIGINT;
-          new_distancia_km DOUBLE PRECISION;
-          new_fk_evento_id BIGINT;
-        */
        
         nuevo_ranking:= SELECT "crear_ranking"(nuevo_evento);
-        --SELECT crear_E_R();
+        nuevo_E_R    := SELECT "crear_E_R"(equipo_num,nuevo_ranking,nuevo_evento);
         --SELECT "startTimer"();
       END IF;
 
@@ -150,15 +138,7 @@ $function$ LANGUAGE plpgsql;
 --id, hora, puesto, , vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id
 CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) returns BIGINT as $body$
 DECLARE
- new_id BIGINT;
- new_hora BIGINT;
- new_puesto BIGINT;
- new_velocidad_media DOUBLE PRECISION;
- new_vuelta_rapida TIEMPO;
- new_numero_vuelta BIGINT;
- new_distancia_km DOUBLE PRECISION;
- new_fk_evento_id BIGINT;
-
+  new_id BIGINT;
   rankings CURSOR FOR SELECT * FROM RANKING r ORDER BY r.id;
 BEGIN
  FOR ranking in rankings LOOP
@@ -170,4 +150,18 @@ BEGIN
 --(1     ,24,1,144.38,(4,53,3),256,3465.12,1),
  RETURN new_id;
 END; 
+$body$ LANGUAGE plpgsql;
+
+---==============FUNCION crear E_R para cada corredor e la nueva iteracion===========
+CREATE OR REPLACE FUNCTION crear_E_R(equipo_num BIGINT,ranking_id BIGINT, evento_id BIGINT) returns BIGINT as $body$
+DECLARE
+ E_Rs CURSOR FOR SELECT * FROM E_R er ORDER BY er.fk_e_p_id;
+BEGIN
+
+ INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_id) VALUES
+   ();
+ 
+ FOR E_R in E_Rs LOOP
+ END LOOP;
+END;
 $body$ LANGUAGE plpgsql;
