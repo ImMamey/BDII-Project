@@ -4,12 +4,11 @@
 
 
 ---=======================Funcion principal, inicia la carrera con un año dado=================================
-
 CREATE OR REPLACE PROCEDURE start_race(IN carrera_anno int) as 
 $func$
 DECLARE
   --r E_P%ROWTYPE; --fila
-  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_fk_equipo_id; 
+  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
 
   --variables por equipo
   new_categoria VARCHAR;
@@ -19,41 +18,42 @@ DECLARE
   new_foto bytea;
   evento_id BIGINT;
   E_P_id BIGINT;
+  nuevo_E_R BIGINT;
 
+  verificar_evento boolean;
   ---Dato del nuevo evento de revalida
   nuevo_evento BIGINT;
       
 BEGIN
 
   --Declaracion de boolean de verificacion de pariticpacion de evento
-  verificar_evento:=false boolean;
+  verificar_evento:=false;
 
   --=== end  of INIT==
-  nuevo_evento:=SELECT "crear_evento"(carrera_anno);
+  nuevo_evento:=(SELECT "crear_evento"(carrera_anno));
 
   FOR E_R IN competidores LOOP
-
     --si el numero ingresado del año es iugal a el numero del evento de ese año.
-    IF carrera_anno=E_R.fk_ranking_evento_id  = true then
+    IF carrera_anno=E_R.fk_ranking_evento_id  then
 
       --guardado de los datos del equipo a competir (de la tabla E_R)
 
-      new_categoria:= E_R.new_categoria;
+      new_categoria:= E_R.categoria;
       new_equipo_num:= E_R.numero_equipo;
-      new_marca_cauchos:= E_R.new_marca_cauchos;
+      new_marca_cauchos:= E_R.marca_cauchos;
       --ranking:= E_R.fk_ranking_id;
       new_foto:=E_R.foto;
       --evento_id:=E_R.fk_ranking_evento_id;
       E_P_id:=E_R.fk_e_p_id;
        
-      nuevo_ranking:= SELECT "crear_ranking"(nuevo_evento);
-      nuevo_E_R    := SELECT "crear_E_R"(new_categoria,
+      nuevo_ranking:= (SELECT "crear_ranking"(nuevo_evento));
+      nuevo_E_R    := (SELECT "crear_E_R"(new_categoria,
                                          new_equipo_num,
                                          new_marca_cauchos,
                                          nuevo_ranking,
                                          new_foto,
                                          nuevo_evento,
-                                         E_P_id);
+                                         E_P_id));
       --SELECT "startTimer"();
     END IF;
   END LOOP;
