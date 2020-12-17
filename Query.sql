@@ -1,13 +1,39 @@
 --PRIMER REPORTE
 
+CREATE OR REPLACE FUNCTION ranking_por_ano (anno INT, category varchar, taip varchar)
+RETURNS TABLE 
+(
+    nombre_equipo EQUIPO.nombre%TYPE, nacionalidad_equipo EQUIPO.nacionalidad%TYPE,
+    n_equipo E_R.numero_equipo%TYPE,foto_equipo E_R.foto%TYPE, categoria E_R.categoria%TYPE,
+    año BIGINT,
+    primer_nombre1 VARCHAR,segundo_nombre1 VARCHAR,primer_apellido1 VARCHAR,segundo_apellido1 VARCHAR,
+    nacionalidad1 PILOTO.nacionalidad%TYPE,foto_piloto1 PILOTO.foto%TYPE,
+    primer_nombre2 VARCHAR,segundo_nombre2 VARCHAR,primer_apellido2 VARCHAR,segundo_apellido2 VARCHAR,
+    nacionalidad2 PILOTO.nacionalidad%TYPE,foto_piloto2 PILOTO.foto%TYPE,
+    vehiculo VEHICULO.nombre%TYPE,motor MOTOR.nombre%TYPE, cilindraje MOTOR.cilindraje%TYPE,
+    puesto_equipo_ensayo EQUIPO.nombre%TYPE,
+    vuelta_rapida_ensayo RANKING.vuelta_rapida%TYPE,velocidad_media_ensayo RANKING.velocidad_media%TYPE,
+    puesto_carrera RANKING.puesto%TYPE,
+    vuelta_rapida RANKING.vuelta_rapida%TYPE,velocidad_media RANKING.velocidad_media%TYPE,
+    n_vuelta RANKING.numero_vuelta%TYPE,distancia_en_KM RANKING.distancia_km%TYPE,
+    diferencia_de_km RANKING.distancia_km%TYPE
+
+) AS $$
+BEGIN
+    IF(category='')THEN
+        RETURN QUERY
+    --equipo
 SELECT e.nombre, e.nacionalidad,
  er.numero_equipo, er.foto, er.categoria, 
+    --pilotos
    ((ev.ano).ano) as año,
   (pil1.identificacion).primer_nombre, (pil1.identificacion).segundo_nombre, (pil1.identificacion).primer_apellido, (pil1.identificacion).segundo_apellido, 
   pil1.nacionalidad,pil1.foto,
   (pil2.identificacion).primer_nombre, (pil2.identificacion).segundo_nombre, (pil2.identificacion).primer_apellido, (pil2.identificacion).segundo_apellido,
-  pil2.nacionalidad, pil2.foto,
+  pil2.nacionalidad, pil2.foto,  
+   --vehiculo
   (v.nombre) as vehiculo, (m.nombre) as motor,m.cilindraje,
+   --ensayo
   (er.numero_equipo) as puesto_ensayo,
 
     (SELECT en.vuelta_rapida
@@ -27,8 +53,8 @@ SELECT e.nombre, e.nacionalidad,
     JOIN E_P ep2 on ep2.id = er2.fk_e_p_id
     WHERE (ev2.ano).ano = 1950 AND ev2.tipo = 'Ensayo' AND e.id = ep2.fk_equipo_id
 
-    ) as vuelta_rapido_ensayo,
-
+    ) as vuelta_media_ensayo,
+  --carrera
   (ca.puesto) as puesto_carrera, ca.velocidad_media, ca.vuelta_rapida, ca.numero_vuelta, ca.distancia_km,
   (ROUND((LAG(ca.distancia_km, 1) OVER (ORDER BY ca.id) - ca.distancia_km ))) as diferencia
 --ca.distancia_km, (LAG(ca.distancia_km, 1) OVER (ORDER BY ca.id)) as puesto_anterior ,
@@ -44,11 +70,77 @@ JOIN VEHICULO v on v.id = vm.fk_vehiculo_id
 JOIN MOTOR m on m.id = vm.fk_motor_id
 JOIN EVENTO ev on ev.id = ca.fk_evento_id
 
-WHERE (ev.ano).ano = 1950 AND ev.tipo = 'Carrera' AND er.categoria = '3001-5000' ;
---WHERE (ev.ano).ano = 1950 AND ev.tipo = 'Carrera' AND er.categoria is not null ;
+WHERE (ev.ano).ano = anno AND
+ev.tipo = taip AND
+er.categoria is not NULL
+
+ORDER BY ev.tipo;
+
+    ELSE
+
+RETURN QUERY
+    --equipo
+SELECT e.nombre, e.nacionalidad,
+ er.numero_equipo, er.foto, er.categoria, 
+    --pilotos
+   ((ev.ano).ano) as año,
+  (pil1.identificacion).primer_nombre, (pil1.identificacion).segundo_nombre, (pil1.identificacion).primer_apellido, (pil1.identificacion).segundo_apellido, 
+  pil1.nacionalidad,pil1.foto,
+  (pil2.identificacion).primer_nombre, (pil2.identificacion).segundo_nombre, (pil2.identificacion).primer_apellido, (pil2.identificacion).segundo_apellido,
+  pil2.nacionalidad, pil2.foto,  
+   --vehiculo
+  (v.nombre) as vehiculo, (m.nombre) as motor,m.cilindraje,
+   --ensayo
+  (er.numero_equipo) as puesto_ensayo,
+
+    (SELECT en.vuelta_rapida
+    FROM RANKING en
+    JOIN E_R er2 on er2.fk_ranking_id = en.id
+    JOIN EVENTO ev2 on ev2.id = en.fk_evento_id
+    JOIN E_P ep2 on ep2.id = er2.fk_e_p_id
+    WHERE (ev2.ano).ano = 1950 AND ev2.tipo = 'Ensayo' AND e.id = ep2.fk_equipo_id
+
+    ) as vuelta_rapido_ensayo,
+
+   
+    (SELECT en.velocidad_media
+    FROM RANKING en
+    JOIN E_R er2 on er2.fk_ranking_id = en.id
+    JOIN EVENTO ev2 on ev2.id = en.fk_evento_id
+    JOIN E_P ep2 on ep2.id = er2.fk_e_p_id
+    WHERE (ev2.ano).ano = 1950 AND ev2.tipo = 'Ensayo' AND e.id = ep2.fk_equipo_id
+
+    ) as vuelta_media_ensayo,
+  --carrera
+  (ca.puesto) as puesto_carrera, ca.velocidad_media, ca.vuelta_rapida, ca.numero_vuelta, ca.distancia_km,
+  (ROUND((LAG(ca.distancia_km, 1) OVER (ORDER BY ca.id) - ca.distancia_km ))) as diferencia
+--ca.distancia_km, (LAG(ca.distancia_km, 1) OVER (ORDER BY ca.id)) as puesto_anterior ,
+   
+FROM E_R er
+JOIN E_P ep on ep.id = er.fk_e_p_id
+JOIN RANKING ca on ca.id = er.fk_ranking_id
+JOIN EQUIPO e on e.id = ep.fk_equipo_id
+JOIN PILOTO pil1 on pil1.id = ep.fk_piloto_id
+JOIN PILOTO pil2 on pil2.id = ep.fk_piloto_id+1
+JOIN V_M vm on vm.fk_vehiculo_id = e.fk_v_m_vehiculo_id
+JOIN VEHICULO v on v.id = vm.fk_vehiculo_id
+JOIN MOTOR m on m.id = vm.fk_motor_id
+JOIN EVENTO ev on ev.id = ca.fk_evento_id
+
+WHERE (ev.ano).ano = anno AND
+ev.tipo = taip AND
+er.categoria = category
+
+ORDER BY ev.tipo;
+
+END IF;
+
+END; $$ LANGUAGE PLPGSQL;
 
 --SEGUNDO REPORTE
-
+/*if condciont THEN
+///
+end if*/
 
 SELECT e.nombre, e.nacionalidad,
  er.numero_equipo, er.foto, er.categoria, --areglar identificacion solo nombre
