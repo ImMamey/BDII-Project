@@ -145,6 +145,13 @@ DECLARE
  coeficiente_mental_total float;
  calculo_coeficiente float;
 
+ --datos del clima
+ clima1 int;
+ clima2 int;
+ clima3 int;
+ clima4 int;
+ promedio_clima float;
+
 BEGIN
  --llenado de datos del competidor 1
  FOR E_P IN eps LOOP
@@ -187,7 +194,32 @@ BEGIN
   --Se suman el promedio de los coeficientes en una sola variable
   calculo_coeficiente:=coeficiente_mental_total+coeficiente_fisico_total;
 
- --
+ --Datos del clima actual
+ --dato1 
+  clima1:=clima_actual[0]
+ --dato2
+ if clima_actual[1]<>null then
+   clima2:=clima_actual[1]
+ else
+   clima2:=0;
+ end if;
+ --dato3
+ if clima actual[2]<>null then
+   clima3:=clima_actual[2]
+ else
+   clima3:=0;
+ end if;
+ --dato4
+if clima_actual[3]<>null then
+ clima4:=clima_actual[3]
+ else
+  clima4:=0;
+ end if;
+
+ if clima_actual[1]=null then
+  promedio_clima:=clima_actual[0]
+ else
+  promedio_clima:=(clima1+clima2+clima3+clima4)/4;
  return -----;
 END;
 $body$LANGUAGE plpgsql;
