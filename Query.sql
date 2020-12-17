@@ -5,16 +5,30 @@ SELECT e.nombre, e.nacionalidad,
   pil1.nacionalidad,pil1.foto,
   (pil2.identificacion).primer_nombre, (pil2.identificacion).segundo_nombre, (pil2.identificacion).primer_apellido, (pil2.identificacion).segundo_apellido,
   pil2.nacionalidad, pil2.foto,
-  (er.numero_equipo) as puesto_ensayo, en.velocidad_media, en.vuelta_rapida,
+  (er.numero_equipo) as puesto_ensayo,
+   en.velocidad_media,
+
+    (SELECT ca.vuelta_rapida
+    FROM RANKING ca
+    JOIN E_R er on er.fk_ranking_id = ca.id
+    
+
+    )
+
+    en.vuelta_rapida,
   (v.nombre) as vehiculo, (m.nombre) as motor,m.cilindraje,
   ca.puesto, ca.velocidad_media, ca.vuelta_rapida, ca.numero_vuelta, ca.distancia_km,
   (ROUND((LAG(ca.distancia_km, 1) OVER (ORDER BY ca.id) - ca.distancia_km ))) as diferencia
 --ca.distancia_km, (LAG(ca.distancia_km, 1) OVER (ORDER BY ca.id)) as puesto_anterior ,
    
 FROM E_R er
-JOIN RANKING ca on ca.id = er.fk_ranking_id
-JOIN RANKING en on en.id = er.fk_ranking_id+5
 JOIN E_P ep on ep.id = er.fk_e_p_id
+JOIN RANKING ca on ca.id = er.fk_ranking_id
+
+--JOIN RANKING en on en.id = er.fk_ranking_id+5 AND en.id <> ca.id
+
+JOIN RANKING en on en.id =  AND en.id <> ca.id
+
 JOIN EQUIPO e on e.id = ep.fk_equipo_id
 JOIN PILOTO pil1 on pil1.id = ep.fk_piloto_id
 JOIN PILOTO pil2 on pil2.id = ep.fk_piloto_id+1
@@ -23,7 +37,9 @@ JOIN VEHICULO v on v.id = vm.fk_vehiculo_id
 JOIN MOTOR m on m.id = vm.fk_motor_id
 JOIN EVENTO ev on ev.id = ca.fk_evento_id
 
-WHERE ca.fk_evento_id = 1 
+--WHERE ca.fk_evento_id = 1 
+
+WHERE (ev.ano).ano = 1950
 
 
 
