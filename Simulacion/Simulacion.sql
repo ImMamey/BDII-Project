@@ -89,9 +89,26 @@ CREATE or REPLACE FUNCTION generar_clima_sucesso(evento_id BIGINT) RETURNS BIGIN
 DECLARE
  id_pista BIGINT;
  sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
+ last_id_suceso BIGINT
 BEGIN
+ last_id_suceso:=1;
  id_pista:=(SELECT return_pista_id(evento_id));
+ FOR suceso IN sucesos LOOP
+   last_id_suceso:=suceso.id;
+ END LOOP;
+ /*
+  id BIGINT NOT NULL,
+ tipo_suceso VARCHAR NOT NULL,
+ momento_suceso INT, 
+ clima_momento VARCHAR(4) NOT NULL,
+ causa VARCHAR(3),
+ tipo_bandera VARCHAR,
+ fk_p_s_fk_seccion_id BIGINT,
+ fk_p_s_fk_pista_id
+ */
 
+ INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
+ ();
 END;
 $body$LANGUAGE plpgsql;
 
