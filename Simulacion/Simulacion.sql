@@ -150,7 +150,7 @@ BEGIN
    
      FOR piloto IN pilotos LOOP
        if E_P.fk_piloto_id=piloto.id then
-         coeficiente1:=piloto.coeficiente
+         coeficiente1:=piloto.coeficientes;
        end if;
      END LOOP;
 
@@ -162,7 +162,7 @@ BEGIN
    
      FOR piloto IN pilotos LOOP
        if E_P.fk_piloto_id=piloto.id then
-          coeficiente2:=piloto.coeficiente
+          coeficiente2:=piloto.coeficientes;
        end if;
      END LOOP;
 
@@ -183,7 +183,7 @@ BEGIN
   coeficiente_fisico_total:=(dato_coeficiente_Físico1 + dato_coeficiente_Físico2)/2;
   coeficiente_mental_total:=(dato_coeficiente_Mental1 + dato_coeficiente_Mental2)/2;
 
- returns coeficiente_fisico_total+coeficiente_mental_total;
+ return coeficiente_fisico_total+coeficiente_mental_total;
 END;
 $body$LANGUAGE plpgsql;
 
