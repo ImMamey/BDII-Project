@@ -114,23 +114,43 @@ BEGIN
 END;
 $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
+                                               --5
 CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT) returns float as $body$
 DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id;
- --pilotos CURSOR FOR SELECT * FROM piloto p ORDER BY p.id;
+ pilotos CURSOR FOR SELECT * FROM piloto p ORDER BY p.id;
  --equipos CURSOR FOR SELECT * FROM equipo e ORDER BY e.id;
  --eps CURSOR FOR SELECT * FROM E_P ep ORDER BY ep.id;
- coeficiente VARCHAR[2][2];
+ coeficiente1 VARCHAR[2][2];
+ coeficiente2 VARCHAR[2][2];
+ coeficiente_final VARCHAR[2][2];
+ --'{{"1","2"},{"4","5"}}'
 BEGIN
  
  FOR E_P IN eps LOOP
   if E_P.id=equipo_piloto_id then
    
+   FOR piloto IN pilotos LOOP
+    if E_P.fk_piloto_id=piloto.id then
+     coeficiente1:=piloto.coeficiente
+    end if;
+   END LOOP;
+
   end if;
  END LOOP;
-  FOR piloto IN pilotos LOOP
-   IF
-  END LOOP;
+
+  FOR E_P IN eps LOOP
+  if E_P.id=equipo_piloto_id+1 then
+   
+   FOR piloto IN pilotos LOOP
+    if E_P.fk_piloto_id=piloto.id then
+     coeficiente2:=piloto.coeficiente
+    end if;
+   END LOOP;
+
+  end if;
+ END LOOP;
+
 
 
 END;
