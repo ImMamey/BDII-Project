@@ -23,10 +23,12 @@ DECLARE
   verificar_evento boolean;
   ---Dato del nuevo evento de revalida
   nuevo_evento BIGINT;
+  nuevo_clima BIGINT;
       
 BEGIN
   verificar_evento:=false;
   nuevo_evento:=(SELECT "crear_evento"(carrera_anno));
+  nuevo_clima:=(SELECT "generar_clima_sucesso"(nuevo_evento));
  
  --Inicia y prepara los datos de los competidores para la siguiente competencia
   FOR E_R IN competidores LOOP
@@ -54,6 +56,7 @@ END;
 $func$LANGUAGE plpgsql;
 
 ---===========FUncion que inicia la simulacion vuelta por vuelta=====================
+
 ---crear estimulado coeficiente manejo dificultad de la pista y clima
 CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT) as $body$
 DECLARE
@@ -81,7 +84,29 @@ BEGIN
  --while todos_terminaron competenica=true; 
 END;
 $body$LANGUAGE plpgsql;
+---===========funcion que genera un clima===========
+CREATE or REPLACE FUNCTION generar_clima_sucesso(evento_id BIGINT) RETURNS BIGINT as $body$
+DECLARE
+ id_pista BIGINT;
+ sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
+BEGIN
+ id_pista:=(SELECT return_pista_id(evento_id));
 
+END;
+$body$LANGUAGE plpgsql;
+
+---===========funcion que regresa el id de una pista, pasandole por refrencia el id de un evento=========
+CREATE OR REPLACE FUNCTION return_pista_id(evento_id BIGINT) RETURNS BIGINT as $$
+DECLARE
+ pistas CURSOR FOR SELECT * FROM evento p ORDER BY p.id;
+BEGIN
+FOR evento IN pistas LOOP
+ if evento.id=evento_id then
+  return evento.fk_pista_id;
+ end if;
+END LOOP;
+END;
+$$ LANGUAGE plpgsql;
 
 ---===========funcion que genera un evento---------
 CREATE Or REPLACE FUNCTION crear_evento(num int) RETURNS BIGINT as $function$
