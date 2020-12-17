@@ -164,23 +164,22 @@ BEGIN
     end if;
    END LOOP;
 
-   --coeficientes del piloto 1
-   coeficiente_Físico1:=coeficiente1[1][2];
-   dato_coeficiente_Físico1:=(CAST (coeficiente_Físico1 AS int));
-   coeficiente_Mental1:=coeficiente1[2][2];
-   dato_coeficiente_Mental1:=(CAST (coeficiente_Mental1 AS int));
-   --coeficientes del piloto 2
-   coeficiente_Físico2:=coeficiente2[1][2];
-   dato_coeficiente_Físico2:=(CAST (coeficiente_Físico2 AS int));
-   coeficiente_Mental2:=coeficiente2[2][2];
-   dato_coeficiente_Mental2:=(CAST (coeficiente_Mental2 AS int));
-   --===========
-   coeficiente_fisico_total:=(dato_coeficiente_Físico1 + dato_coeficiente_Físico2)/2;
-   coeficiente_mental_total:=(dato_coeficiente_Mental1 + dato_coeficiente_Mental2)/2;
-
   end if;
  END LOOP;
  
+  --coeficientes del piloto 1
+  coeficiente_Físico1:=coeficiente1[1][2];
+  dato_coeficiente_Físico1:=(CAST (coeficiente_Físico1 AS int));
+  coeficiente_Mental1:=coeficiente1[2][2];
+  dato_coeficiente_Mental1:=(CAST (coeficiente_Mental1 AS int));
+  --coeficientes del piloto 2
+  coeficiente_Físico2:=coeficiente2[1][2];
+  dato_coeficiente_Físico2:=(CAST (coeficiente_Físico2 AS int));
+  coeficiente_Mental2:=coeficiente2[2][2];
+  dato_coeficiente_Mental2:=(CAST (coeficiente_Mental2 AS int));
+  --===========
+  coeficiente_fisico_total:=(dato_coeficiente_Físico1 + dato_coeficiente_Físico2)/2;
+  coeficiente_mental_total:=(dato_coeficiente_Mental1 + dato_coeficiente_Mental2)/2;
 
 
 END;
