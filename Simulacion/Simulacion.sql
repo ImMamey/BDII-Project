@@ -123,6 +123,7 @@ DECLARE
  pilotos CURSOR FOR SELECT * FROM piloto p ORDER BY p.id;
  eps CURSOR FOR SELECT * FROM E_P ep ORDER BY ep.id;
 
+ tiempo_vuelta float;
 
  --equipos CURSOR FOR SELECT * FROM equipo e ORDER BY e.id;
  
@@ -135,17 +136,19 @@ DECLARE
  coeficiente_Mental1 VARCHAR;
  dato_coeficiente_Físico1 int; --CAST ('100' AS INTEGER)
  dato_coeficiente_Mental1 int;
+ manejo1 INT;
 
 --competidor 2
  coeficiente_Físico2 VARCHAR;
  coeficiente_Mental2 VARCHAR;
  dato_coeficiente_Físico2 int; --CAST ('100' AS INTEGER)
  dato_coeficiente_Mental2 int;
-
+ manejo2 INT;
  --datos coeficientes finales por equipo
  coeficiente_fisico_total float;
  coeficiente_mental_total float;
  calculo_coeficiente float;
+ manejo_total float;
 
  --datos del clima
  clima1 int;
@@ -164,6 +167,7 @@ BEGIN
      FOR piloto IN pilotos LOOP
        if E_P.fk_piloto_id=piloto.id then
          coeficiente1:=piloto.coeficientes;
+         manejo1:=piloto.manejo;
        end if;
      END LOOP;
 
@@ -176,6 +180,7 @@ BEGIN
      FOR piloto IN pilotos LOOP
        if E_P.fk_piloto_id=piloto.id then
           coeficiente2:=piloto.coeficientes;
+          manejo2:=piloto.coeficiente;
        end if;
      END LOOP;
 
@@ -197,6 +202,8 @@ BEGIN
   coeficiente_mental_total:=(dato_coeficiente_Mental1 + dato_coeficiente_Mental2)/2;
   --Se suman el promedio de los coeficientes en una sola variable
   calculo_coeficiente:=coeficiente_mental_total+coeficiente_fisico_total;
+  --manejo promedio
+  manejo_total:=((manejo1+manejo2)/2);
 
  --Datos del clima actual
  --dato1 
@@ -229,9 +236,25 @@ if clima_actual[4]=null then
 --obtencion de datos de dificultad de pista
  dificultad_pista:=( SELECT "obtener_dificultad_pista"(id_evento));
 
+ --==CALCULOS DEL TIEMPO DE VUELTA==
+ --avg por vuelta son rango 290-300
+ tiempo_vuelta:=(SELECT "random_i"( 290, 300));
+ -- le añado segundos si difficultad_pista >5, else le quito segundos
+ IF difficultad_pista>5 then
+   tiempo_vuelta:=(tiempo_vuelta+(difficultad_pista*2));
+ else
+   tiempo_vuelta:=(tiempo_vuelta-(difficultad_pista*2));
+ end if;
+ -- le bajo un segundo por nivel          
+ tiempo_vuelta:=(tiempo_vuelta-coeficiente_mental_total);  
+ -- le bajo un segundo por nivel
+ tiempo_vuelta:=(tiempo_vuelta-coeficiente_fisico_total);
+ --clima sumo 5 segundos por nivel
+ tiempo_vuelta:=tiempo_vuelta+(promedio_clima*5);
+ -- por cada nivel de manejo lo quito 2 segundos
+ tiempo_vuelta:=tiempo_vuelta-(manejo_total*2);
 
-
- return promedio_clima;
+ return tiempo_vuelta;
 END;
 $body$LANGUAGE plpgsql;
 ---===========funcion que obtiene dificultad de pista
