@@ -114,6 +114,7 @@ BEGIN
 END;
 $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
+--Esta es la funcion mas larga, recorre arias tablas y genera el tiempo que duro en recorrer una vuelta dpendiendo de calculos estadisticos
                                                --5
 CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT) returns float as $body$
 DECLARE
@@ -142,6 +143,7 @@ DECLARE
  --datos coeficientes finales por equipo
  coeficiente_fisico_total float;
  coeficiente_mental_total float;
+ calculo_coeficiente float;
 
 BEGIN
  --llenado de datos del competidor 1
@@ -179,11 +181,14 @@ BEGIN
   dato_coeficiente_Físico2:=(CAST (coeficiente_Físico2 AS int));
   coeficiente_Mental2:=coeficiente2[2][2];
   dato_coeficiente_Mental2:=(CAST (coeficiente_Mental2 AS int));
-  --===========
+  --Promedio de los dos coeficientes de los 2 competidores
   coeficiente_fisico_total:=(dato_coeficiente_Físico1 + dato_coeficiente_Físico2)/2;
   coeficiente_mental_total:=(dato_coeficiente_Mental1 + dato_coeficiente_Mental2)/2;
+  --Se suman el promedio de los coeficientes en una sola variable
+  calculo_coeficiente:=coeficiente_mental_total+coeficiente_fisico_total;
 
- return coeficiente_fisico_total+coeficiente_mental_total;
+ --
+ return -----;
 END;
 $body$LANGUAGE plpgsql;
 
