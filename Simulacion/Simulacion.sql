@@ -175,8 +175,8 @@ BEGIN
    coeficiente_Mental2:=coeficiente2[2][2];
    dato_coeficiente_Mental2:=(CAST (coeficiente_Mental2 AS int));
    --===========
-   coeficiente_fisico_total:=dato_coeficiente_Físico1+dato_coeficiente_Físico2;
-   coeficiente_mental_total:=coeficiente_Mental1+dato_coeficiente_Mental2;
+   coeficiente_fisico_total:=(dato_coeficiente_Físico1 + dato_coeficiente_Físico2)/2;
+   coeficiente_mental_total:=(dato_coeficiente_Mental1 + dato_coeficiente_Mental2)/2;
 
   end if;
  END LOOP;
