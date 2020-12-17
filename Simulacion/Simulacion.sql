@@ -65,7 +65,9 @@ DECLARE
  climas       CURSOR FOR SELECT * FROM SUCESO c ORDER BY c.id;
  todos_terminaron_competencia boolean;
  clima_actual INT[4];
+ vuelta_numero BIGINT;
 BEGIN
+ vuelta_numero:=0;
  todos_terminaron_competencia:=true;
  --obtencion de datos de clima
     FOR SUCESO IN climas LOOP
@@ -74,9 +76,9 @@ BEGIN
       end if;
     END LOOP;
  --Final de la obtencion de datos de clima
-
+ --la longitud de la pista es 13.0 a 13.2
  Loop --Este es el loop por vuelta
-
+   vuelta_numero:=vuelta_numero+1;
     FOR E_R IN competidores LOOP                   --Este loop inicia los datos de todos los competidores en ER
       if E_R.fk_ranking_evento_id = id_evento then --Pero solo iterará sus datos si cumplen con la condicion de que estan activos en esta simulacion
         
