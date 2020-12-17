@@ -95,7 +95,7 @@ BEGIN
          if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
             
             km_esta_vuelta:=(SELECT "random_f"(13.0,13.2));
-            tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id))
+            tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id,clima_actual))
 
             --condicinoal de entrade por 24h de corredor
 
@@ -116,7 +116,7 @@ $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
 --Esta es la funcion mas larga, recorre arias tablas y genera el tiempo que duro en recorrer una vuelta dpendiendo de calculos estadisticos
                                                --5
-CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT) returns float as $body$
+CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT,clima_actual INT[4]) returns float as $body$
 DECLARE
  --declaracion de cursores para coeficientes
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id;
