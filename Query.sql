@@ -42,8 +42,7 @@ JOIN VEHICULO v on v.id = vm.fk_vehiculo_id
 JOIN MOTOR m on m.id = vm.fk_motor_id
 JOIN EVENTO ev on ev.id = ca.fk_evento_id
 
-WHERE (ev.ano).ano = 1950 AND ev.tipo = 'Carrera'
+WHERE (ev.ano).ano = 1950 AND ev.tipo = 'Carrera';
 
 
 
-  
