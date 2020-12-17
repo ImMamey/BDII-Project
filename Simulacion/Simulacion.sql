@@ -94,38 +94,43 @@ DECLARE
  sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
 
  last_id_suceso BIGINT;
- clima_nuevo VARCHAR(4);
+ clima_nuevo INT(4);
  random1 int;
  random2 int;
  random3 int;
  random4 int;
 
- llenado_array boolean;
  contador_array int;
+ --END OF VARIABLE DECLARATIONS
 BEGIN
+
  last_id_suceso:=1;
  id_pista:=(SELECT return_pista_id(evento_id));
 
+ --Randoms posibles para el clima.
+ random1:=(SELECT floor(random()*(5-1+1))+1);
+ random2:=(SELECT floor(random()*(5-1+1))+1);
+ random3:=(SELECT floor(random()*(5-1+1))+1);
+ random4:=(SELECT floor(random()*(5-1+1))+1);
+
+ --este for loop permiterecuprar el ultimo id registrado
  FOR suceso IN sucesos LOOP
    last_id_suceso:=suceso.id;
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
-
-  llenado_array:=false;
+ --fin del forloop;
   contador_array:=0;
 
  LOOP
    contador_array:=contador_array+1;
 
-   IF contador_array=4 then
-    llenado_array:=true
-  END IF;
-  EXIT WHEN llenado_array=true
+
+  EXIT WHEN contador_array=4
  END LOOP;
 
-
+ 
  --soleado, noche, tormenta, nublado, lluvia
- INSERT INTO clima_nuevo VALUES('','','')
+ INSERT INTO clima_nuevo VALUES(,,)
  
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
  (last_id_suceso,'clima',clima[],null, null,null,null);
