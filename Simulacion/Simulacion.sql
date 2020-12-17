@@ -110,7 +110,7 @@ BEGIN
  */
 
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
- (last_id_suceso,'clima',clima[],causa[], null,null,null);
+ (last_id_suceso,'clima',clima[],null, null,null,null);
 END;
 $body$LANGUAGE plpgsql;
 
