@@ -93,9 +93,11 @@ DECLARE
 BEGIN
  last_id_suceso:=1;
  id_pista:=(SELECT return_pista_id(evento_id));
+
  FOR suceso IN sucesos LOOP
    last_id_suceso:=suceso.id;
  END LOOP;
+  last_id_suceso:=last_id_suceso+1;
  /*
   id BIGINT NOT NULL,
  tipo_suceso VARCHAR NOT NULL,
@@ -108,7 +110,7 @@ BEGIN
  */
 
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
- ();
+ (last_id_suceso,'clima',clima[],causa[], null,null,null);
 END;
 $body$LANGUAGE plpgsql;
 
