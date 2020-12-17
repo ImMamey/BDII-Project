@@ -120,13 +120,29 @@ DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id;
  pilotos CURSOR FOR SELECT * FROM piloto p ORDER BY p.id;
  --equipos CURSOR FOR SELECT * FROM equipo e ORDER BY e.id;
- --eps CURSOR FOR SELECT * FROM E_P ep ORDER BY ep.id;
+ eps CURSOR FOR SELECT * FROM E_P ep ORDER BY ep.id;
  coeficiente1 VARCHAR[2][2];
  coeficiente2 VARCHAR[2][2];
- coeficiente_final VARCHAR[2][2];
- --'{{"1","2"},{"4","5"}}'
+ --'{{"uwu","2"},{"owo","5"}}'
+
+--competidor 1
+ coeficiente_Físico1 VARCHAR;
+ coeficiente_Mental1 VARCHAR;
+ dato_coeficiente_Físico1 int; --CAST ('100' AS INTEGER)
+ dato_coeficiente_Mental1 int;
+
+--competidor 2
+ coeficiente_Físico2 VARCHAR;
+ coeficiente_Mental2 VARCHAR;
+ dato_coeficiente_Físico2 int; --CAST ('100' AS INTEGER)
+ dato_coeficiente_Mental2 int;
+
+ --datos equipo
+ coeficiente_fisico_total float;
+ coeficiente_mental_total float;
+
 BEGIN
- 
+ --llenado de datos del competidor 1
  FOR E_P IN eps LOOP
   if E_P.id=equipo_piloto_id then
    
@@ -138,7 +154,7 @@ BEGIN
 
   end if;
  END LOOP;
-
+ --llenado de datos del competidor 2
   FOR E_P IN eps LOOP
   if E_P.id=equipo_piloto_id+1 then
    
@@ -148,9 +164,23 @@ BEGIN
     end if;
    END LOOP;
 
+   --coeficientes del piloto 1
+   coeficiente_Físico1:=coeficiente1[1][2];
+   dato_coeficiente_Físico1:=(CAST (coeficiente_Físico1 AS int));
+   coeficiente_Mental1:=coeficiente1[2][2];
+   dato_coeficiente_Mental1:=(CAST (coeficiente_Mental1 AS int));
+   --coeficientes del piloto 2
+   coeficiente_Físico2:=coeficiente2[1][2];
+   dato_coeficiente_Físico2:=(CAST (coeficiente_Físico2 AS int));
+   coeficiente_Mental2:=coeficiente2[2][2];
+   dato_coeficiente_Mental2:=(CAST (coeficiente_Mental2 AS int));
+   --===========
+   coeficiente_fisico_total:=dato_coeficiente_Físico1+dato_coeficiente_Físico2;
+   coeficiente_mental_total:=coeficiente_Mental1+dato_coeficiente_Mental2;
+
   end if;
  END LOOP;
-
+ 
 
 
 END;
