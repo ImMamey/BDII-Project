@@ -77,7 +77,10 @@ BEGIN
     END LOOP;
  --Final de la obtencion de datos de clima
  --la longitud de la pista es 13.0 a 13.2
+ --velocidad media dependera del tiempo
+ --tiempo tiene formula
  Loop --Este es el loop por vuelta
+ 
    vuelta_numero:=vuelta_numero+1;
     FOR E_R IN competidores LOOP                   --Este loop inicia los datos de todos los competidores en ER
       if E_R.fk_ranking_evento_id = id_evento then --Pero solo iterará sus datos si cumplen con la condicion de que estan activos en esta simulacion
