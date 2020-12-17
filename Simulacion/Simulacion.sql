@@ -63,9 +63,17 @@ DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
  rankings     CURSOR FOR SELECT * FROM ranking e ORDER BY e.id;
  climas       CURSOR FOR SELECT * FROM SUCESO c ORDER BY c.id;
+---datos por vuelta
  todos_terminaron_competencia boolean;
  clima_actual INT[4];
+ vuelta_numero BIGINT;
+---======
+ --datos del competidor
+ km_esta_vuelta float;
+ tiempo_esta_vuelta float;
+ velocidad_sta_vuelta float;
 BEGIN
+ vuelta_numero:=0;
  todos_terminaron_competencia:=true;
  --obtencion de datos de clima
     FOR SUCESO IN climas LOOP
@@ -74,14 +82,19 @@ BEGIN
       end if;
     END LOOP;
  --Final de la obtencion de datos de clima
-
+ --la longitud de la pista es 13.0 a 13.2
+ --velocidad media dependera del tiempo
+ --tiempo tiene formula
  Loop --Este es el loop por vuelta
 
+   vuelta_numero:=vuelta_numero+1;
     FOR E_R IN competidores LOOP                   --Este loop inicia los datos de todos los competidores en ER
       if E_R.fk_ranking_evento_id = id_evento then --Pero solo iterará sus datos si cumplen con la condicion de que estan activos en esta simulacion
         
         FOR ranking IN rankings LOOP               --Este loop buscara el ranking de l corredor
          if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
+            km_esta_vuelta:=(SELECT "random_f"(13.0,13.2));
+
 
             --condicinoal de entrade por 24h de corredor
 
@@ -99,7 +112,13 @@ BEGIN
  --while todos_terminaron competenica=true; 
 END;
 $body$LANGUAGE plpgsql;
+---===========funcion genrar tiempo de vuelta=======
+CREATE OR REPLACE FUNCTION generar_tiempo_vuelta() returns float as $body$
+DECLARE
+BEGIN
 
+END;
+$body$LANGUAGE plpgsql;
 
 ---===========funcion que genera un clima===========
 CREATE or REPLACE FUNCTION generar_clima_sucesso(evento_id BIGINT) RETURNS BIGINT as $body$
@@ -124,13 +143,13 @@ BEGIN
  --Randoms posibles para el clima.
  --1=soleado, 2=noche, 3=nublado, 4=lluvia, 5=tormenta
 
- random1:=(SELECT floor(random()*(5-1+1))+1);
+ random1:=(SELECT "random_i"(1,5));
  IF random1=1 then
     clima_nuevo:=ARRAY[random1,null,null,null];
  else
-   random2:=(SELECT floor(random()*(5-2+1))+2);
-   random3:=(SELECT floor(random()*(5-2+1))+2);
-   random4:=(SELECT floor(random()*(5-2+1))+2);
+   random2:=(SELECT "random_i"(2,5));   --(SELECT floor(random()*(5-2+1))+2);
+   random3:=(SELECT "random_i"(2,5));
+   random4:=(SELECT "random_i"(2,5));
    clima_nuevo:=ARRAY[random1,random2,random3,random4];
  end IF;
 
@@ -207,21 +226,6 @@ END;
 $function$ LANGUAGE plpgsql;
 
 
----===========Funcion que genera numeros aleatoreos controlados para el uso del proyecto==========
-CREATE OR REPLACE FUNCTION random_i(prob competidor.coeficiente%TYPE, prob_race competidor.habilidad%TYPE) RETURNS interger as $function$
-DECLARE
- result interger;
-BEGIN
- IF prob==1 then
-  returns result:= random()*(1-0.01)+0.01;
- END IF;
- IF i>1 and i<5 then
-  returns  result:= random()*(a-b)+b; --donde a es el mayor tiempo posible de completar circuito, b es el menor tiempo posible de completar circuito.
- END IF;
- --more random functions if needed
-END;
-$function$ LANGUAGE plpgsql; 
-
 ---===============Funcion crear ranking para cada corredor=================
 CREATE OR REPLACE FUNCTION crear_ranking(evento BIGINT) returns BIGINT as $body$
 DECLARE
@@ -249,3 +253,19 @@ BEGIN
  return new_E_P_id;
 END;
 $body$ LANGUAGE plpgsql;
+
+---===========Funcion que genera numeros aleatoreos de tipo int==========
+CREATE OR REPLACE FUNCTION random_i( a int, b int) RETURNS int as $function$
+BEGIN
+  --donde "a" s el menor numero y b es el mayor
+  return (SELECT floor(random()*(b-a+1))+a);
+END;
+$function$ LANGUAGE plpgsql;
+
+---===========Funcion que genera numeros aleatoreos de tipo float=========
+CREATE OR REPLACE FUNCTION random_f( a float, b float) RETURNS float as $function$
+BEGIN
+  --donde "a" s el menor numero y b es el mayor
+  return (SELECT random()*(b-a)+a;);
+END;
+$function$ LANGUAGE plpgsql;
