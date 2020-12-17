@@ -100,7 +100,6 @@ DECLARE
  random3 int;
  random4 int;
 
- contador_array int;
  --END OF VARIABLE DECLARATIONS
 BEGIN
 
@@ -108,10 +107,18 @@ BEGIN
  id_pista:=(SELECT return_pista_id(evento_id));
 
  --Randoms posibles para el clima.
+ --1=soleado, 2=noche, 3=tormenta, 4=nublado, 5=lluvia
+
  random1:=(SELECT floor(random()*(5-1+1))+1);
- random2:=(SELECT floor(random()*(5-1+1))+1);
- random3:=(SELECT floor(random()*(5-1+1))+1);
- random4:=(SELECT floor(random()*(5-1+1))+1);
+ IF random1=1 or random1=2 then
+   INSERT INTO clima_nuevo VALUES(random1,null,null,null);
+ else
+   random2:=(SELECT floor(random()*(5-2+1))+2);
+   random3:=(SELECT floor(random()*(5-2+1))+2);
+   random4:=(SELECT floor(random()*(5-2+1))+2);
+   INSERT INTO clima_nuevo VALUES(random1,random2,random3,random4);
+ end IF;
+ 
 
  --este for loop permiterecuprar el ultimo id registrado
  FOR suceso IN sucesos LOOP
@@ -119,14 +126,6 @@ BEGIN
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
  --fin del forloop;
-  contador_array:=0;
-
- LOOP
-   contador_array:=contador_array+1;
-
-
-  EXIT WHEN contador_array=4
- END LOOP;
 
  
  --soleado, noche, tormenta, nublado, lluvia
