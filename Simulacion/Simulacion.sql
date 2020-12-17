@@ -95,7 +95,7 @@ BEGIN
          if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
             
             km_esta_vuelta:=(SELECT "random_f"(13.0,13.2));
-            tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id,clima_actual))
+            tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id,clima_actual,id_evento))
 
             --condicinoal de entrade por 24h de corredor
 
@@ -116,12 +116,14 @@ $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
 --Esta es la funcion mas larga, recorre arias tablas y genera el tiempo que duro en recorrer una vuelta dpendiendo de calculos estadisticos
                                                --5
-CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT,clima_actual INT[4]) returns float as $body$
+CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT,clima_actual INT[4],id_evento BIGINT) returns float as $body$
 DECLARE
  --declaracion de cursores para coeficientes
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id;
  pilotos CURSOR FOR SELECT * FROM piloto p ORDER BY p.id;
  eps CURSOR FOR SELECT * FROM E_P ep ORDER BY ep.id;
+
+
  --equipos CURSOR FOR SELECT * FROM equipo e ORDER BY e.id;
  
  coeficiente1 VARCHAR[2][2];
@@ -152,6 +154,8 @@ DECLARE
  clima4 int;
  promedio_clima float;
 
+ --datos de la dificutad de la pista
+ dificultad_pista BIGINT;
 BEGIN
  --llenado de datos del competidor 1
  FOR E_P IN eps LOOP
@@ -217,19 +221,48 @@ if clima_actual[4]=null then
  end if;
 
  if clima_actual[2]=null then
-    promedio_clima:=clima_actual[2];
+    promedio_clima:=clima_actual[1];
  else
     promedio_clima:= (clima1+clima2+clima3+clima4)/4;
     promedio_clima:= round( CAST( promedio_clima as numeric), 2);
  end if;
- 
+--obtencion de datos de dificultad de pista
+ dificultad_pista:=( SELECT "obtener_dificultad_pista"(id_evento));
 
 
 
  return promedio_clima;
 END;
 $body$LANGUAGE plpgsql;
+---===========funcion que obtiene dificultad de pista
+CREATE or REPLACE FUNCTION obtener_dificultad_pista(id_evento BIGINT)returns BIGINT as $$
+DECLARE
+ eventos CURSOR FOR SELECT * FROM evento e ORDER BY e.id;
+ p_ss CURSOR FOR SELECT * FROM P_S ps ORDER BY ps.fk_pista_id;
+ secciones CURSOR FOR SELECT * FROM seccion s ORDER BY s.id;
 
+ id_pista BIGINT;
+ id_seccion BIGINT;
+ dificultad BIGINT;
+BEGIN
+  FOR evento in pilotos LOOP --loop para obtener el id de la pista
+    if evento.id=id_evento then 
+      id_pista:=evento.fk_pista_id;
+    end if;
+ end loop;
+  FOR P_S in p_ss LOOP --loop para obtener el id de la seccion
+    if P_S.fk_pista_id=id_pista then
+       id_seccion:=P_S.fk_seccion_id; 
+    end if;
+ end loop;
+  FOR seccion in secciones LOOP
+   if seccion.id=id_seccion then
+      dificultad:=seccion.dificultad;
+   end if;
+  end loop;
+  return dificultad;
+END;
+$$LANGUAGE plpgsql;
 ---===========funcion que genera un clima===========
 CREATE or REPLACE FUNCTION generar_clima_sucesso(evento_id BIGINT) RETURNS BIGINT as $body$
 DECLARE
