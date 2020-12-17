@@ -127,7 +127,7 @@ CREATE TABLE SUCESO(
  id BIGINT NOT NULL,
  tipo_suceso VARCHAR NOT NULL,
  momento_suceso INT, 
- clima_momento VARCHAR(4) NOT NULL,
+ clima_momento INT[4] NOT NULL,
  causa VARCHAR(3),
  tipo_bandera VARCHAR,
  fk_p_s_fk_seccion_id BIGINT,
