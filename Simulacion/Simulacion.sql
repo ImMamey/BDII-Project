@@ -107,10 +107,10 @@ BEGIN
  id_pista:=(SELECT return_pista_id(evento_id));
 
  --Randoms posibles para el clima.
- --1=soleado, 2=noche, 3=tormenta, 4=nublado, 5=lluvia
+ --1=soleado, 2=noche, 3=nublado, 4=lluvia, 5=tormenta
 
  random1:=(SELECT floor(random()*(5-1+1))+1);
- IF random1=1 or random1=2 then
+ IF random1=1 then
    INSERT INTO clima_nuevo VALUES(random1,null,null,null);
  else
    random2:=(SELECT floor(random()*(5-2+1))+2);
@@ -118,21 +118,16 @@ BEGIN
    random4:=(SELECT floor(random()*(5-2+1))+2);
    INSERT INTO clima_nuevo VALUES(random1,random2,random3,random4);
  end IF;
- 
 
  --este for loop permiterecuprar el ultimo id registrado
  FOR suceso IN sucesos LOOP
    last_id_suceso:=suceso.id;
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
- --fin del forloop;
-
- 
- --soleado, noche, tormenta, nublado, lluvia
- INSERT INTO clima_nuevo VALUES(,,)
+ --fin del forloop y creacion del nuevo id del suceso;
  
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
- (last_id_suceso,'clima',clima[],null, null,null,null);
+ (last_id_suceso,'clima',clima_nuevo,null, null,null,null);
 END;
 $body$LANGUAGE plpgsql;
 
