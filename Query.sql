@@ -11,10 +11,10 @@ RETURNS TABLE
     primer_nombre2 VARCHAR,segundo_nombre2 VARCHAR,primer_apellido2 VARCHAR,segundo_apellido2 VARCHAR,
     nacionalidad2 PILOTO.nacionalidad%TYPE,foto_piloto2 PILOTO.foto%TYPE,
     vehiculo VEHICULO.nombre%TYPE,motor MOTOR.nombre%TYPE, cilindraje MOTOR.cilindraje%TYPE,
-    puesto_equipo_ensayo EQUIPO.nombre%TYPE,
+    puesto_equipo_ensayo E_R.numero_equipo%TYPE,
     vuelta_rapida_ensayo RANKING.vuelta_rapida%TYPE,velocidad_media_ensayo RANKING.velocidad_media%TYPE,
     puesto_carrera RANKING.puesto%TYPE,
-    vuelta_rapida RANKING.vuelta_rapida%TYPE,velocidad_media RANKING.velocidad_media%TYPE,
+    velocidad_media RANKING.velocidad_media%TYPE,vuelta_rapida RANKING.vuelta_rapida%TYPE,
     n_vuelta RANKING.numero_vuelta%TYPE,distancia_en_KM RANKING.distancia_km%TYPE,
     diferencia_de_km RANKING.distancia_km%TYPE
 
