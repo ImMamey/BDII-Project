@@ -76,19 +76,23 @@ BEGIN
  --Final de la obtencion de datos de clima
 
  Loop --Este es el loop por vuelta
-    FOR E_R IN competidores LOOP
 
-      if E_R.fk_ranking_evento_id = id_evento then
-        FOR ranking IN rankings LOOP
-         if E_R.fk_ranking_id = ranking.id then
+    FOR E_R IN competidores LOOP                   --Este loop inicia los datos de todos los competidores en ER
+      if E_R.fk_ranking_evento_id = id_evento then --Pero solo iterará sus datos si cumplen con la condicion de que estan activos en esta simulacion
+        
+        FOR ranking IN rankings LOOP               --Este loop buscara el ranking de l corredor
+         if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
             --condicinoal de entrade por 24h de corredor
 
             ---SIMULACION
          end if;
         END LOOP;
+        
         --iff tiempo -24 then todos_terminaron_competencia:= false nd if;
-      end if;
+     
+      end if; --Final del loop que inicia los datos de todos los competidores
     END LOOP;
+
   EXIT WHEN todos_terminaron_competencia=true;
   END LOOP;
  --while todos_terminaron competenica=true; 
