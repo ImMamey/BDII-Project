@@ -94,7 +94,7 @@ DECLARE
  sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
 
  last_id_suceso BIGINT;
- clima_nuevo INT(4);
+ clima_nuevo INT[4];
  random1 int;
  random2 int;
  random3 int;
@@ -103,7 +103,7 @@ DECLARE
  --END OF VARIABLE DECLARATIONS
 BEGIN
 
- last_id_suceso:=1;
+ last_id_suceso:=0;
  id_pista:=(SELECT return_pista_id(evento_id));
 
  --Randoms posibles para el clima.
@@ -111,12 +111,12 @@ BEGIN
 
  random1:=(SELECT floor(random()*(5-1+1))+1);
  IF random1=1 then
-   INSERT INTO clima_nuevo VALUES(random1,null,null,null);
+    clima_nuevo:=ARRAY[random1,null,null,null];
  else
    random2:=(SELECT floor(random()*(5-2+1))+2);
    random3:=(SELECT floor(random()*(5-2+1))+2);
    random4:=(SELECT floor(random()*(5-2+1))+2);
-   INSERT INTO clima_nuevo VALUES(random1,random2,random3,random4);
+   clima_nuevo:=ARRAY[random1,random2,random3,random4];
  end IF;
 
  --este for loop permiterecuprar el ultimo id registrado
@@ -128,6 +128,7 @@ BEGIN
  
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
  (last_id_suceso,'clima',clima_nuevo,null, null,null,null);
+ RETURN last_id_suceso;
 END;
 $body$LANGUAGE plpgsql;
 
