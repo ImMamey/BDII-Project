@@ -89,7 +89,8 @@ CREATE or REPLACE FUNCTION generar_clima_sucesso(evento_id BIGINT) RETURNS BIGIN
 DECLARE
  id_pista BIGINT;
  sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
- last_id_suceso BIGINT
+ last_id_suceso BIGINT;
+ clima_nuevo VARCHAR(4);
 BEGIN
  last_id_suceso:=1;
  id_pista:=(SELECT return_pista_id(evento_id));
@@ -108,7 +109,9 @@ BEGIN
  fk_p_s_fk_seccion_id BIGINT,
  fk_p_s_fk_pista_id
  */
-
+ --soleado, noche, tormenta, nublado, lluvia
+ INSERT INTO clima_nuevo VALUES('','','')
+ 
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
  (last_id_suceso,'clima',clima[],null, null,null,null);
 END;
