@@ -51,34 +51,49 @@ BEGIN
   END LOOP;
  
   --Inicia el proceso de la simulacion
-  SELECT "startSimulation"(nuevo_evento);
+  SELECT "startSimulation"(nuevo_evento,nuevo_clima);
 END;
 $func$LANGUAGE plpgsql;
 
 ---===========FUncion que inicia la simulacion vuelta por vuelta=====================
 
 ---crear estimulado coeficiente manejo dificultad de la pista y clima
-CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT) as $body$
+CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT,id_clima BIGINT) as $body$
 DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
  rankings     CURSOR FOR SELECT * FROM ranking e ORDER BY e.id;
+ climas       CURSOR FOR SELECT * FROM SUCESO c ORDER BY c.id;
  todos_terminaron_competencia boolean;
+ clima_actual INT[4];
 BEGIN
  todos_terminaron_competencia:=true;
- Loop
-    FOR E_R IN competidores LOOP
+ --obtencion de datos de clima
+    FOR SUCESO IN climas LOOP
+      if SUCESO.id=id_clima then
+        clima_actual:=SUCESO.clima_momento;
+      end if;
+    END LOOP;
+ --Final de la obtencion de datos de clima
 
-      if E_R.fk_ranking_evento_id = id_evento then
-        FOR ranking IN rankings LOOP
-         if E_R.fk_ranking_id = ranking.id then
+ Loop --Este es el loop por vuelta
+
+    FOR E_R IN competidores LOOP                   --Este loop inicia los datos de todos los competidores en ER
+      if E_R.fk_ranking_evento_id = id_evento then --Pero solo iterará sus datos si cumplen con la condicion de que estan activos en esta simulacion
+        
+        FOR ranking IN rankings LOOP               --Este loop buscara el ranking de l corredor
+         if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
+
             --condicinoal de entrade por 24h de corredor
 
             ---SIMULACION
          end if;
         END LOOP;
-        --iff tiempo -24 then todos_terminaron_competencia:= false nd if;
-      end if;
+
+        --iff tiempo =24 then todos_terminaron_competencia:= false nd if;
+     
+      end if; --Final del loop que inicia los datos de todos los competidores
     END LOOP;
+
   EXIT WHEN todos_terminaron_competencia=true;
   END LOOP;
  --while todos_terminaron competenica=true; 
@@ -94,7 +109,7 @@ DECLARE
  sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
 
  last_id_suceso BIGINT;
- clima_nuevo INT(4);
+ clima_nuevo INT[4];
  random1 int;
  random2 int;
  random3 int;
@@ -103,36 +118,32 @@ DECLARE
  --END OF VARIABLE DECLARATIONS
 BEGIN
 
- last_id_suceso:=1;
+ last_id_suceso:=0;
  id_pista:=(SELECT return_pista_id(evento_id));
 
  --Randoms posibles para el clima.
- --1=soleado, 2=noche, 3=tormenta, 4=nublado, 5=lluvia
+ --1=soleado, 2=noche, 3=nublado, 4=lluvia, 5=tormenta
 
  random1:=(SELECT floor(random()*(5-1+1))+1);
- IF random1=1 or random1=2 then
-   INSERT INTO clima_nuevo VALUES(random1,null,null,null);
+ IF random1=1 then
+    clima_nuevo:=ARRAY[random1,null,null,null];
  else
    random2:=(SELECT floor(random()*(5-2+1))+2);
    random3:=(SELECT floor(random()*(5-2+1))+2);
    random4:=(SELECT floor(random()*(5-2+1))+2);
-   INSERT INTO clima_nuevo VALUES(random1,random2,random3,random4);
+   clima_nuevo:=ARRAY[random1,random2,random3,random4];
  end IF;
- 
 
  --este for loop permiterecuprar el ultimo id registrado
  FOR suceso IN sucesos LOOP
    last_id_suceso:=suceso.id;
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
- --fin del forloop;
-
- 
- --soleado, noche, tormenta, nublado, lluvia
- INSERT INTO clima_nuevo VALUES(,,)
+ --fin del forloop y creacion del nuevo id del suceso;
  
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
- (last_id_suceso,'clima',clima[],null, null,null,null);
+ (last_id_suceso,'clima',clima_nuevo,null, null,null,null);
+ RETURN last_id_suceso;
 END;
 $body$LANGUAGE plpgsql;
 
