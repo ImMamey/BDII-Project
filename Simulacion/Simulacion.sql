@@ -196,31 +196,37 @@ BEGIN
 
  --Datos del clima actual
  --dato1 
-  clima1:=clima_actual[0]
+  clima1:=clima_actual[1];
  --dato2
- if clima_actual[1]<>null then
-   clima2:=clima_actual[1]
+ if clima_actual[2]=null then
+    clima2:=0;
  else
-   clima2:=0;
+   clima2:=clima_actual[2];
  end if;
  --dato3
- if clima actual[2]<>null then
-   clima3:=clima_actual[2]
- else
+ if clima_actual[3]=null then
    clima3:=0;
+ else
+   clima3:=clima_actual[3];
  end if;
  --dato4
-if clima_actual[3]<>null then
- clima4:=clima_actual[3]
+if clima_actual[4]=null then
+   clima4:=0;
  else
-  clima4:=0;
+   clima4:=clima_actual[4];
  end if;
 
- if clima_actual[1]=null then
-  promedio_clima:=clima_actual[0]
+ if clima_actual[2]=null then
+    promedio_clima:=clima_actual[2];
  else
-  promedio_clima:=(clima1+clima2+clima3+clima4)/4;
- return -----;
+    promedio_clima:= (clima1+clima2+clima3+clima4)/4;
+    promedio_clima:= round( CAST( promedio_clima as numeric), 2);
+ end if;
+ 
+
+
+
+ return promedio_clima;
 END;
 $body$LANGUAGE plpgsql;
 
