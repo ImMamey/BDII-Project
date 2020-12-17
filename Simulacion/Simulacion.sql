@@ -84,13 +84,24 @@ BEGIN
  --while todos_terminaron competenica=true; 
 END;
 $body$LANGUAGE plpgsql;
+
+
 ---===========funcion que genera un clima===========
 CREATE or REPLACE FUNCTION generar_clima_sucesso(evento_id BIGINT) RETURNS BIGINT as $body$
 DECLARE
  id_pista BIGINT;
+
  sucesos CURSOR FOR SELECT * FROM SUCESO s ORDER BY s.id;
+
  last_id_suceso BIGINT;
  clima_nuevo VARCHAR(4);
+ random1 int;
+ random2 int;
+ random3 int;
+ random4 int;
+
+ llenado_array boolean;
+ contador_array int;
 BEGIN
  last_id_suceso:=1;
  id_pista:=(SELECT return_pista_id(evento_id));
@@ -99,16 +110,20 @@ BEGIN
    last_id_suceso:=suceso.id;
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
- /*
-  id BIGINT NOT NULL,
- tipo_suceso VARCHAR NOT NULL,
- momento_suceso INT, 
- clima_momento VARCHAR(4) NOT NULL,
- causa VARCHAR(3),
- tipo_bandera VARCHAR,
- fk_p_s_fk_seccion_id BIGINT,
- fk_p_s_fk_pista_id
- */
+
+  llenado_array:=false;
+  contador_array:=0;
+
+ LOOP
+   contador_array:=contador_array+1;
+
+   IF contador_array=4 then
+    llenado_array:=true
+  END IF;
+  EXIT WHEN llenado_array=true
+ END LOOP;
+
+
  --soleado, noche, tormenta, nublado, lluvia
  INSERT INTO clima_nuevo VALUES('','','')
  
