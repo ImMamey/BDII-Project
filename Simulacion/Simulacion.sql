@@ -93,8 +93,9 @@ BEGIN
         
         FOR ranking IN rankings LOOP               --Este loop buscara el ranking de l corredor
          if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
+            
             km_esta_vuelta:=(SELECT "random_f"(13.0,13.2));
-
+            tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id))
 
             --condicinoal de entrade por 24h de corredor
 
@@ -113,8 +114,9 @@ BEGIN
 END;
 $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
-CREATE OR REPLACE FUNCTION generar_tiempo_vuelta() returns float as $body$
+CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto BIGINT) returns float as $body$
 DECLARE
+ pilotos
 BEGIN
 
 END;
