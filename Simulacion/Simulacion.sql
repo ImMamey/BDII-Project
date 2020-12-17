@@ -51,21 +51,31 @@ BEGIN
   END LOOP;
  
   --Inicia el proceso de la simulacion
-  SELECT "startSimulation"(nuevo_evento);
+  SELECT "startSimulation"(nuevo_evento,nuevo_clima);
 END;
 $func$LANGUAGE plpgsql;
 
 ---===========FUncion que inicia la simulacion vuelta por vuelta=====================
 
 ---crear estimulado coeficiente manejo dificultad de la pista y clima
-CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT) as $body$
+CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT,id_clima BIGINT) as $body$
 DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
  rankings     CURSOR FOR SELECT * FROM ranking e ORDER BY e.id;
+ climas       CURSOR FOR SELECT * FROM SUCESO c ORDER BY c.id;
  todos_terminaron_competencia boolean;
+ clima_actual INT[4];
 BEGIN
  todos_terminaron_competencia:=true;
- Loop
+ --obtencion de datos de clima
+    FOR SUCESO IN climas LOOP
+      if SUCESO.id=id_clima then
+        clima_actual:=SUCESO.clima_momento;
+      end if;
+    END LOOP;
+ --Final de la obtencion de datos de clima
+
+ Loop --Este es el loop por vuelta
     FOR E_R IN competidores LOOP
 
       if E_R.fk_ranking_evento_id = id_evento then
