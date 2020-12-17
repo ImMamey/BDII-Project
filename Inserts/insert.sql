@@ -133,5 +133,7 @@ INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vu
 INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_fk_piloto_id, fk_e_p_fk_equipo_id) VALUES
     ()
 
-INSERT INTO RANKING_HORA (fk_piloto_id, fk_equipo_id) VALUES
-    ()
+INSERT INTO RANKING_HORA (id,hora,puesto, fk_e_r_ranking_id, fk_e_r_ranking_evento_id, fk_e_r_id) VALUES
+    (1,1,2,1,1,1),
+    (2,1,4,2,1,3),  
+    (3,1,3,3,1,5);  
