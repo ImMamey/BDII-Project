@@ -444,7 +444,7 @@ BEGIN
   (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,evento);
   return;
 END
-$$
+$$LANGUAGE plpgsql;
 
 ---==============FUNCION crear E_R para cada corredor e la nueva iteracion===========
 CREATE OR REPLACE FUNCTION crear_e_r(new_categoria VARCHAR,new_equipo_num BIGINT,new_marca_cauchos VARCHAR,new_ranking_id BIGINT,new_foto bytea,new_evento_id BIGINT,new_E_P_id BIGINT) 
