@@ -8,7 +8,6 @@ CREATE OR REPLACE FUNCTION start_race(IN carrera_anno int)
 returns bigint as 
 $func$
 DECLARE
-  --r E_P%ROWTYPE; --fila
   competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
 
   --variables por equipo
@@ -30,6 +29,7 @@ DECLARE
 BEGIN
   verificar_evento:=false;
   nuevo_evento:=(SELECT "crear_evento"(carrera_anno));
+  return nuevo_evento;
   nuevo_clima:=(SELECT "generar_clima_sucesso"(nuevo_evento));
  
  --Inicia y prepara los datos de los competidores para la siguiente competencia
@@ -338,12 +338,19 @@ BEGIN
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
  --fin del forloop y creacion del nuevo id del suceso;
- 
+ /*
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
- (last_id_suceso,'clima',clima_nuevo,null, null,null,null);
+ (last_id_suceso,'clima',clima_nuevo,null, null,null,null); */
  RETURN last_id_suceso;
 END;
 $body$LANGUAGE plpgsql;
+
+CREATE OR REPLACE PROCEDURE  push_generar_clima_sucesso(last_id_suceso BIGINT, clima_nuevo INT[4])as $$
+BEGIN
+INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
+ (last_id_suceso,'clima',clima_nuevo,null, null,null,null);
+ return;
+END;$$LANGUAGE plpgsql;
 
 ---===========funcion que regresa el id de una pista, pasandole por refrencia el id de un evento=========
 CREATE OR REPLACE FUNCTION return_pista_id(evento_id BIGINT) RETURNS BIGINT as $$
@@ -359,7 +366,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 ---===========funcion que genera un evento---------
-CREATE Or REPLACE FUNCTION crear_evento(num int) RETURNS BIGINT as $function$
+CREATE Or REPLACE FUNCTION crear_evento(num int)
+RETURNS BIGINT as $function$
 DECLARE
 
  eventos CURSOR FOR SELECT * FROM evento e ORDER BY e.id;
@@ -388,7 +396,7 @@ BEGIN
  
  nuevo_ano:=nuevo_ano+1;
  new_id:=new_id+1;
-
+ 
  tipo:='Carrera';
 
  IF num <7 then
@@ -397,12 +405,22 @@ BEGIN
   id_pista:=2;
  END IF;
 
-  INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
-   (new_id,(nuevo_dia,nuevo_mes,nuevo_ano), tipo, id_pista);
+  /*INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
+   (new_id,(nuevo_dia,nuevo_mes,nuevo_ano),tipo,id_pista);*/
+   (CALL push_evento(new_id,nuevo_dia,nuevo_mes,nuevo_ano,tipo,id_pista));
 
  RETURN new_id;
 END;
 $function$ LANGUAGE plpgsql;
+
+---======llamade de insert evento=================
+CREATE OR REPLACE PROCEDURE push_evento(new_id BIGINT, new_dia BIGINT,new_mes BIGINT,new_ano BIGINT, new_tipo CHAR VARYING, new_fk_pista_id BIGINT) as $$
+BEGIN
+ INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
+   (new_id,(new_dia,new_mes,new_ano),new_tipo,new_fk_pista_id);
+   return;
+END;
+$$ LANGUAGE plpgsql;
 
 
 ---===============Funcion crear ranking para cada corredor=================
@@ -415,11 +433,18 @@ BEGIN
   new_id:= ranking.id;
  END LOOP;
   new_id:=new_id+1;
-  INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
-  (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,evento);
+  CALL push_crear_ranking(new_id,evento);
  RETURN new_id;
 END; 
 $body$ LANGUAGE plpgsql;
+---=============================================================
+CREATE OR REPLACE PROCEDURE push_crear_ranking(new_id,evento) as $$
+BEGIN
+   INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
+  (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,evento);
+  return;
+END
+$$
 
 ---==============FUNCION crear E_R para cada corredor e la nueva iteracion===========
 CREATE OR REPLACE FUNCTION crear_e_r(new_categoria VARCHAR,new_equipo_num BIGINT,new_marca_cauchos VARCHAR,new_ranking_id BIGINT,new_foto bytea,new_evento_id BIGINT,new_E_P_id BIGINT) 
@@ -427,11 +452,21 @@ CREATE OR REPLACE FUNCTION crear_e_r(new_categoria VARCHAR,new_equipo_num BIGINT
 DECLARE
  E_Rs CURSOR FOR SELECT * FROM E_R er ORDER BY er.fk_e_p_id;
 BEGIN
- INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_id) VALUES
-   (new_categoria,new_equipo_num,new_marca_cauchos,new_ranking_id,new_foto,new_evento_id,new_E_P_id);
+ /*INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_id) VALUES
+   (new_categoria,new_equipo_num,new_marca_cauchos,new_ranking_id,new_foto,new_evento_id,new_E_P_id); */
+   CALL push_crear_e_r(new_categoria,new_equipo_num,new_marca_cauchos,new_ranking_id,new_foto,new_evento_id,new_E_P_id);
  return new_E_P_id;
 END;
 $body$ LANGUAGE plpgsql;
+
+--===============
+CREATE OR REPLACE PROCEDURE push_crear_e_r(new_categoria VARCHAR,new_equipo_num BIGINT,new_marca_cauchos VARCHAR,new_ranking_id BIGINT,new_foto bytea,new_evento_id BIGINT,new_E_P_id BIGINT)as $$
+BEGIN
+  INSERT INTO E_R (categoria, numero_equipo, marca_cauchos, fk_ranking_id, foto, fk_ranking_evento_id, fk_e_p_id) VALUES
+   (new_categoria,new_equipo_num,new_marca_cauchos,new_ranking_id,new_foto,new_evento_id,new_E_P_id);
+   return;
+END
+$$LANGUAGE plpgsql;
 
 ---===========Funcion que genera numeros aleatoreos de tipo int==========
 CREATE OR REPLACE FUNCTION random_i( a int, b int) RETURNS int as $function$
