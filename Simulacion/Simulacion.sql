@@ -4,7 +4,8 @@
 
 
 ---=======================Funcion principal, inicia la carrera con un año dado=================================
-CREATE OR REPLACE FUNCTION start_race(IN carrera_anno int)returns void as 
+CREATE OR REPLACE FUNCTION start_race(IN carrera_anno int) 
+returns bigint as 
 $func$
 DECLARE
   --r E_P%ROWTYPE; --fila
@@ -52,14 +53,17 @@ BEGIN
   END LOOP;
  
   --Inicia el proceso de la simulacion
-  i:=(SELECT "startSimulation"(nuevo_evento,nuevo_clima));
+  
+  i:=(SELECT "start_simulation"(nuevo_evento,nuevo_clima));
+  return i;
 END;
 $func$LANGUAGE plpgsql;
 
 ---===========FUncion que inicia la simulacion vuelta por vuelta=====================
 
 ---crear estimulado coeficiente manejo dificultad de la pista y clima
-CREATE OR REPLACE FUNCTION startSimulation(id_evento BIGINT, id_clima BIGINT) returns void as $body$
+CREATE OR REPLACE FUNCTION start_simulation(id_evento BIGINT,id_clima BIGINT)
+returns bigint as $body$
 DECLARE
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id; 
  rankings     CURSOR FOR SELECT * FROM ranking e ORDER BY e.id;
@@ -71,6 +75,8 @@ DECLARE
  --datos del competidor
  km_esta_vuelta float;
  distancia_total float;
+ este_id BIGINT;
+ tiempo_total BIGINT;
 
  tiempo_esta_vuelta float;
  velocidad_esta_vuelta float;
@@ -97,6 +103,7 @@ BEGIN
       FOR ranking IN rankings LOOP               --Este loop buscara el ranking de l corredor
         if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
           vuelta_numero:=0;
+          este_id:=E_R.fk_ranking_id;
 
           WHILE (ranking.hora<86400) LOOP
             vuelta_numero:=vuelta_numero+1;
@@ -106,8 +113,9 @@ BEGIN
 
             distancia_total:=((ranking.distancia_km+km_esta_vuelta));
             velocidad_media_esta_vuelta:=((ranking.velocidad_media+velocidad_esta_vuelta)/2);
-            UPDATE ranking SET velocidad_media=velocidad_media_esta_vuelta, numero_vuelta=vuelta_numero, distancia_km=distancia_total WHERE id=ranking.id;
-            /*UPDATE nombretabla SET columna=valor1, columna2=valor2 WHERE id = ?*/
+            tiempo_total:=(ranking.hora+tiempo_esta_vuelta);
+
+            UPDATE ranking SET hora=tiempo_total,velocidad_media=velocidad_media_esta_vuelta, numero_vuelta=vuelta_numero, distancia_km=distancia_total WHERE id=este_id;
           END LOOP;
 
         end if;
@@ -115,6 +123,7 @@ BEGIN
 
     end if; --Final del loop que inicia los datos de todos los competidores
   END LOOP; 
+  return 1;
 END;
 $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
