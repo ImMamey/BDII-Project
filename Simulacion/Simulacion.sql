@@ -64,17 +64,18 @@ DECLARE
  rankings     CURSOR FOR SELECT * FROM ranking e ORDER BY e.id;
  climas       CURSOR FOR SELECT * FROM SUCESO c ORDER BY c.id;
 ---datos por vuelta
- todos_terminaron_competencia boolean;
  clima_actual INT[4];
  vuelta_numero BIGINT;
 ---======
  --datos del competidor
  km_esta_vuelta float;
+ distancia_total float;
+
  tiempo_esta_vuelta float;
- velocidad_sta_vuelta float;
+ velocidad_esta_vuelta float;
+ velocidad_media_esta_vuelta float;
 BEGIN
  vuelta_numero:=0;
- todos_terminaron_competencia:=true;
  --obtencion de datos de clima
     FOR SUCESO IN climas LOOP
       if SUCESO.id=id_clima then
@@ -82,48 +83,52 @@ BEGIN
       end if;
     END LOOP;
  --Final de la obtencion de datos de clima
+
  --la longitud de la pista es 13.0 a 13.2
  --velocidad media dependera del tiempo
  --tiempo tiene formula
- Loop --Este es el loop por vuelta
 
-   vuelta_numero:=vuelta_numero+1;
+ vuelta_numero:=vuelta_numero+1;
+
     FOR E_R IN competidores LOOP                   --Este loop inicia los datos de todos los competidores en ER
       if E_R.fk_ranking_evento_id = id_evento then --Pero solo iterará sus datos si cumplen con la condicion de que estan activos en esta simulacion
         
         FOR ranking IN rankings LOOP               --Este loop buscara el ranking de l corredor
          if E_R.fk_ranking_id = ranking.id then    --Y solo iniciará los datos del corredor
-            
-            km_esta_vuelta:=(SELECT "random_f"(13.0,13.2));
-            tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id,clima_actual,id_evento))
+           vuelta_numero:=0;
 
-            --condicinoal de entrade por 24h de corredor
+            WHILE (ranking.hora<86400) LOOP
 
-            ---SIMULACION
+             vuelta_numero:=vuelta_numero+1;
+             km_esta_vuelta:=(SELECT "random_f"(13.0,13.2));
+             tiempo_esta_vuelta:=(SELECT "generar_tiempo_vuelta"(E_R.fk_e_p_id,clima_actual,id_evento))
+             velocidad_esta_vuelta:=((km_esta_vuelta)/(tiempo_esta_vuelta/(3600)));
+
+             distancia_total:=((ranking.distancia_km+km_esta_vuelta));
+             velocidad_media_esta_vuelta:=((ranking.velocidad_media+velocidad_esta_vuelta)/2);
+             UPDATE ranking SET velocidad_media=velocidad_media_esta_vuelta, numero_vuelta=vuelta_numero, distancia_km=distancia_total WHERE id=ranking.di
+              /*UPDATE nombretabla SET columna=valor1, columna2=valor2 WHERE id = ?*/
+            END LOOP;
+
          end if;
-        END LOOP;
+        END LOOP; 
 
-        --iff tiempo =24 then todos_terminaron_competencia:= false nd if;
-     
       end if; --Final del loop que inicia los datos de todos los competidores
     END LOOP;
-
-  EXIT WHEN todos_terminaron_competencia=true;
-  END LOOP;
  --while todos_terminaron competenica=true; 
 END;
 $body$LANGUAGE plpgsql;
 ---===========funcion genrar tiempo de vuelta=======
 --Esta es la funcion mas larga, recorre arias tablas y genera el tiempo que duro en recorrer una vuelta dpendiendo de calculos estadisticos
                                                --5
-CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT,clima_actual INT[4],id_evento BIGINT) returns float as $body$
+CREATE OR REPLACE FUNCTION generar_tiempo_vuelta(equipo_piloto_id BIGINT,clima_actual INT[4],id_evento BIGINT) returns int as $body$
 DECLARE
  --declaracion de cursores para coeficientes
  competidores CURSOR FOR SELECT * FROM E_R tabla ORDER BY tabla.fk_e_p_id;
  pilotos CURSOR FOR SELECT * FROM piloto p ORDER BY p.id;
  eps CURSOR FOR SELECT * FROM E_P ep ORDER BY ep.id;
 
- tiempo_vuelta float;
+ tiempo_vuelta int;
 
  --equipos CURSOR FOR SELECT * FROM equipo e ORDER BY e.id;
  
@@ -180,7 +185,7 @@ BEGIN
      FOR piloto IN pilotos LOOP
        if E_P.fk_piloto_id=piloto.id then
           coeficiente2:=piloto.coeficientes;
-          manejo2:=piloto.coeficiente;
+          manejo2:=piloto.manejo;
        end if;
      END LOOP;
 
@@ -240,10 +245,10 @@ if clima_actual[4]=null then
  --avg por vuelta son rango 290-300
  tiempo_vuelta:=(SELECT "random_i"( 290, 300));
  -- le añado segundos si difficultad_pista >5, else le quito segundos
- IF difficultad_pista>5 then
-   tiempo_vuelta:=(tiempo_vuelta+(difficultad_pista*2));
+ IF dificultad_pista>5 then
+   tiempo_vuelta:=(tiempo_vuelta+(dificultad_pista*2));
  else
-   tiempo_vuelta:=(tiempo_vuelta-(difficultad_pista*2));
+   tiempo_vuelta:=(tiempo_vuelta-(dificultad_pista*2));
  end if;
  -- le bajo un segundo por nivel          
  tiempo_vuelta:=(tiempo_vuelta-coeficiente_mental_total);  
@@ -268,7 +273,7 @@ DECLARE
  id_seccion BIGINT;
  dificultad BIGINT;
 BEGIN
-  FOR evento in pilotos LOOP --loop para obtener el id de la pista
+  FOR evento in eventos LOOP --loop para obtener el id de la pista
     if evento.id=id_evento then 
       id_pista:=evento.fk_pista_id;
     end if;
