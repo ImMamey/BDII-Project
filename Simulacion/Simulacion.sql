@@ -407,7 +407,7 @@ BEGIN
 
   /*INSERT INTO evento (id, ano, tipo, fk_pista_id) VALUES
    (new_id,(nuevo_dia,nuevo_mes,nuevo_ano),tipo,id_pista);*/
-   (CALL push_evento(new_id,nuevo_dia,nuevo_mes,nuevo_ano,tipo,id_pista));
+   CALL push_evento(new_id,nuevo_dia,nuevo_mes,nuevo_ano,tipo,id_pista);
 
  RETURN new_id;
 END;
