@@ -338,9 +338,9 @@ BEGIN
  END LOOP;
   last_id_suceso:=last_id_suceso+1;
  --fin del forloop y creacion del nuevo id del suceso;
- /*
+ 
  INSERT INTO suceso (id, tipo_suceso, clima_momento, causa, tipo_bandera, fk_p_s_fk_seccion_id,fk_p_s_fk_pista_id) VALUES
- (last_id_suceso,'clima',clima_nuevo,null, null,null,null); */
+ (last_id_suceso,'clima',clima_nuevo,null, null,null,null); 
  RETURN last_id_suceso;
 END;
 $body$LANGUAGE plpgsql;
