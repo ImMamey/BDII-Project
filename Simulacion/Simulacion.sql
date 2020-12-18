@@ -438,7 +438,7 @@ BEGIN
 END; 
 $body$ LANGUAGE plpgsql;
 ---=============================================================
-CREATE OR REPLACE PROCEDURE push_crear_ranking(new_id,evento) as $$
+CREATE OR REPLACE PROCEDURE push_crear_ranking(new_id BIGINT,evento BIGINT) as $$
 BEGIN
    INSERT INTO RANKING (id, hora, puesto, velocidad_media, vuelta_rapida, numero_vuelta, distancia_km, fk_evento_id) VALUES
   (new_id,0 ,0,0     ,(0,0,0),0   ,0      ,evento);
