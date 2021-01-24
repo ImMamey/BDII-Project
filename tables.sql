@@ -45,13 +45,13 @@ CREATE TABLE VEHICULO(
 ALTER TABLE VEHICULO ADD CONSTRAINT vehiculo_marca_id_fk FOREIGN KEY (fk_marca_auto_id) REFERENCES MARCA_AUTO (id);
 
 CREATE TABLE V_M(
-fk_motor_id BIGINT NOT NULL,
 fk_vehiculo_id BIGINT NOT NULL,
-PRIMARY KEY(fk_motor_id,fk_vehiculo_id)
+fk_motor_id BIGINT NOT NULL,
+PRIMARY KEY(fk_vehiculo_id,fk_motor_id)
 );
 
-ALTER TABLE V_M ADD CONSTRAINT v_m_motor_id_fk FOREIGN KEY (fk_motor_id) REFERENCES MOTOR (id);
 ALTER TABLE V_M ADD CONSTRAINT v_m_vehiculo_id_fk FOREIGN KEY (fk_vehiculo_id) REFERENCES VEHICULO (id);
+ALTER TABLE V_M ADD CONSTRAINT v_m_motor_id_fk FOREIGN KEY (fk_motor_id) REFERENCES MOTOR (id);
 
 CREATE TABLE EQUIPO(
  id BIGINT NOT NULL,
