@@ -1,0 +1,83 @@
+CREATE TABLE DIMENSION_PILOTO(
+ id_Dimension_Piloto INT  NOT NULL,
+ primer_nombre VARCHAR NOT NULL,
+ segundo_nombre VARCHAR,
+ primer_apellido VARCHAR NOT NULL,
+ segundo_apellido VARCHAR,
+ sexo CHAR[1],
+ nacionalidad VARCHAR(20),
+ fecha_nacimiento DATE,
+ fecha_fallecimiento DATE,
+ PRIMARY KEY (id_Dimension_Piloto)
+);
+
+CREATE TABLE DIMENSION_VEHICULO(
+    id_Dimension_Vehiculo INT NOT NULL,
+    tipo VARCHAR(40),
+    marca VARCHAR(20),
+    nombre VARCHAR(30),
+    cilindraje INTEGER,
+    nombre_motor VARCHAR(20)
+  PRIMARY KEY ( id_Dimension_Vehiculo)
+);
+
+CREATE TABLE DIMENSION_FECHA(
+    id_Dimension_Fecha INT NOT NULL,
+    fecha_inicial DATE,
+    decada INTEGER,
+    PRIMARY KEY ( id_Dimension_Fecha)
+);
+
+CREATE TABLE DIMENSION_RANKING(
+    id_Dimension_Ranking INT NOT NULL,
+    hora INT,
+    minutos INT,
+    segundos INT,
+    centesimas INT,
+    puesto INT,
+    velocidad_media REAL,
+    numero_vuelta INT,
+    distancia_recorrida_km real,
+    marca_de_caucho VARCHAR(20),
+    categoria VARCHAR(20),
+    numero_equipo INT,
+    foto BYTEA,
+    PRIMARY KEY ( id_Dimension_Ranking)
+);
+
+CREATE TABLE DIMENSION_EVENTO(
+    id_Dimension_Evento INT,
+    tipo VARCHAR(20),
+    PRIMARY KEY(id_Dimension_Evento)
+);
+
+CREATE TABLE DIMENSION_EQUIPO(
+    id_Dimension_Equipo INT NOT NULL,
+    nombre VARCHAR(30),
+    nacionalidad VARCHAR(20),
+    PRIMARY KEY(id_Dimension_Equipo)
+);
+
+CREATE TABLE HECHOS_PARTICIPACION(
+    fk_id_Dimension_Piloto INT,
+    fk_id_Dimension_Equipo INT,
+    fk_id_Dimension_Vehiculo INT,
+    fk_id_Dimension_Ranking INT,
+    fk_id_Dimension_Evento INT,
+    fk_id_Dimension_Fecha INT,
+    num_equipo INT,
+    puesto INT
+    PRIMARY KEY(
+        fk_id_Dimension_Piloto,
+        fk_id_Dimension_Equipo,
+        fk_id_Dimension_Vehiculo,
+        fk_id_Dimension_Ranking,
+        fk_id_Dimension_Evento,
+        fk_id_Dimension_Fecha)
+);
+ALTER TABLE HECHOS_PARTICIPACION ADD CONSTRAINT id_Dimension_Piloto_fk FOREIGN KEY ( fk_id_Dimension_Piloto) REFERENCES DIMENSION_PILOTO (id_Dimension_Piloto);
+ALTER TABLE HECHOS_PARTICIPACION ADD CONSTRAINT id_Dimension_Equipo_fk FOREIGN KEY ( fk_id_Dimension_Equipo) REFERENCES DIMENSION_EQUIPO (id_Dimension_Equipo);
+ALTER TABLE HECHOS_PARTICIPACION ADD CONSTRAINT iid_Dimension_Vehiculo_fk FOREIGN KEY ( fk_id_Dimension_Vehiculo) REFERENCES DIMENSION_VEHICULO ( id_Dimension_Vehiculo);
+ALTER TABLE HECHOS_PARTICIPACION ADD CONSTRAINT id_Dimension_Ranking_fk FOREIGN KEY ( fk_id_Dimension_Ranking) REFERENCES DIMENSION_RANKING (id_Dimension_Ranking);
+ALTER TABLE HECHOS_PARTICIPACION ADD CONSTRAINT id_Dimension_Evento_fk FOREIGN KEY ( fk_id_Dimension_Evento) REFERENCES DIMENSION_EVENTO ( id_Dimension_Evento);
+ALTER TABLE HECHOS_PARTICIPACION ADD CONSTRAINT id_Dimension_Fecha_fk FOREIGN KEY ( fk_id_Dimension_Fecha) REFERENCES DIMENSION_FECHA (id_Dimension_Fecha);
