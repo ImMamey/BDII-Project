@@ -4,20 +4,22 @@ CREATE TABLE DIMENSION_PILOTO(
  segundo_nombre VARCHAR NOT NULL,
  primer_apellido VARCHAR NOT NULL,
  segundo_apellido VARCHAR NOT NULL,
- sexo VARCHAR(20) NOT NULL,
- nacionalidad VARCHAR(20) NOT NULL,
+ sexo VARCHAR NOT NULL,
+ nacionalidad VARCHAR NOT NULL,
  fecha_nacimiento DATE NOT NULL,
  fecha_fallecimiento DATE NOT NULL,
+ foto BYTEA NOT NULL,
+ lugar_nacimiento VARCHAR,
  PRIMARY KEY (id_Dimension_Piloto)
 );
 
 CREATE TABLE DIMENSION_VEHICULO(
     id_Dimension_Vehiculo INT NOT NULL,
-    tipo VARCHAR(40) NOT NULL,
-    marca VARCHAR(20) NOT NULL,
-    nombre VARCHAR(30) NOT NULL,
+    tipo VARCHAR NOT NULL,
+    marca VARCHAR NOT NULL,
+    nombre VARCHAR NOT NULL,
     cilindraje INTEGER NOT NULL,
-    nombre_motor VARCHAR(20) NOT NULL,
+    nombre_motor VARCHAR NOT NULL,
   PRIMARY KEY ( id_Dimension_Vehiculo)
 );
 
@@ -38,8 +40,8 @@ CREATE TABLE DIMENSION_RANKING(
     velocidad_media REAL NOT NULL,
     numero_vuelta INT NOT NULL,
     distancia_recorrida_km real NOT NULL,
-    marca_de_caucho VARCHAR(20) NOT NULL,
-    categoria VARCHAR(20) NOT NULL,
+    marca_de_caucho VARCHAR NOT NULL,
+    categoria VARCHAR NOT NULL,
     numero_equipo INT NOT NULL,
     foto BYTEA NOT NULL,
     PRIMARY KEY ( id_Dimension_Ranking)
@@ -53,8 +55,8 @@ CREATE TABLE DIMENSION_EVENTO(
 
 CREATE TABLE DIMENSION_EQUIPO(
     id_Dimension_Equipo INT NOT NULL,
-    nombre VARCHAR(30) NOT NULL,
-    nacionalidad VARCHAR(20) NOT NULL,
+    nombre VARCHAR NOT NULL,
+    nacionalidad VARCHAR NOT NULL,
     PRIMARY KEY(id_Dimension_Equipo)
 );
 
