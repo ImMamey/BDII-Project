@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformacion_vehiculo_03</name>
+    <name>Transformacion_equipo_03</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,9 +427,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2021/01/26 23:17:28.419</created_date>
+    <created_date>2021/01/26 22:26:22.378</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/26 23:17:28.419</modified_date>
+    <modified_date>2021/01/26 22:26:22.378</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
@@ -557,15 +557,11 @@
     </partitioning>
     <connection>lemans03</connection>
     <sql>SELECT 
-v.tipo as tipo,
-ma.nombre as marca,
-initcap(v.nombre) as nombre,
-m.cilindraje as cilindraje,
-initcap(m.nombre) as nombre_motor
-FROM V_M vm
-JOIN MOTOR m on m.id = vm.fk_motor_id
-JOIN VEHICULO v on v.id = vm.fk_vehiculo_id
-JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
+initcap(equipo.nombre) as nombre,
+initcap(equipo.nacionalidad) as nacionalidad
+
+FROM equipo
+ORDER BY 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -573,52 +569,6 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>tipo</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>tipo</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>marca</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>marca</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
@@ -643,36 +593,13 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>cilindraje</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>cilindraje</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>nombre_motor</name>
+        <name>nacionalidad</name>
         <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>nombre_motor</comments>
+        <comments>nacionalidad</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -698,8 +625,8 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>176</xloc>
-      <yloc>288</yloc>
+      <xloc>272</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -715,7 +642,7 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dimension_vehiculo</table>
+    <table>dimension_equipo</table>
     <connection>datamars</connection>
     <commit>100</commit>
     <cache_size>9999</cache_size>
@@ -725,27 +652,15 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
     <crcfield>hashcode</crcfield>
     <fields>
       <key>
-        <name>tipo</name>
-        <lookup>tipo</lookup>
-      </key>
-      <key>
-        <name>marca</name>
-        <lookup>marca</lookup>
-      </key>
-      <key>
         <name>nombre</name>
         <lookup>nombre</lookup>
       </key>
       <key>
-        <name>cilindraje</name>
-        <lookup>cilindraje</lookup>
-      </key>
-      <key>
-        <name>nombre_motor</name>
-        <lookup>nombre_motor</lookup>
+        <name>nacionalidad</name>
+        <lookup>nacionalidad</lookup>
       </key>
       <return>
-        <name>id_dimension_vehiculo</name>
+        <name>id_dimension_equipo</name>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
       </return>
@@ -761,8 +676,8 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>288</yloc>
+      <xloc>512</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
