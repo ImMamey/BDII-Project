@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformacion_ranking_03</name>
+    <name>Transformacion_piloto_02</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,9 +428,9 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2021/01/26 23:56:37.523</created_date>
+    <created_date>2021/01/26 00:14:28.998</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/26 23:56:37.523</modified_date>
+    <modified_date>2021/01/26 00:14:28.998</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -487,11 +488,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>lemans03</name>
+    <name>lemans02</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans03</database>
+    <database>lemans02</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7bf85a618fc218ec5f68c</password>
@@ -540,22 +541,22 @@
   <order>
     <hop>
       <from>Table input</from>
+      <to>Value mapper</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Value mapper</from>
+      <to>If field value is null</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Unique rows</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
-      <to>Insert / update</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Combination lookup/update</from>
-      <to>Combination lookup/update 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Combination lookup/update</from>
-      <to>Update</to>
+      <from>If field value is null</from>
+      <to>Unique rows</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -571,9 +572,9 @@
       <schema_name/>
     </partitioning>
     <schema>public</schema>
-    <table>dimension_ranking</table>
+    <table>dimension_piloto</table>
     <connection>datamars</connection>
-    <commit>1</commit>
+    <commit>100</commit>
     <cache_size>9999</cache_size>
     <replace>N</replace>
     <preloadCache>N</preloadCache>
@@ -581,11 +582,47 @@
     <crcfield>hashcode</crcfield>
     <fields>
       <key>
-        <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
+        <name>nombre</name>
+        <lookup>primer_nombre</lookup>
+      </key>
+      <key>
+        <name>segundo_nombre</name>
+        <lookup>segundo_nombre</lookup>
+      </key>
+      <key>
+        <name>apellido</name>
+        <lookup>primer_apellido</lookup>
+      </key>
+      <key>
+        <name>segundo_apellido</name>
+        <lookup>segundo_apellido</lookup>
+      </key>
+      <key>
+        <name>genero</name>
+        <lookup>sexo</lookup>
+      </key>
+      <key>
+        <name>nacionalidad</name>
+        <lookup>nacionalidad</lookup>
+      </key>
+      <key>
+        <name>fecha_nacimiento</name>
+        <lookup>fecha_nacimiento</lookup>
+      </key>
+      <key>
+        <name>fecha_fallecimiento</name>
+        <lookup>fecha_fallecimiento</lookup>
+      </key>
+      <key>
+        <name>foto</name>
+        <lookup>foto</lookup>
+      </key>
+      <key>
+        <name>lugar_nacimiento</name>
+        <lookup>lugar_nacimiento</lookup>
       </key>
       <return>
-        <name>id_dimension_ranking</name>
+        <name>id_dimension_piloto</name>
         <creation_method>tablemax</creation_method>
         <use_autoinc>N</use_autoinc>
       </return>
@@ -601,14 +638,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>240</yloc>
+      <xloc>704</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
+    <name>If field value is null</name>
+    <type>IfNull</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -617,79 +654,63 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datamars</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_ranking</table>
-      <key>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
         <name>id</name>
-        <field>id_dimension_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>hora</name>
-        <rename>hora</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>minutos</name>
-        <rename>minutos</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>segundos</name>
-        <rename>segundos</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>centesimas</name>
-        <rename>centesimas</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>puesto</name>
-        <rename>puesto</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>velocidad_media</name>
-        <rename>velocidad_media</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>numero_vuelta</name>
-        <rename>numero_vuelta</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>distancia_recorrida_km</name>
-        <rename>distancia_recorrida_km</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>marca_de_caucho</name>
-        <rename>marca_de_caucho</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>numero_equipo</name>
-        <rename>numero_equipo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>foto</name>
-        <rename>foto</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>nombre</name>
+        <value>Sin Nombre</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>segundo_nombre</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>apellido</name>
+        <value>Sin Apellido</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>segundo_apellido</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>genero</name>
+        <value>Desconocido</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>nacionalidad</name>
+        <value>Desconocida</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lugar_nacimiento</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -699,8 +720,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>144</yloc>
+      <xloc>464</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -715,25 +736,11 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lemans03</connection>
-    <sql>SELECT 
-ranking.id as id,
-ranking.hora as hora,
-(ranking.vuelta_rapida).minuto as minutos,
-(ranking.vuelta_rapida).segundo as segundos,
-(ranking.vuelta_rapida).centesimas as centesimas,
-ranking.puesto as puesto,
-ranking.velocidad_media as velocidad_media,
-ranking.numero_vuelta as numero_vuelta,
-ranking.distancia_km as distancia_recorrida_km,
-initcap(e_r.marca_cauchos) as marca_de_caucho,
-e_r.categoria as categoria,
-e_r.numero_equipo as numero_equipo,
-e_r.foto as foto
-
-FROM ranking, e_r  
-WHERE ranking.id = e_r.fk_ranking_id
-      
+    <connection>lemans02</connection>
+    <sql>SELECT piloto.id,(piloto.datos).nombre,'N/A' as segundo_nombre,(piloto.datos).apellido,'N/A' as segundo_apellido,(piloto.datos).genero, pais.nacionalidad, (piloto.datos).fecha_nacimiento,
+(piloto.datos).fecha_fallecimiento,piloto.foto,pais.nombre as lugar_nacimiento
+FROM piloto, pais
+where piloto.id = pais.id
 ORDER BY 1</sql>
     <limit>0</limit>
     <lookup/>
@@ -746,7 +753,7 @@ ORDER BY 1</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>id</name>
-        <length>15</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
         <comments>id</comments>
@@ -766,197 +773,13 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>hora</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>hora</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>minutos</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>minutos</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>segundos</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>segundos</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>centesimas</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>centesimas</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>puesto</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>puesto</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>velocidad_media</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>velocidad_media</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>numero_vuelta</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>numero_vuelta</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>distancia_recorrida_km</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>distancia_recorrida_km</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>marca_de_caucho</name>
-        <length>2147483647</length>
+        <name>nombre</name>
+        <length>20</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>marca_de_caucho</comments>
+        <comments>nombre</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -975,11 +798,11 @@ ORDER BY 1</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>categoria</name>
+        <name>segundo_nombre</name>
         <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>categoria</comments>
+        <comments>segundo_nombre</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -996,14 +819,14 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>numero_equipo</name>
-        <length>15</length>
-        <precision>0</precision>
+        <name>apellido</name>
+        <length>20</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>numero_equipo</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <comments>apellido</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1019,13 +842,151 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Binary</type>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>segundo_apellido</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>segundo_apellido</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>genero</name>
+        <length>1</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>genero</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nacionalidad</name>
+        <length>35</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>nacionalidad</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecha_nacimiento</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>fecha_nacimiento</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecha_fallecimiento</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>fecha_fallecimiento</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
         <storagetype>normal</storagetype>
         <name>foto</name>
         <length>-1</length>
         <precision>-1</precision>
         <origin>Table input</origin>
         <comments>foto</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>lugar_nacimiento</name>
+        <length>35</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>lugar_nacimiento</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1051,14 +1012,14 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>240</yloc>
+      <xloc>256</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update 2</name>
-    <type>CombinationLookup</type>
+    <name>Unique rows</name>
+    <type>Unique</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1067,76 +1028,56 @@ ORDER BY 1</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>dimension_ranking</table>
-    <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
     <fields>
-      <key>
+      <field>
         <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
-      </key>
-      <key>
-        <name>hora</name>
-        <lookup>hora</lookup>
-      </key>
-      <key>
-        <name>minutos</name>
-        <lookup>minutos</lookup>
-      </key>
-      <key>
-        <name>segundos</name>
-        <lookup>segundos</lookup>
-      </key>
-      <key>
-        <name>centesimas</name>
-        <lookup>centesimas</lookup>
-      </key>
-      <key>
-        <name>puesto</name>
-        <lookup>puesto</lookup>
-      </key>
-      <key>
-        <name>velocidad_media</name>
-        <lookup>velocidad_media</lookup>
-      </key>
-      <key>
-        <name>numero_vuelta</name>
-        <lookup>numero_vuelta</lookup>
-      </key>
-      <key>
-        <name>distancia_recorrida_km</name>
-        <lookup>distancia_recorrida_km</lookup>
-      </key>
-      <key>
-        <name>marca_de_caucho</name>
-        <lookup>marca_de_caucho</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
-      </key>
-      <key>
-        <name>numero_equipo</name>
-        <lookup>numero_equipo</lookup>
-      </key>
-      <key>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>nombre</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>segundo_nombre</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>apellido</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>segundo_apellido</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>genero</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>nacionalidad</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>fecha_nacimiento</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>fecha_fallecimiento</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
         <name>foto</name>
-        <lookup>foto</lookup>
-      </key>
-      <return>
-        <name>id_dimension_ranking</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
+        <case_insensitive>N</case_insensitive>
+      </field>
+      <field>
+        <name>lugar_nacimiento</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
     </fields>
-    <sequence/>
-    <last_update_field/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1146,14 +1087,14 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>320</yloc>
+      <xloc>592</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Update</name>
-    <type>Update</type>
+    <name>Value mapper</name>
+    <type>ValueMapper</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1162,76 +1103,19 @@ ORDER BY 1</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>datamars</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_ranking</table>
-      <key>
-        <name>id_dimension_ranking</name>
-        <field>id_dimension_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id</name>
-        <field>id_tabla_original_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>hora</name>
-        <rename>hora</rename>
-      </value>
-      <value>
-        <name>minutos</name>
-        <rename>minutos</rename>
-      </value>
-      <value>
-        <name>segundos</name>
-        <rename>segundos</rename>
-      </value>
-      <value>
-        <name>centesimas</name>
-        <rename>centesimas</rename>
-      </value>
-      <value>
-        <name>puesto</name>
-        <rename>puesto</rename>
-      </value>
-      <value>
-        <name>velocidad_media</name>
-        <rename>velocidad_media</rename>
-      </value>
-      <value>
-        <name>numero_vuelta</name>
-        <rename>numero_vuelta</rename>
-      </value>
-      <value>
-        <name>distancia_recorrida_km</name>
-        <rename>distancia_recorrida_km</rename>
-      </value>
-      <value>
-        <name>marca_de_caucho</name>
-        <rename>marca_de_caucho</rename>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-      </value>
-      <value>
-        <name>numero_equipo</name>
-        <rename>numero_equipo</rename>
-      </value>
-      <value>
-        <name>foto</name>
-        <rename>foto</rename>
-      </value>
-    </lookup>
+    <field_to_use>genero</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>M</source_value>
+        <target_value>Masculino</target_value>
+      </field>
+      <field>
+        <source_value>F</source_value>
+        <target_value>Femenino</target_value>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1241,8 +1125,8 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
-      <yloc>240</yloc>
+      <xloc>352</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformacion_ranking_03</name>
+    <name>Transformacion_ranking_02</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2021/01/26 23:56:37.523</created_date>
+    <created_date>2021/01/28 22:56:47.869</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/26 23:56:37.523</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2021/01/28 22:56:47.869</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -487,11 +487,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>lemans03</name>
+    <name>lemans02</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans03</database>
+    <database>lemans02</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7bf85a618fc218ec5f68c</password>
@@ -544,166 +544,11 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
-      <to>Insert / update</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Combination lookup/update</from>
-      <to>Combination lookup/update 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>Combination lookup/update</from>
       <to>Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dimension_ranking</table>
-    <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
-      </key>
-      <return>
-        <name>id_dimension_ranking</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_ranking</table>
-      <key>
-        <name>id</name>
-        <field>id_dimension_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>hora</name>
-        <rename>hora</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>minutos</name>
-        <rename>minutos</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>segundos</name>
-        <rename>segundos</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>centesimas</name>
-        <rename>centesimas</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>puesto</name>
-        <rename>puesto</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>velocidad_media</name>
-        <rename>velocidad_media</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>numero_vuelta</name>
-        <rename>numero_vuelta</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>distancia_recorrida_km</name>
-        <rename>distancia_recorrida_km</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>marca_de_caucho</name>
-        <rename>marca_de_caucho</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>numero_equipo</name>
-        <rename>numero_equipo</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>foto</name>
-        <rename>foto</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -715,26 +560,29 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lemans03</connection>
+    <connection>lemans02</connection>
     <sql>SELECT 
-ranking.id as id,
-ranking.hora as hora,
-(ranking.vuelta_rapida).minuto as minutos,
-(ranking.vuelta_rapida).segundo as segundos,
-(ranking.vuelta_rapida).centesimas as centesimas,
-ranking.puesto as puesto,
-ranking.velocidad_media as velocidad_media,
-ranking.numero_vuelta as numero_vuelta,
-ranking.distancia_km as distancia_recorrida_km,
-initcap(e_r.marca_cauchos) as marca_de_caucho,
-e_r.categoria as categoria,
-e_r.numero_equipo as numero_equipo,
-e_r.foto as foto
-
-FROM ranking, e_r  
-WHERE ranking.id = e_r.fk_ranking_id
+participacion.id as id,
+extract(hour from participacion.tiempo_total) as hora,
+extract(minute from participacion.tiempo_total) as minutos,
+extract(second from participacion.tiempo_total) as segundos,
+extract(millisecond from participacion.tiempo_total) as centesimas,
+case when participacion.estadisticas_hora[24].posicion is not null then participacion.estadisticas_hora[24].posicion else 0 end as puesto,
+case when participacion.estadisticas_hora[24].vel_media is not null then participacion.estadisticas_hora[24].vel_media else participacion.estadisticas_hora[1].vel_media end as velocidad_media,
+participacion.numero_vueltas as numero_vuelta,
+case when participacion.estadisticas_hora[24].distancia_recorrida is not null then participacion.estadisticas_hora[24].distancia_recorrida else 0 end as distancia_recorrida_km,
+fabricante.nombre as marca_de_caucho,
+evento.tipo as categoria,
+participacion.numero_participacion as numero_equipo,
+pais.foto as foto
+FROM participacion,fabricante,vehiculo, evento, pais, equipo
+WHERE participacion.vehiculo_id= vehiculo.id and
+      fabricante.id=vehiculo.neumaticos_fabricante_id and
+      participacion.evento_id=evento.id and
+      participacion.equipo_id=equipo.id and
+      equipo.pais_id=pais.id
       
-ORDER BY 1</sql>
+order by 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -746,7 +594,7 @@ ORDER BY 1</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>id</name>
-        <length>15</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
         <comments>id</comments>
@@ -766,14 +614,14 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Number</type>
         <storagetype>normal</storagetype>
         <name>hora</name>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
         <comments>hora</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -789,14 +637,14 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Number</type>
         <storagetype>normal</storagetype>
         <name>minutos</name>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
         <comments>minutos</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -812,14 +660,14 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Number</type>
         <storagetype>normal</storagetype>
         <name>segundos</name>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
         <comments>segundos</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -835,14 +683,14 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Number</type>
         <storagetype>normal</storagetype>
         <name>centesimas</name>
-        <length>15</length>
-        <precision>0</precision>
+        <length>-1</length>
+        <precision>-1</precision>
         <origin>Table input</origin>
         <comments>centesimas</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -861,7 +709,7 @@ ORDER BY 1</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>puesto</name>
-        <length>15</length>
+        <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
         <comments>puesto</comments>
@@ -884,8 +732,8 @@ ORDER BY 1</sql>
         <type>Number</type>
         <storagetype>normal</storagetype>
         <name>velocidad_media</name>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>8</length>
+        <precision>8</precision>
         <origin>Table input</origin>
         <comments>velocidad_media</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
@@ -907,7 +755,7 @@ ORDER BY 1</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>numero_vuelta</name>
-        <length>15</length>
+        <length>4</length>
         <precision>0</precision>
         <origin>Table input</origin>
         <comments>numero_vuelta</comments>
@@ -930,8 +778,8 @@ ORDER BY 1</sql>
         <type>Number</type>
         <storagetype>normal</storagetype>
         <name>distancia_recorrida_km</name>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>8</length>
+        <precision>8</precision>
         <origin>Table input</origin>
         <comments>distancia_recorrida_km</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
@@ -953,7 +801,7 @@ ORDER BY 1</sql>
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>marca_de_caucho</name>
-        <length>2147483647</length>
+        <length>40</length>
         <precision>-1</precision>
         <origin>Table input</origin>
         <comments>marca_de_caucho</comments>
@@ -976,7 +824,7 @@ ORDER BY 1</sql>
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>categoria</name>
-        <length>2147483647</length>
+        <length>15</length>
         <precision>-1</precision>
         <origin>Table input</origin>
         <comments>categoria</comments>
@@ -999,7 +847,7 @@ ORDER BY 1</sql>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>numero_equipo</name>
-        <length>15</length>
+        <length>4</length>
         <precision>0</precision>
         <origin>Table input</origin>
         <comments>numero_equipo</comments>
@@ -1051,13 +899,13 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>240</yloc>
+      <xloc>240</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update 2</name>
+    <name>Combination lookup/update</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1070,7 +918,7 @@ ORDER BY 1</sql>
     <schema>public</schema>
     <table>dimension_ranking</table>
     <connection>datamars</connection>
-    <commit>1</commit>
+    <commit>100</commit>
     <cache_size>9999</cache_size>
     <replace>N</replace>
     <preloadCache>N</preloadCache>
@@ -1079,55 +927,7 @@ ORDER BY 1</sql>
     <fields>
       <key>
         <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
-      </key>
-      <key>
-        <name>hora</name>
-        <lookup>hora</lookup>
-      </key>
-      <key>
-        <name>minutos</name>
-        <lookup>minutos</lookup>
-      </key>
-      <key>
-        <name>segundos</name>
-        <lookup>segundos</lookup>
-      </key>
-      <key>
-        <name>centesimas</name>
-        <lookup>centesimas</lookup>
-      </key>
-      <key>
-        <name>puesto</name>
-        <lookup>puesto</lookup>
-      </key>
-      <key>
-        <name>velocidad_media</name>
-        <lookup>velocidad_media</lookup>
-      </key>
-      <key>
-        <name>numero_vuelta</name>
-        <lookup>numero_vuelta</lookup>
-      </key>
-      <key>
-        <name>distancia_recorrida_km</name>
-        <lookup>distancia_recorrida_km</lookup>
-      </key>
-      <key>
-        <name>marca_de_caucho</name>
-        <lookup>marca_de_caucho</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
-      </key>
-      <key>
-        <name>numero_equipo</name>
-        <lookup>numero_equipo</lookup>
-      </key>
-      <key>
-        <name>foto</name>
-        <lookup>foto</lookup>
+        <lookup>id_dimension_ranking</lookup>
       </key>
       <return>
         <name>id_dimension_ranking</name>
@@ -1146,8 +946,8 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
-      <yloc>320</yloc>
+      <xloc>384</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1172,14 +972,8 @@ ORDER BY 1</sql>
       <schema>public</schema>
       <table>dimension_ranking</table>
       <key>
-        <name>id_dimension_ranking</name>
-        <field>id_dimension_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
         <name>id</name>
-        <field>id_tabla_original_ranking</field>
+        <field>id_dimension_ranking</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -1241,7 +1035,39 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
+      <xloc>576</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_ranking</table>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>

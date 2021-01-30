@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformacion_equipo_03</name>
+    <name>Transformacion_evento_02</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2021/01/26 22:26:22.378</created_date>
+    <created_date>2021/01/27 19:48:22.998</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/26 22:26:22.378</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2021/01/27 19:48:22.998</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -487,11 +487,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>lemans03</name>
+    <name>lemans02</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>lemans03</database>
+    <database>lemans02</database>
     <port>5432</port>
     <username>postgres</username>
     <password>Encrypted 2be98afc86aa7bf85a618fc218ec5f68c</password>
@@ -543,59 +543,7 @@
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>Combination lookup/update</from>
-      <to>Update</to>
-      <enabled>Y</enabled>
-    </hop>
   </order>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dimension_equipo</table>
-    <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>id_viejo</name>
-        <lookup>id_tabla_original_equipo</lookup>
-      </key>
-      <return>
-        <name>id_dimension_equipo</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -607,13 +555,9 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>lemans03</connection>
-    <sql>SELECT 
-equipo.id as id_viejo,
-initcap(equipo.nombre) as nombre,
-initcap(equipo.nacionalidad) as nacionalidad
-
-FROM equipo
+    <connection>lemans02</connection>
+    <sql>SELECT evento.tipo as tipo
+FROM evento 
 ORDER BY 1</sql>
     <limit>0</limit>
     <lookup/>
@@ -623,59 +567,13 @@ ORDER BY 1</sql>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>id_viejo</name>
+        <name>tipo</name>
         <length>15</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>id_viejo</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>nombre</name>
-        <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>nombre</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>nacionalidad</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>nacionalidad</comments>
+        <comments>tipo</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -701,14 +599,14 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>304</yloc>
+      <xloc>208</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Update</name>
-    <type>Update</type>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -717,36 +615,28 @@ ORDER BY 1</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <schema>public</schema>
+    <table>dimension_evento</table>
     <connection>datamars</connection>
-    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_equipo</table>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
       <key>
-        <name>id_viejo</name>
-        <field>id_tabla_original_equipo</field>
-        <condition>=</condition>
-        <name2/>
+        <name>tipo</name>
+        <lookup>tipo</lookup>
       </key>
-      <key>
-        <name>id_dimension_equipo</name>
-        <field>id_dimension_equipo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>nombre</name>
-        <rename>nombre</rename>
-      </value>
-      <value>
-        <name>nacionalidad</name>
-        <rename>nacionalidad</rename>
-      </value>
-    </lookup>
+      <return>
+        <name>id_dimension_evento</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -756,8 +646,8 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>304</yloc>
+      <xloc>368</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -431,7 +431,7 @@
     <created_date>2021/01/26 00:14:28.998</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/26 00:14:28.998</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -550,16 +550,249 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Unique rows</from>
-      <to>Combination lookup/update</to>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Unique rows</from>
+      <to>Execute SQL script</to>
+      <enabled>N</enabled>
+    </hop>
+    <hop>
       <from>If field value is null</from>
-      <to>Unique rows</to>
+      <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>448</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dimension_piloto</table>
+    <connection>datamars</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_dimension_piloto</lookup>
+      </key>
+      <return>
+        <name>id_dimension_piloto</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>Insert into dimension_piloto (id_dimension_piloto,primer_nombre,segundo_nombre. primer_apellido, segundo_apellido, sexo, nacionalidad, fecha_nacimiento, fecha_fallecimiento, foto, lugar_nacimiento)
+VALUES(?,?,?,?,?,?,?,?,decode('?','base64'), ?);</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+      <argument>
+        <name>id</name>
+      </argument>
+      <argument>
+        <name>nombre</name>
+      </argument>
+      <argument>
+        <name>segundo_nombre</name>
+      </argument>
+      <argument>
+        <name>apellido</name>
+      </argument>
+      <argument>
+        <name>segundo_apellido</name>
+      </argument>
+      <argument>
+        <name>genero</name>
+      </argument>
+      <argument>
+        <name>nacionalidad</name>
+      </argument>
+      <argument>
+        <name>fecha_nacimiento</name>
+      </argument>
+      <argument>
+        <name>fecha_fallecimiento</name>
+      </argument>
+      <argument>
+        <name>foto</name>
+      </argument>
+      <argument>
+        <name>lugar_nacimiento</name>
+      </argument>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>928</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>If field value is null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>id</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>primer_nombre</name>
+        <value>Sin Nombre</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>segundo_nombre</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>primer_apellido</name>
+        <value>Sin Apellido</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>segundo_apellido</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>genero</name>
+        <value>Desconocido</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>nacionalidad</name>
+        <value>Desconocida</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lugar_nacimiento</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -572,8 +805,21 @@
       <schema_name/>
     </partitioning>
     <connection>lemans02</connection>
-    <sql>SELECT piloto.id,(piloto.datos).nombre,'N/A' as segundo_nombre,(piloto.datos).apellido,'N/A' as segundo_apellido,(piloto.datos).genero, pais.nacionalidad, (piloto.datos).fecha_nacimiento,
-(piloto.datos).fecha_fallecimiento,piloto.foto,pais.nombre as lugar_nacimiento
+    <sql>SELECT 
+piloto.id,
+(piloto.datos).nombre as primer_nombre,
+'N/A' as segundo_nombre,
+(piloto.datos).apellido as primer_apellido,
+'N/A' as segundo_apellido,
+(piloto.datos).genero as genero,
+ pais.nacionalidad as nacionalidad,
+case when (piloto.datos).fecha_nacimiento is not null then (piloto.datos).fecha_nacimiento else to_date(CONCAT(1800,'-',1,'-',1),'YYYY-MM-DD') end as fecha_nacimiento,
+case when (piloto.datos).fecha_fallecimiento is not null then (piloto.datos).fecha_fallecimiento else to_date(CONCAT(2100,'-',1,'-',1),'YYYY-MM-DD') end as fecha_fallecimiento,
+case when piloto.foto is not null then piloto.foto[1] else decode('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
+
+',
+'base64') end as foto,
+pais.nombre as lugar_nacimiento
 FROM piloto, pais
 where piloto.id = pais.id
 ORDER BY 1</sql>
@@ -610,11 +856,11 @@ ORDER BY 1</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>nombre</name>
+        <name>primer_nombre</name>
         <length>20</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>nombre</comments>
+        <comments>primer_nombre</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -656,11 +902,11 @@ ORDER BY 1</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>apellido</name>
+        <name>primer_apellido</name>
         <length>20</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>apellido</comments>
+        <comments>primer_apellido</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -792,11 +1038,11 @@ ORDER BY 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Binary</type>
         <storagetype>normal</storagetype>
         <name>foto</name>
         <length>-1</length>
-        <precision>0</precision>
+        <precision>-1</precision>
         <origin>Table input</origin>
         <comments>foto</comments>
         <conversion_Mask/>
@@ -848,126 +1094,6 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>256</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Value mapper</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <field_to_use>genero</field_to_use>
-    <target_field/>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value>M</source_value>
-        <target_value>Masculino</target_value>
-      </field>
-      <field>
-        <source_value>F</source_value>
-        <target_value>Femenino</target_value>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue/>
-    <replaceAllMask/>
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>id</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>nombre</name>
-        <value>Sin Nombre</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>segundo_nombre</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>apellido</name>
-        <value>Sin Apellido</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>segundo_apellido</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>genero</name>
-        <value>Desconocido</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>nacionalidad</name>
-        <value>Desconocida</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>lugar_nacimiento</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>464</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1042,14 +1168,14 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>256</yloc>
+      <xloc>656</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1058,64 +1184,62 @@ ORDER BY 1</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>dimension_piloto</table>
     <connection>datamars</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_piloto</table>
       <key>
-        <name>nombre</name>
-        <lookup>primer_nombre</lookup>
-      </key>
-      <key>
-        <name>segundo_nombre</name>
-        <lookup>segundo_nombre</lookup>
-      </key>
-      <key>
-        <name>apellido</name>
-        <lookup>primer_apellido</lookup>
-      </key>
-      <key>
-        <name>segundo_apellido</name>
-        <lookup>segundo_apellido</lookup>
-      </key>
-      <key>
-        <name>genero</name>
-        <lookup>sexo</lookup>
-      </key>
-      <key>
-        <name>nacionalidad</name>
-        <lookup>nacionalidad</lookup>
-      </key>
-      <key>
-        <name>fecha_nacimiento</name>
-        <lookup>fecha_nacimiento</lookup>
-      </key>
-      <key>
-        <name>fecha_fallecimiento</name>
-        <lookup>fecha_fallecimiento</lookup>
-      </key>
-      <key>
-        <name>foto</name>
-        <lookup>foto</lookup>
-      </key>
-      <key>
-        <name>lugar_nacimiento</name>
-        <lookup>lugar_nacimiento</lookup>
-      </key>
-      <return>
         <name>id_dimension_piloto</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
+        <field>id_dimension_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>primer_nombre</name>
+        <rename>primer_nombre</rename>
+      </value>
+      <value>
+        <name>segundo_nombre</name>
+        <rename>segundo_nombre</rename>
+      </value>
+      <value>
+        <name>primer_apellido</name>
+        <rename>primer_apellido</rename>
+      </value>
+      <value>
+        <name>segundo_apellido</name>
+        <rename>segundo_apellido</rename>
+      </value>
+      <value>
+        <name>sexo</name>
+        <rename>genero</rename>
+      </value>
+      <value>
+        <name>nacionalidad</name>
+        <rename>nacionalidad</rename>
+      </value>
+      <value>
+        <name>fecha_nacimiento</name>
+        <rename>fecha_nacimiento</rename>
+      </value>
+      <value>
+        <name>fecha_fallecimiento</name>
+        <rename>fecha_fallecimiento</rename>
+      </value>
+      <value>
+        <name>foto</name>
+        <rename>foto</rename>
+      </value>
+      <value>
+        <name>lugar_nacimiento</name>
+        <rename>lugar_nacimiento</rename>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1125,12 +1249,62 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
+      <xloc>928</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Value mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>genero</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>M</source_value>
+        <target_value>Masculino</target_value>
+      </field>
+      <field>
+        <source_value>F</source_value>
+        <target_value>Femenino</target_value>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
+    <error>
+      <source_step>Execute SQL script</source_step>
+      <target_step>Unique rows</target_step>
+      <is_enabled>N</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
