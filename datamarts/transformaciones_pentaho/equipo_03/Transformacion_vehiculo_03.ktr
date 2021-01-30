@@ -430,7 +430,7 @@
     <created_date>2021/01/26 23:17:28.419</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/26 23:17:28.419</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -541,9 +541,61 @@
     <hop>
       <from>Table input</from>
       <to>Combination lookup/update</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dimension_vehiculo</table>
+    <connection>datamars</connection>
+    <commit>100</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_tabla_original_vehiculo</lookup>
+      </key>
+      <return>
+        <name>id_dimension_vehiculo</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -557,11 +609,12 @@
     </partitioning>
     <connection>lemans03</connection>
     <sql>SELECT 
-v.tipo as tipo,
+initcap(v.tipo) as tipo,
 ma.nombre as marca,
 initcap(v.nombre) as nombre,
 m.cilindraje as cilindraje,
-initcap(m.nombre) as nombre_motor
+initcap(m.nombre) as nombre_motor,
+v.id as id
 FROM V_M vm
 JOIN MOTOR m on m.id = vm.fk_motor_id
 JOIN VEHICULO v on v.id = vm.fk_vehiculo_id
@@ -704,8 +757,8 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -714,44 +767,48 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>dimension_vehiculo</table>
     <connection>datamars</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_vehiculo</table>
       <key>
-        <name>tipo</name>
-        <lookup>tipo</lookup>
+        <name>id</name>
+        <field>id_tabla_original_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
-        <name>marca</name>
-        <lookup>marca</lookup>
-      </key>
-      <key>
-        <name>nombre</name>
-        <lookup>nombre</lookup>
-      </key>
-      <key>
-        <name>cilindraje</name>
-        <lookup>cilindraje</lookup>
-      </key>
-      <key>
-        <name>nombre_motor</name>
-        <lookup>nombre_motor</lookup>
-      </key>
-      <return>
         <name>id_dimension_vehiculo</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
+        <field>id_dimension_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>tipo</name>
+        <rename>tipo</rename>
+      </value>
+      <value>
+        <name>marca</name>
+        <rename>marca</rename>
+      </value>
+      <value>
+        <name>nombre</name>
+        <rename>nombre</rename>
+      </value>
+      <value>
+        <name>cilindraje</name>
+        <rename>cilindraje</rename>
+      </value>
+      <value>
+        <name>nombre_motor</name>
+        <rename>nombre_motor</rename>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -761,7 +818,7 @@ JOIN MARCA_AUTO ma on ma.id = v.fk_marca_auto_id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
+      <xloc>528</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>

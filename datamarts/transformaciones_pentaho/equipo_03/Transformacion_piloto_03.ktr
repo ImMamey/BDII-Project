@@ -430,7 +430,7 @@
     <created_date>2021/01/26 21:33:30.358</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/26 21:33:30.358</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -558,7 +558,191 @@
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Combination lookup/update</from>
+      <to>Update</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
+  <step>
+    <name>Cambio de genero</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>sexo</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>M</source_value>
+        <target_value>Masculino</target_value>
+      </field>
+      <field>
+        <source_value>F</source_value>
+        <target_value>Femenino</target_value>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dimension_piloto</table>
+    <connection>datamars</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_tabla_original_piloto</lookup>
+      </key>
+      <return>
+        <name>id_dimension_piloto</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>768</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>If field value is null</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <replaceAllByValue/>
+    <replaceAllMask/>
+    <selectFields>Y</selectFields>
+    <selectValuesType>N</selectValuesType>
+    <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>primer_nombre</name>
+        <value>Sin nombre</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>segundo_nombre</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>primer_apellido</name>
+        <value>Sin Apellido</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>segundo_apellido</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>sexo</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>nacionalidad</name>
+        <value>Sin nacionalidad</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fecha_nacimiento</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>fecha_fallecimiento</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>foto</name>
+        <value/>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>lugar_nacimiento</name>
+        <value>N/A</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -572,6 +756,7 @@
     </partitioning>
     <connection>lemans03</connection>
     <sql>SELECT  
+piloto.id as id,
 initcap((piloto.identificacion).primer_nombre) as primer_nombre,
 initcap((piloto.identificacion).segundo_nombre) as segundo_nombre,
 initcap((piloto.identificacion).primer_apellido) as primer_apellido,
@@ -592,6 +777,29 @@ ORDER BY 1</sql>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
@@ -832,140 +1040,8 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Cambio de genero</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <field_to_use>sexo</field_to_use>
-    <target_field/>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value>M</source_value>
-        <target_value>Masculino</target_value>
-      </field>
-      <field>
-        <source_value>F</source_value>
-        <target_value>Femenino</target_value>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
       <xloc>384</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>If field value is null</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <replaceAllByValue/>
-    <replaceAllMask/>
-    <selectFields>Y</selectFields>
-    <selectValuesType>N</selectValuesType>
-    <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>primer_nombre</name>
-        <value>Sin nombre</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>segundo_nombre</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>primer_apellido</name>
-        <value>Sin Apellido</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>segundo_apellido</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>sexo</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>nacionalidad</name>
-        <value>Sin nacionalidad</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fecha_nacimiento</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>fecha_fallecimiento</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>foto</name>
-        <value/>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>lugar_nacimiento</name>
-        <value>N/A</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>512</xloc>
-      <yloc>304</yloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1041,8 +1117,8 @@ ORDER BY 1</sql>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1051,64 +1127,68 @@ ORDER BY 1</sql>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>dimension_piloto</table>
     <connection>datamars</connection>
+    <skip_lookup>N</skip_lookup>
     <commit>100</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_piloto</table>
       <key>
-        <name>primer_nombre</name>
-        <lookup>primer_nombre</lookup>
-      </key>
-      <key>
-        <name>segundo_nombre</name>
-        <lookup>segundo_nombre</lookup>
-      </key>
-      <key>
-        <name>primer_apellido</name>
-        <lookup>primer_apellido</lookup>
-      </key>
-      <key>
-        <name>segundo_apellido</name>
-        <lookup>segundo_apellido</lookup>
-      </key>
-      <key>
-        <name>sexo</name>
-        <lookup>sexo</lookup>
-      </key>
-      <key>
-        <name>nacionalidad</name>
-        <lookup>nacionalidad</lookup>
-      </key>
-      <key>
-        <name>fecha_nacimiento</name>
-        <lookup>fecha_nacimiento</lookup>
-      </key>
-      <key>
-        <name>fecha_fallecimiento</name>
-        <lookup>fecha_fallecimiento</lookup>
-      </key>
-      <key>
-        <name>foto</name>
-        <lookup>foto</lookup>
-      </key>
-      <key>
-        <name>lugar_nacimiento</name>
-        <lookup>lugar_nacimiento</lookup>
-      </key>
-      <return>
         <name>id_dimension_piloto</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
+        <field>id_dimension_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id</name>
+        <field>id_tabla_original_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>primer_nombre</name>
+        <rename>primer_nombre</rename>
+      </value>
+      <value>
+        <name>segundo_nombre</name>
+        <rename>segundo_nombre</rename>
+      </value>
+      <value>
+        <name>primer_apellido</name>
+        <rename>primer_apellido</rename>
+      </value>
+      <value>
+        <name>segundo_apellido</name>
+        <rename>segundo_apellido</rename>
+      </value>
+      <value>
+        <name>sexo</name>
+        <rename>sexo</rename>
+      </value>
+      <value>
+        <name>nacionalidad</name>
+        <rename>nacionalidad</rename>
+      </value>
+      <value>
+        <name>fecha_nacimiento</name>
+        <rename>fecha_nacimiento</rename>
+      </value>
+      <value>
+        <name>fecha_fallecimiento</name>
+        <rename>fecha_fallecimiento</rename>
+      </value>
+      <value>
+        <name>foto</name>
+        <rename>foto</rename>
+      </value>
+      <value>
+        <name>lugar_nacimiento</name>
+        <rename>lugar_nacimiento</rename>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1119,7 +1199,7 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>768</xloc>
-      <yloc>304</yloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
