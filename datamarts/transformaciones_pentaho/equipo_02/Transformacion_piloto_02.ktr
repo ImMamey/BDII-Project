@@ -550,11 +550,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Combination lookup/update</from>
-      <to>Update</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Unique rows</from>
       <to>Execute SQL script</to>
       <enabled>N</enabled>
@@ -562,6 +557,11 @@
     <hop>
       <from>If field value is null</from>
       <to>Combination lookup/update</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Combination lookup/update</from>
+      <to>Combination lookup/update 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -587,8 +587,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>128</yloc>
+      <xloc>528</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -606,7 +606,7 @@
     <schema>public</schema>
     <table>dimension_piloto</table>
     <connection>datamars</connection>
-    <commit>100</commit>
+    <commit>1</commit>
     <cache_size>9999</cache_size>
     <replace>N</replace>
     <preloadCache>N</preloadCache>
@@ -615,7 +615,7 @@
     <fields>
       <key>
         <name>id</name>
-        <lookup>id_dimension_piloto</lookup>
+        <lookup>id_tabla_original_piloto</lookup>
       </key>
       <return>
         <name>id_dimension_piloto</name>
@@ -634,7 +634,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>688</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -806,7 +806,7 @@ VALUES(?,?,?,?,?,?,?,?,decode('?','base64'), ?);</sql>
     </partitioning>
     <connection>lemans02</connection>
     <sql>SELECT 
-piloto.id,
+piloto.id as id,
 (piloto.datos).nombre as primer_nombre,
 'N/A' as segundo_nombre,
 (piloto.datos).apellido as primer_apellido,
@@ -1093,8 +1093,8 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>256</yloc>
+      <xloc>352</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1168,7 +1168,7 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>528</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1249,7 +1249,7 @@ ORDER BY 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>928</xloc>
+      <xloc>1008</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1288,6 +1288,93 @@ ORDER BY 1</sql>
     </remotesteps>
     <GUI>
       <xloc>352</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Combination lookup/update 2</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dimension_piloto</table>
+    <connection>datamars</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_tabla_original_piloto</lookup>
+      </key>
+      <key>
+        <name>primer_nombre</name>
+        <lookup>primer_nombre</lookup>
+      </key>
+      <key>
+        <name>segundo_nombre</name>
+        <lookup>segundo_nombre</lookup>
+      </key>
+      <key>
+        <name>primer_apellido</name>
+        <lookup>primer_apellido</lookup>
+      </key>
+      <key>
+        <name>segundo_apellido</name>
+        <lookup>segundo_apellido</lookup>
+      </key>
+      <key>
+        <name>genero</name>
+        <lookup>sexo</lookup>
+      </key>
+      <key>
+        <name>nacionalidad</name>
+        <lookup>nacionalidad</lookup>
+      </key>
+      <key>
+        <name>fecha_nacimiento</name>
+        <lookup>fecha_nacimiento</lookup>
+      </key>
+      <key>
+        <name>fecha_fallecimiento</name>
+        <lookup>fecha_fallecimiento</lookup>
+      </key>
+      <key>
+        <name>foto</name>
+        <lookup>foto</lookup>
+      </key>
+      <key>
+        <name>lugar_nacimiento</name>
+        <lookup>lugar_nacimiento</lookup>
+      </key>
+      <return>
+        <name>id_dimension_piloto</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>

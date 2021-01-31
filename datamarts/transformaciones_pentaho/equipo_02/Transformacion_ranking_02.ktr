@@ -430,7 +430,7 @@
     <created_date>2021/01/28 22:56:47.869</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/28 22:56:47.869</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -545,10 +545,57 @@
     </hop>
     <hop>
       <from>Combination lookup/update</from>
-      <to>Update</to>
+      <to>Combination lookup/update 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dimension_ranking</table>
+    <connection>datamars</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_tabla_original_ranking</lookup>
+      </key>
+      <return>
+        <name>id_dimension_ranking</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -871,7 +918,7 @@ order by 1</sql>
         <storagetype>normal</storagetype>
         <name>foto</name>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
         <origin>Table input</origin>
         <comments>foto</comments>
         <conversion_Mask/>
@@ -905,7 +952,7 @@ order by 1</sql>
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update</name>
+    <name>Combination lookup/update 2</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -918,7 +965,7 @@ order by 1</sql>
     <schema>public</schema>
     <table>dimension_ranking</table>
     <connection>datamars</connection>
-    <commit>100</commit>
+    <commit>1</commit>
     <cache_size>9999</cache_size>
     <replace>N</replace>
     <preloadCache>N</preloadCache>
@@ -927,7 +974,55 @@ order by 1</sql>
     <fields>
       <key>
         <name>id</name>
-        <lookup>id_dimension_ranking</lookup>
+        <lookup>id_tabla_original_ranking</lookup>
+      </key>
+      <key>
+        <name>hora</name>
+        <lookup>hora</lookup>
+      </key>
+      <key>
+        <name>minutos</name>
+        <lookup>minutos</lookup>
+      </key>
+      <key>
+        <name>segundos</name>
+        <lookup>segundos</lookup>
+      </key>
+      <key>
+        <name>centesimas</name>
+        <lookup>centesimas</lookup>
+      </key>
+      <key>
+        <name>puesto</name>
+        <lookup>puesto</lookup>
+      </key>
+      <key>
+        <name>velocidad_media</name>
+        <lookup>velocidad_media</lookup>
+      </key>
+      <key>
+        <name>numero_vuelta</name>
+        <lookup>numero_vuelta</lookup>
+      </key>
+      <key>
+        <name>distancia_recorrida_km</name>
+        <lookup>distancia_recorrida_km</lookup>
+      </key>
+      <key>
+        <name>marca_de_caucho</name>
+        <lookup>marca_de_caucho</lookup>
+      </key>
+      <key>
+        <name>categoria</name>
+        <lookup>categoria</lookup>
+      </key>
+      <key>
+        <name>numero_equipo</name>
+        <lookup>numero_equipo</lookup>
+      </key>
+      <key>
+        <name>foto</name>
+        <lookup>foto</lookup>
       </key>
       <return>
         <name>id_dimension_ranking</name>
@@ -946,129 +1041,8 @@ order by 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>544</xloc>
       <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_ranking</table>
-      <key>
-        <name>id</name>
-        <field>id_dimension_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>hora</name>
-        <rename>hora</rename>
-      </value>
-      <value>
-        <name>minutos</name>
-        <rename>minutos</rename>
-      </value>
-      <value>
-        <name>segundos</name>
-        <rename>segundos</rename>
-      </value>
-      <value>
-        <name>centesimas</name>
-        <rename>centesimas</rename>
-      </value>
-      <value>
-        <name>puesto</name>
-        <rename>puesto</rename>
-      </value>
-      <value>
-        <name>velocidad_media</name>
-        <rename>velocidad_media</rename>
-      </value>
-      <value>
-        <name>numero_vuelta</name>
-        <rename>numero_vuelta</rename>
-      </value>
-      <value>
-        <name>distancia_recorrida_km</name>
-        <rename>distancia_recorrida_km</rename>
-      </value>
-      <value>
-        <name>marca_de_caucho</name>
-        <rename>marca_de_caucho</rename>
-      </value>
-      <value>
-        <name>categoria</name>
-        <rename>categoria</rename>
-      </value>
-      <value>
-        <name>numero_equipo</name>
-        <rename>numero_equipo</rename>
-      </value>
-      <value>
-        <name>foto</name>
-        <rename>foto</rename>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Insert / update</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_ranking</table>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>688</xloc>
-      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
