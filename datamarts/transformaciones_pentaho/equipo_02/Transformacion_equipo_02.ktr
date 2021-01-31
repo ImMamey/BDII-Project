@@ -844,8 +844,8 @@ ORDER BY id</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>368</yloc>
+      <xloc>448</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

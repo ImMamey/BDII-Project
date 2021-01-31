@@ -608,7 +608,7 @@
       <schema_name/>
     </partitioning>
     <connection>lemans02</connection>
-    <sql>SELECT evento.tipo as tipo,
+    <sql>SELECT initcap(evento.tipo) as tipo,
        evento.id as id
 FROM evento 
 ORDER BY 1</sql>
@@ -623,7 +623,7 @@ ORDER BY 1</sql>
         <type>String</type>
         <storagetype>normal</storagetype>
         <name>tipo</name>
-        <length>15</length>
+        <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table input</origin>
         <comments>tipo</comments>
