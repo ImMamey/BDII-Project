@@ -607,6 +607,101 @@
     </GUI>
   </step>
   <step>
+    <name>Combination lookup/update 2</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>dimension_ranking</table>
+    <connection>datamars</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id</name>
+        <lookup>id_tabla_original_ranking</lookup>
+      </key>
+      <key>
+        <name>hora</name>
+        <lookup>hora</lookup>
+      </key>
+      <key>
+        <name>minutos</name>
+        <lookup>minutos</lookup>
+      </key>
+      <key>
+        <name>segundos</name>
+        <lookup>segundos</lookup>
+      </key>
+      <key>
+        <name>centesimas</name>
+        <lookup>centesimas</lookup>
+      </key>
+      <key>
+        <name>puesto</name>
+        <lookup>puesto</lookup>
+      </key>
+      <key>
+        <name>velocidad_media</name>
+        <lookup>velocidad_media</lookup>
+      </key>
+      <key>
+        <name>numero_vuelta</name>
+        <lookup>numero_vuelta</lookup>
+      </key>
+      <key>
+        <name>distancia_recorrida_km</name>
+        <lookup>distancia_recorrida_km</lookup>
+      </key>
+      <key>
+        <name>marca_de_caucho</name>
+        <lookup>marca_de_caucho</lookup>
+      </key>
+      <key>
+        <name>categoria</name>
+        <lookup>categoria</lookup>
+      </key>
+      <key>
+        <name>numero_equipo</name>
+        <lookup>numero_equipo</lookup>
+      </key>
+      <key>
+        <name>foto</name>
+        <lookup>foto</lookup>
+      </key>
+      <return>
+        <name>id_dimension_ranking</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Insert / update</name>
     <type>InsertUpdate</type>
     <description/>
@@ -1023,7 +1118,7 @@ ORDER BY 1</sql>
         <storagetype>normal</storagetype>
         <name>foto</name>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
         <origin>Table input</origin>
         <comments>foto</comments>
         <conversion_Mask/>
@@ -1053,101 +1148,6 @@ ORDER BY 1</sql>
     <GUI>
       <xloc>224</xloc>
       <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Combination lookup/update 2</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dimension_ranking</table>
-    <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
-      </key>
-      <key>
-        <name>hora</name>
-        <lookup>hora</lookup>
-      </key>
-      <key>
-        <name>minutos</name>
-        <lookup>minutos</lookup>
-      </key>
-      <key>
-        <name>segundos</name>
-        <lookup>segundos</lookup>
-      </key>
-      <key>
-        <name>centesimas</name>
-        <lookup>centesimas</lookup>
-      </key>
-      <key>
-        <name>puesto</name>
-        <lookup>puesto</lookup>
-      </key>
-      <key>
-        <name>velocidad_media</name>
-        <lookup>velocidad_media</lookup>
-      </key>
-      <key>
-        <name>numero_vuelta</name>
-        <lookup>numero_vuelta</lookup>
-      </key>
-      <key>
-        <name>distancia_recorrida_km</name>
-        <lookup>distancia_recorrida_km</lookup>
-      </key>
-      <key>
-        <name>marca_de_caucho</name>
-        <lookup>marca_de_caucho</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
-      </key>
-      <key>
-        <name>numero_equipo</name>
-        <lookup>numero_equipo</lookup>
-      </key>
-      <key>
-        <name>foto</name>
-        <lookup>foto</lookup>
-      </key>
-      <return>
-        <name>id_dimension_ranking</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
