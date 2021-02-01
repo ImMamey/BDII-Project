@@ -66,6 +66,7 @@ CREATE TABLE DIMENSION_EQUIPO(
 );
 
 CREATE TABLE HECHOS_PARTICIPACION(
+    id_participacion INT NULL,
     fk_id_Dimension_Piloto INT NOT NULL,
      fk_id_tabla_original_piloto INT NOT NULL,
     fk_id_Dimension_Equipo INT NOT NULL,
@@ -80,6 +81,7 @@ CREATE TABLE HECHOS_PARTICIPACION(
     num_equipo INT NOT NULL,
     puesto INT NOT NULL,
     PRIMARY KEY(
+        id_participacion,
         fk_id_Dimension_Piloto,
         fk_id_tabla_original_piloto,
         fk_id_Dimension_Equipo,
