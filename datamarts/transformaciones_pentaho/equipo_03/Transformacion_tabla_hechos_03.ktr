@@ -431,7 +431,7 @@
     <created_date>2021/01/31 07:13:13.164</created_date>
     <modified_user>-</modified_user>
     <modified_date>2021/01/31 07:13:13.164</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -581,6 +581,249 @@
     </hop>
   </order>
   <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>hechos_participacion</table>
+    <connection>datamars</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id_dimension_piloto_new</name>
+        <lookup>fk_id_dimension_piloto</lookup>
+      </key>
+      <key>
+        <name>id_piloto_vieja</name>
+        <lookup>fk_id_tabla_original_piloto</lookup>
+      </key>
+      <key>
+        <name>id_dimension_equipo_new</name>
+        <lookup>fk_id_dimension_equipo</lookup>
+      </key>
+      <key>
+        <name>id_equipo_vieja</name>
+        <lookup>fk_id_tabla_original_equipo</lookup>
+      </key>
+      <key>
+        <name>id_dimension_vehiculo_new</name>
+        <lookup>fk_id_dimension_vehiculo</lookup>
+      </key>
+      <key>
+        <name>id_vehiculo_vieja</name>
+        <lookup>fk_id_tabla_original_vehiculo</lookup>
+      </key>
+      <key>
+        <name>id_dimension_ranking_new</name>
+        <lookup>fk_id_dimension_ranking</lookup>
+      </key>
+      <key>
+        <name>id_ranking_vieja</name>
+        <lookup>fk_id_tabla_original_ranking</lookup>
+      </key>
+      <key>
+        <name>id_dimension_evento_new</name>
+        <lookup>fk_id_dimension_evento</lookup>
+      </key>
+      <key>
+        <name>id_evento_vieja</name>
+        <lookup>fk_id_tabla_original_evento</lookup>
+      </key>
+      <key>
+        <name>id_dimension_fecha_new</name>
+        <lookup>fk_id_dimension_fecha</lookup>
+      </key>
+      <return>
+        <name>id_participacion</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Equipo</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_equipo</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_equipo_vieja</name>
+        <field>id_tabla_original_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>nombre_equipo</name>
+        <field>nombre</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_equipo</name>
+        <rename>id_dimension_equipo_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Evento</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_evento</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_evento_vieja</name>
+        <field>id_tabla_original_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>tipo_evento</name>
+        <field>tipo</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_evento</name>
+        <rename>id_dimension_evento_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>576</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Fecha</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_fecha</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>fecha</name>
+        <field>fecha_inicial</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_fecha</name>
+        <rename>id_dimension_fecha_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Lookup of id_Dimension_Piloto</name>
     <type>DBLookup</type>
     <description/>
@@ -641,108 +884,6 @@
     </GUI>
   </step>
   <step>
-    <name>Lookup of id_Dimension_Vehiculo</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_vehiculo</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>id_vehiculo_vieja</name>
-        <field>id_tabla_original_vehiculo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>nombre_vehiculo</name>
-        <field>nombre</field>
-        <condition>LIKE</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_dimension_vehiculo</name>
-        <rename>id_dimension_vehiculo_new</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Lookup of id_Dimension_Fecha</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_fecha</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>fecha</name>
-        <field>fecha_inicial</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_dimension_fecha</name>
-        <rename>id_dimension_fecha_new</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Lookup of id_Dimension_Ranking</name>
     <type>DBLookup</type>
     <description/>
@@ -797,7 +938,7 @@
     </GUI>
   </step>
   <step>
-    <name>Lookup of id_Dimension_Evento</name>
+    <name>Lookup of id_Dimension_Vehiculo</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -813,79 +954,25 @@
     <cache_size>0</cache_size>
     <lookup>
       <schema>public</schema>
-      <table>dimension_evento</table>
+      <table>dimension_vehiculo</table>
       <orderby/>
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>id_evento_vieja</name>
-        <field>id_tabla_original_evento</field>
+        <name>id_vehiculo_vieja</name>
+        <field>id_tabla_original_vehiculo</field>
         <condition>=</condition>
         <name2/>
       </key>
       <key>
-        <name>tipo_evento</name>
-        <field>tipo</field>
-        <condition>LIKE</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>id_dimension_evento</name>
-        <rename>id_dimension_evento_new</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Lookup of id_Dimension_Equipo</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <cache>N</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema>public</schema>
-      <table>dimension_equipo</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>id_equipo_vieja</name>
-        <field>id_tabla_original_equipo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>nombre_equipo</name>
+        <name>nombre_vehiculo</name>
         <field>nombre</field>
         <condition>LIKE</condition>
         <name2/>
       </key>
       <value>
-        <name>id_dimension_equipo</name>
-        <rename>id_dimension_equipo_new</rename>
+        <name>id_dimension_vehiculo</name>
+        <rename>id_dimension_vehiculo_new</rename>
         <default/>
         <type>None</type>
       </value>
@@ -899,123 +986,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>256</xloc>
       <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Update</name>
-    <type>Update</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>datamars</connection>
-    <skip_lookup>N</skip_lookup>
-    <commit>100</commit>
-    <use_batch>N</use_batch>
-    <error_ignored>N</error_ignored>
-    <ignore_flag_field/>
-    <lookup>
-      <schema>public</schema>
-      <table>hechos_participacion</table>
-      <key>
-        <name>id_dimension_piloto_new</name>
-        <field>fk_id_dimension_piloto</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_piloto_vieja</name>
-        <field>fk_id_tabla_original_piloto</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_dimension_equipo_new</name>
-        <field>fk_id_dimension_equipo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_equipo_vieja</name>
-        <field>fk_id_tabla_original_equipo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_dimension_vehiculo_new</name>
-        <field>fk_id_dimension_vehiculo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_vehiculo_vieja</name>
-        <field>fk_id_tabla_original_vehiculo</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_dimension_ranking_new</name>
-        <field>fk_id_dimension_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_ranking_vieja</name>
-        <field>fk_id_tabla_original_ranking</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_dimension_evento_new</name>
-        <field>fk_id_dimension_evento</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_evento_vieja</name>
-        <field>fk_id_tabla_original_evento</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_dimension_fecha_new</name>
-        <field>fk_id_dimension_fecha</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id_participacion</name>
-        <field>id_participacion</field>
-        <condition>=</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>num_equipo</name>
-        <rename>id_dimension_equipo_new</rename>
-      </value>
-      <value>
-        <name>puesto</name>
-        <rename>puesto_ranking</rename>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1104</xloc>
-      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1071,7 +1043,8 @@ WHERE E_R.fk_e_p_id = E_P.id and
       v_m.fk_vehiculo_id = vehiculo.id and
       v_m.fk_motor_id = motor.id and
       E_R.fk_ranking_id = ranking.id and
-      ranking.fk_evento_id = evento.id
+      ranking.fk_evento_id = evento.id and
+      evento.tipo = 'Carrera'
 -----
 </sql>
     <limit>0</limit>
@@ -1465,8 +1438,8 @@ WHERE E_R.fk_e_p_id = E_P.id and
     </GUI>
   </step>
   <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
+    <name>Update</name>
+    <type>Update</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1475,68 +1448,96 @@ WHERE E_R.fk_e_p_id = E_P.id and
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <schema>public</schema>
-    <table>hechos_participacion</table>
     <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>hechos_participacion</table>
       <key>
         <name>id_dimension_piloto_new</name>
-        <lookup>fk_id_dimension_piloto</lookup>
+        <field>fk_id_dimension_piloto</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_piloto_vieja</name>
-        <lookup>fk_id_tabla_original_piloto</lookup>
+        <field>fk_id_tabla_original_piloto</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_dimension_equipo_new</name>
-        <lookup>fk_id_dimension_equipo</lookup>
+        <field>fk_id_dimension_equipo</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_equipo_vieja</name>
-        <lookup>fk_id_tabla_original_equipo</lookup>
+        <field>fk_id_tabla_original_equipo</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_dimension_vehiculo_new</name>
-        <lookup>fk_id_dimension_vehiculo</lookup>
+        <field>fk_id_dimension_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_vehiculo_vieja</name>
-        <lookup>fk_id_tabla_original_vehiculo</lookup>
+        <field>fk_id_tabla_original_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_dimension_ranking_new</name>
-        <lookup>fk_id_dimension_ranking</lookup>
+        <field>fk_id_dimension_ranking</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_ranking_vieja</name>
-        <lookup>fk_id_tabla_original_ranking</lookup>
+        <field>fk_id_tabla_original_ranking</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_dimension_evento_new</name>
-        <lookup>fk_id_dimension_evento</lookup>
+        <field>fk_id_dimension_evento</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_evento_vieja</name>
-        <lookup>fk_id_tabla_original_evento</lookup>
+        <field>fk_id_tabla_original_evento</field>
+        <condition>=</condition>
+        <name2/>
       </key>
       <key>
         <name>id_dimension_fecha_new</name>
-        <lookup>fk_id_dimension_fecha</lookup>
+        <field>fk_id_dimension_fecha</field>
+        <condition>=</condition>
+        <name2/>
       </key>
-      <return>
+      <key>
         <name>id_participacion</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
+        <field>id_participacion</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>num_equipo</name>
+        <rename>id_dimension_equipo_new</rename>
+      </value>
+      <value>
+        <name>puesto</name>
+        <rename>puesto_ranking</rename>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1546,7 +1547,7 @@ WHERE E_R.fk_e_p_id = E_P.id and
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>1104</xloc>
       <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>

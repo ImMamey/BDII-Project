@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformacion_ranking_02</name>
+    <name>Transformacion_tabla_hechos_02</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,10 +427,10 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2021/01/28 22:56:47.869</created_date>
+    <created_date>2021/01/31 23:20:14.484</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2021/01/28 22:56:47.869</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2021/01/31 23:20:14.484</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -540,157 +540,45 @@
   <order>
     <hop>
       <from>Table input</from>
+      <to>Lookup of id_Dimension_Piloto</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup of id_Dimension_Piloto</from>
+      <to>Lookup of id_Dimension_Vehiculo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup of id_Dimension_Vehiculo</from>
+      <to>Lookup of id_Dimension_Fecha</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup of id_Dimension_Fecha</from>
+      <to>Lookup of id_Dimension_Ranking</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup of id_Dimension_Ranking</from>
+      <to>Lookup of id_Dimension_Evento</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup of id_Dimension_Evento</from>
+      <to>Lookup of id_Dimension_Equipo</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Lookup of id_Dimension_Equipo</from>
       <to>Combination lookup/update</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Combination lookup/update</from>
-      <to>Combination lookup/update 2</to>
+      <to>Update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
-  <step>
-    <name>Combination lookup/update</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dimension_ranking</table>
-    <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
-      </key>
-      <return>
-        <name>id_dimension_ranking</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>384</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Combination lookup/update 2</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <schema>public</schema>
-    <table>dimension_ranking</table>
-    <connection>datamars</connection>
-    <commit>1</commit>
-    <cache_size>9999</cache_size>
-    <replace>N</replace>
-    <preloadCache>N</preloadCache>
-    <crc>N</crc>
-    <crcfield>hashcode</crcfield>
-    <fields>
-      <key>
-        <name>id</name>
-        <lookup>id_tabla_original_ranking</lookup>
-      </key>
-      <key>
-        <name>hora</name>
-        <lookup>hora</lookup>
-      </key>
-      <key>
-        <name>minutos</name>
-        <lookup>minutos</lookup>
-      </key>
-      <key>
-        <name>segundos</name>
-        <lookup>segundos</lookup>
-      </key>
-      <key>
-        <name>centesimas</name>
-        <lookup>centesimas</lookup>
-      </key>
-      <key>
-        <name>puesto</name>
-        <lookup>puesto</lookup>
-      </key>
-      <key>
-        <name>velocidad_media</name>
-        <lookup>velocidad_media</lookup>
-      </key>
-      <key>
-        <name>numero_vuelta</name>
-        <lookup>numero_vuelta</lookup>
-      </key>
-      <key>
-        <name>distancia_recorrida_km</name>
-        <lookup>distancia_recorrida_km</lookup>
-      </key>
-      <key>
-        <name>marca_de_caucho</name>
-        <lookup>marca_de_caucho</lookup>
-      </key>
-      <key>
-        <name>categoria</name>
-        <lookup>categoria</lookup>
-      </key>
-      <key>
-        <name>numero_equipo</name>
-        <lookup>numero_equipo</lookup>
-      </key>
-      <key>
-        <name>foto</name>
-        <lookup>foto</lookup>
-      </key>
-      <return>
-        <name>id_dimension_ranking</name>
-        <creation_method>tablemax</creation_method>
-        <use_autoinc>N</use_autoinc>
-      </return>
-    </fields>
-    <sequence/>
-    <last_update_field/>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>256</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
   <step>
     <name>Table input</name>
     <type>TableInput</type>
@@ -704,27 +592,47 @@
     </partitioning>
     <connection>lemans02</connection>
     <sql>SELECT 
-participacion.id as id,
-extract(hour from participacion.tiempo_total) as hora,
-extract(minute from participacion.tiempo_total) as minutos,
-extract(second from participacion.tiempo_total) as segundos,
-extract(millisecond from participacion.tiempo_total) as centesimas,
-case when participacion.estadisticas_hora[24].posicion is not null then participacion.estadisticas_hora[24].posicion else 100 end as puesto,
-case when participacion.estadisticas_hora[24].vel_media is not null then participacion.estadisticas_hora[24].vel_media else participacion.estadisticas_hora[1].vel_media end as velocidad_media,
-participacion.numero_vueltas as numero_vuelta,
-case when participacion.estadisticas_hora[24].distancia_recorrida is not null then participacion.estadisticas_hora[24].distancia_recorrida else 0 end as distancia_recorrida_km,
-fabricante.nombre as marca_de_caucho,
-evento.tipo as categoria,
-participacion.numero_participacion as numero_equipo,
-pais.foto as foto
-FROM participacion,fabricante,vehiculo, evento, pais, equipo
-WHERE participacion.vehiculo_id= vehiculo.id and
-      fabricante.id=vehiculo.neumaticos_fabricante_id and
-      participacion.evento_id=evento.id and
-      participacion.equipo_id=equipo.id and
-      equipo.pais_id=pais.id
-      
-order by 1</sql>
+
+--pilots
+ piloto.id as id_piloto_vieja,
+(piloto.datos).nombre as primer_nombre_piloto,
+(piloto.datos).apellido as primer_apellido_piloto,
+ initcap(pais.nacionalidad) as nacionalidad_piloto,
+
+--vehiculos
+vehiculo.id as id_vehiculo_vieja,
+vehiculo.nombre_chasis as nombre_vehiculo,
+motor.modelo as nombre_motor,
+
+
+--fecha
+to_date(CONCAT(1,'-',1,'-',evento.ano),'DD-MM-YYYY') as fecha,
+
+--ranking
+participacion.id as id_ranking_vieja,
+case when participacion.estadisticas_hora[24].posicion is not null then participacion.estadisticas_hora[24].posicion else 0 end as puesto_ranking,
+case when participacion.estadisticas_hora[24].distancia_recorrida is not null then participacion.estadisticas_hora[24].distancia_recorrida else 0 end as distancia_km_ranking,
+
+--event
+evento.id as id_evento_vieja,
+initcap(evento.tipo) as tipo_evento,
+
+--equipo
+equipo.id as id_equipo_vieja,
+initcap(equipo.nombre) as nombre_equipo,
+equipo.pais_id as pais_equipo,
+participacion.numero_participacion as numero_equipo
+
+FROM  participacion, piloto_participacion, piloto, pais, vehiculo, motor, evento, equipo
+WHERE participacion.id=piloto_participacion.participacion_id and
+      piloto_participacion.piloto_id = piloto.id and
+      piloto.pais_id = pais.id and
+      participacion.vehiculo_id = vehiculo.id and
+      vehiculo.motor_id = motor.id and
+      participacion.evento_id = evento.id and
+      participacion.equipo_id = equipo.id and
+      evento.tipo = 'carrera'
+      </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -735,11 +643,11 @@ order by 1</sql>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>id</name>
+        <name>id_piloto_vieja</name>
         <length>9</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>id</comments>
+        <comments>id_piloto_vieja</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -756,14 +664,14 @@ order by 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Number</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>hora</name>
-        <length>-1</length>
+        <name>primer_nombre_piloto</name>
+        <length>20</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>hora</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <comments>primer_nombre_piloto</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -779,14 +687,14 @@ order by 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Number</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>minutos</name>
-        <length>-1</length>
+        <name>primer_apellido_piloto</name>
+        <length>20</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>minutos</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <comments>primer_apellido_piloto</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -802,37 +710,14 @@ order by 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Number</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>segundos</name>
-        <length>-1</length>
+        <name>nacionalidad_piloto</name>
+        <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>segundos</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>centesimas</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>centesimas</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <comments>nacionalidad_piloto</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -850,57 +735,126 @@ order by 1</sql>
       <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>puesto</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>puesto</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Number</type>
-        <storagetype>normal</storagetype>
-        <name>velocidad_media</name>
-        <length>8</length>
-        <precision>8</precision>
-        <origin>Table input</origin>
-        <comments>velocidad_media</comments>
-        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>numero_vuelta</name>
+        <name>id_vehiculo_vieja</name>
         <length>4</length>
         <precision>0</precision>
         <origin>Table input</origin>
-        <comments>numero_vuelta</comments>
+        <comments>id_vehiculo_vieja</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nombre_vehiculo</name>
+        <length>40</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>nombre_vehiculo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nombre_motor</name>
+        <length>40</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>nombre_motor</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>fecha</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>fecha</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_ranking_vieja</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>id_ranking_vieja</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>puesto_ranking</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>puesto_ranking</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -919,11 +873,11 @@ order by 1</sql>
       <value-meta>
         <type>Number</type>
         <storagetype>normal</storagetype>
-        <name>distancia_recorrida_km</name>
+        <name>distancia_km_ranking</name>
         <length>8</length>
         <precision>8</precision>
         <origin>Table input</origin>
-        <comments>distancia_recorrida_km</comments>
+        <comments>distancia_km_ranking</comments>
         <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -940,14 +894,14 @@ order by 1</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>marca_de_caucho</name>
-        <length>40</length>
-        <precision>-1</precision>
+        <name>id_evento_vieja</name>
+        <length>9</length>
+        <precision>0</precision>
         <origin>Table input</origin>
-        <comments>marca_de_caucho</comments>
-        <conversion_Mask/>
+        <comments>id_evento_vieja</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -965,12 +919,81 @@ order by 1</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>categoria</name>
-        <length>15</length>
+        <name>tipo_evento</name>
+        <length>2147483647</length>
         <precision>-1</precision>
         <origin>Table input</origin>
-        <comments>categoria</comments>
+        <comments>tipo_evento</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id_equipo_vieja</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>id_equipo_vieja</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nombre_equipo</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>nombre_equipo</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>pais_equipo</name>
+        <length>4</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>pais_equipo</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1008,29 +1031,6 @@ order by 1</sql>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
-      <value-meta>
-        <type>Binary</type>
-        <storagetype>normal</storagetype>
-        <name>foto</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>foto</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
     </row-meta>
     <attributes/>
     <cluster_schema/>
@@ -1041,8 +1041,522 @@ order by 1</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>224</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Piloto</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_piloto</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_piloto_vieja</name>
+        <field>id_tabla_original_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>primer_apellido_piloto</name>
+        <field>primer_apellido</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_piloto</name>
+        <rename>id_dimension_piloto_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
       <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Vehiculo</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_vehiculo</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_vehiculo_vieja</name>
+        <field>id_tabla_original_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>nombre_vehiculo</name>
+        <field>nombre</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_vehiculo</name>
+        <rename>id_dimension_vehiculo_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Fecha</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_fecha</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>fecha</name>
+        <field>fecha_inicial</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_fecha</name>
+        <rename>id_dimension_fecha_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Ranking</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_ranking</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_ranking_vieja</name>
+        <field>id_tabla_original_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>numero_equipo</name>
+        <field>numero_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_ranking</name>
+        <rename>id_dimension_ranking_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Evento</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_evento</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_evento_vieja</name>
+        <field>id_tabla_original_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>tipo_evento</name>
+        <field>tipo</field>
+        <condition>LIKE</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_evento</name>
+        <rename>id_dimension_evento_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Lookup of id_Dimension_Equipo</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>dimension_equipo</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>id_equipo_vieja</name>
+        <field>id_tabla_original_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>id_dimension_equipo</name>
+        <rename>id_dimension_equipo_new</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>688</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Combination lookup/update</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <schema>public</schema>
+    <table>hechos_participacion</table>
+    <connection>datamars</connection>
+    <commit>1</commit>
+    <cache_size>9999</cache_size>
+    <replace>N</replace>
+    <preloadCache>N</preloadCache>
+    <crc>N</crc>
+    <crcfield>hashcode</crcfield>
+    <fields>
+      <key>
+        <name>id_dimension_piloto_new</name>
+        <lookup>fk_id_dimension_piloto</lookup>
+      </key>
+      <key>
+        <name>id_piloto_vieja</name>
+        <lookup>fk_id_tabla_original_piloto</lookup>
+      </key>
+      <key>
+        <name>id_dimension_equipo_new</name>
+        <lookup>fk_id_dimension_equipo</lookup>
+      </key>
+      <key>
+        <name>id_equipo_vieja</name>
+        <lookup>fk_id_tabla_original_equipo</lookup>
+      </key>
+      <key>
+        <name>id_dimension_vehiculo_new</name>
+        <lookup>fk_id_dimension_vehiculo</lookup>
+      </key>
+      <key>
+        <name>id_vehiculo_vieja</name>
+        <lookup>fk_id_tabla_original_vehiculo</lookup>
+      </key>
+      <key>
+        <name>id_dimension_ranking_new</name>
+        <lookup>fk_id_dimension_ranking</lookup>
+      </key>
+      <key>
+        <name>id_ranking_vieja</name>
+        <lookup>fk_id_tabla_original_ranking</lookup>
+      </key>
+      <key>
+        <name>id_dimension_evento_new</name>
+        <lookup>fk_id_dimension_evento</lookup>
+      </key>
+      <key>
+        <name>id_evento_vieja</name>
+        <lookup>fk_id_tabla_original_evento</lookup>
+      </key>
+      <key>
+        <name>id_dimension_fecha_new</name>
+        <lookup>fk_id_dimension_fecha</lookup>
+      </key>
+      <return>
+        <name>id_participacion</name>
+        <creation_method>tablemax</creation_method>
+        <use_autoinc>N</use_autoinc>
+      </return>
+    </fields>
+    <sequence/>
+    <last_update_field/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
+      <yloc>352</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Update</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datamars</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema>public</schema>
+      <table>hechos_participacion</table>
+      <key>
+        <name>id_dimension_piloto_new</name>
+        <field>fk_id_dimension_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_piloto_vieja</name>
+        <field>fk_id_tabla_original_piloto</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_dimension_equipo_new</name>
+        <field>fk_id_dimension_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_equipo_vieja</name>
+        <field>fk_id_tabla_original_equipo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_dimension_vehiculo_new</name>
+        <field>fk_id_dimension_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_vehiculo_vieja</name>
+        <field>fk_id_tabla_original_vehiculo</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_dimension_ranking_new</name>
+        <field>fk_id_dimension_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_ranking_vieja</name>
+        <field>fk_id_tabla_original_ranking</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_dimension_evento_new</name>
+        <field>fk_id_dimension_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_evento_vieja</name>
+        <field>fk_id_tabla_original_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_dimension_fecha_new</name>
+        <field>fk_id_dimension_fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id_participacion</name>
+        <field>id_participacion</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>num_equipo</name>
+        <rename>id_dimension_equipo_new</rename>
+      </value>
+      <value>
+        <name>puesto</name>
+        <rename>puesto_ranking</rename>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1040</xloc>
+      <yloc>352</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

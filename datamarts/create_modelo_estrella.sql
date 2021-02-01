@@ -78,8 +78,8 @@ CREATE TABLE HECHOS_PARTICIPACION(
     fk_id_Dimension_Evento INT NOT NULL,
      fk_id_tabla_original_evento INT NOT NULL,
     fk_id_Dimension_Fecha INT NOT NULL,
-    num_equipo INT NOT NULL,
-    puesto INT NOT NULL,
+    num_equipo INT,
+    puesto INT,
     PRIMARY KEY(
         id_participacion,
         fk_id_Dimension_Piloto,
