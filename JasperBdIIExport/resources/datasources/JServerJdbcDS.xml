@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jdbcDataSource exportedWithPermissions="true">
+    <folder>/datasources</folder>
+    <name>JServerJdbcDS</name>
+    <version>0</version>
+    <label>JServer Jdbc Data Source</label>
+    <description>JServer Jdbc Data Source</description>
+    <creationDate>2021-02-02T02:49:54.819-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:35.847-04:00</updateDate>
+    <driver>org.postgresql.Driver</driver>
+    <connectionUrl>jdbc:postgresql://ci-catalogs-postgresql.jaspersoft.com:5432/sugarcrm</connectionUrl>
+    <connectionUser>ci_agent</connectionUser>
+    <connectionPassword>ENC&lt;4A5253495600000010B67E22F40415755C7F8127C7E0E0D1851F255ED4C57629FF7DD39292457D8F19&gt;</connectionPassword>
+</jdbcDataSource>

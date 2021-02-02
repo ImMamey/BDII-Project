@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jdbcDataSource exportedWithPermissions="true">
+    <folder>/datasources</folder>
+    <name>Base_de_datos_estrella</name>
+    <version>0</version>
+    <label>Base de datos estrella</label>
+    <creationDate>2021-02-02T03:23:19.325-04:00</creationDate>
+    <updateDate>2021-02-02T03:23:19.325-04:00</updateDate>
+    <driver>org.postgresql.Driver</driver>
+    <connectionUrl>jdbc:postgresql://localhost:5432/datamars</connectionUrl>
+    <connectionUser>postgres</connectionUser>
+    <connectionPassword>ENC&lt;4A52534956000000102D22DF43104EE224326E04364C004436CCB2B2349C78A0FC6C73E2FD733C7CB8&gt;</connectionPassword>
+    <timezone></timezone>
+</jdbcDataSource>

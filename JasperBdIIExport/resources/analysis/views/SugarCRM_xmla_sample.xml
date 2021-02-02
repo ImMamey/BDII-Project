@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<olapUnit exportedWithPermissions="true">
+    <folder>/analysis/views</folder>
+    <name>SugarCRM_xmla_sample</name>
+    <version>0</version>
+    <label>SugarCRM Sample XMLA Analysis View</label>
+    <description>Sample SugarCRM Analysis View (XMLA): Sales Performance by Industry/Account</description>
+    <creationDate>2021-02-02T02:49:55.358-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.532-04:00</updateDate>
+    <olapClientConnection>
+        <uri>/analysis/connections/SugarCRMXmlaConnection</uri>
+    </olapClientConnection>
+    <mdxQuery>select {[Measures].[Total Sale Amount], [Measures].[Number of Sales], [Measures].[Avg Sale Amount], [Measures].[Avg Time To Close (Days)], [Measures].[Avg Close Probability]} ON COLUMNS,  NON EMPTY {([Account Categorization].[All Accounts], [Close Period].[All Periods])} ON ROWS  from [SalesAnalysis]  where [Sale State].[All Types].[Closed Won]</mdxQuery>
+</olapUnit>

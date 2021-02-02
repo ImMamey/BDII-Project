@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/themes/default/jasper-ui</parent>
+    <name>images</name>
+    <label>images</label>
+    <creationDate>2021-02-02T02:49:54.790-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:17.107-04:00</updateDate>
+    <resource>bg.jpg</resource>
+    <resource>button_action_icons_sprite.png</resource>
+    <resource>chart-type-icon-mono-sprite.svg</resource>
+    <resource>chart-type-icon-sprite.svg</resource>
+    <resource>column_header_bkgd.png</resource>
+    <resource>control_icons_sprite.png</resource>
+    <resource>domain-tree-icons-sprite.svg</resource>
+    <resource>glyph_icons_sprite.svg</resource>
+    <resource>glyph_icons_sprite-responsive.svg</resource>
+    <resource>gr-link.png</resource>
+    <resource>icontrol_icons_sprite.png</resource>
+    <resource>jr-loading_animation.gif</resource>
+    <resource>list_node_animation.gif</resource>
+    <resource>logo_amazon.svg</resource>
+    <resource>logo_aws.png</resource>
+    <resource>logo_tibco.svg</resource>
+    <resource>sizer_icons_sprite.png</resource>
+    <resource>tiny_minus.png</resource>
+    <resource>tiny_plus.png</resource>
+    <resource>tree_icons_sprite.svg</resource>
+    <resource>workflow_icons_sprite.svg</resource>
+</folder>

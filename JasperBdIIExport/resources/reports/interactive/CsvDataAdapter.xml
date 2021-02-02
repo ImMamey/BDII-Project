@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fileResource exportedWithPermissions="true" dataFile="CsvDataAdapter.data">
+    <folder>/reports/interactive</folder>
+    <name>CsvDataAdapter</name>
+    <version>0</version>
+    <label>CSV Data Adapter</label>
+    <description>CSV Data Adapter</description>
+    <creationDate>2021-02-02T02:49:55.385-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:37.031-04:00</updateDate>
+    <fileType>xml</fileType>
+</fileResource>

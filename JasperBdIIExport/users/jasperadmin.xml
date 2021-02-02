@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user>
+    <username>jasperadmin</username>
+    <fullName>jasperadmin User</fullName>
+    <password>ENC&lt;4A5253495600000010C9D497F18B46359E69B69E0AEF1C89262D28E4D9CF1C383F50BBD8334CD47EEF&gt;</password>
+    <externallyDefined>false</externallyDefined>
+    <enabled>true</enabled>
+    <role>ROLE_ADMINISTRATOR</role>
+    <role>ROLE_USER</role>
+    <previousPasswordChangeTime>2019-12-06T18:54:09.575-04:00</previousPasswordChangeTime>
+</user>

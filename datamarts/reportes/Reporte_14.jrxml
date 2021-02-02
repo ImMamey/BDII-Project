@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte_14" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9b057292-566c-466a-b587-734b9fc5402e">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Base de Datos Estrella"/>
+	<property name="ireport.jasperserver.url" value="http://localhost:8081/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/Reporte_14_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/Reporte_14"/>
+	<queryString language="plsql">
+		<![CDATA[SELECT * FROM PILOTOS_ABANDONARON()]]>
+	</queryString>
+	<field name="pnombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pnombre"/>
+		<property name="com.jaspersoft.studio.field.name" value="pnombre"/>
+	</field>
+	<field name="snombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="snombre"/>
+		<property name="com.jaspersoft.studio.field.name" value="snombre"/>
+	</field>
+	<field name="papellido" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="papellido"/>
+		<property name="com.jaspersoft.studio.field.name" value="papellido"/>
+	</field>
+	<field name="sapellido" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sapellido"/>
+		<property name="com.jaspersoft.studio.field.name" value="sapellido"/>
+	</field>
+	<field name="nacionalidad_piloto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nacionalidad_piloto"/>
+		<property name="com.jaspersoft.studio.field.name" value="nacionalidad_piloto"/>
+	</field>
+	<field name="foto_piloto" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="foto_piloto"/>
+		<property name="com.jaspersoft.studio.field.name" value="foto_piloto"/>
+	</field>
+	<field name="numero_abandonos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="numero_abandonos"/>
+		<property name="com.jaspersoft.studio.field.name" value="numero_abandonos"/>
+	</field>
+	<title>
+		<band height="157" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="72" width="100" height="30" uuid="a884ae61-f28b-4ea8-86bb-e85a6a37969e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="72" width="100" height="30" uuid="15de86e4-102b-426b-93f0-35803754e59c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="140" y="21" width="594" height="132" uuid="cc42297c-97a4-411f-ad75-6dd1bdebf28c"/>
+				<imageExpression><![CDATA["C:/Users/Victor Vásquez/Pictures/lemans/logo_lemans_24_horas.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="4" width="820" height="11" backcolor="#000000" uuid="680a9ed3-0d92-48a2-af01-45ddfa524e71"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="26" y="8" width="710" height="46" forecolor="#453691" uuid="55d199ce-aac5-465d-9d02-395a7a44f87d"/>
+				<box>
+					<pen lineColor="#030303"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="22"/>
+				</textElement>
+				<text><![CDATA[En el pódium, pero nunca en el primer escalón]]></text>
+			</staticText>
+			<line>
+				<reportElement x="90" y="43" width="590" height="1" uuid="a625087b-369d-4e9c-b594-1f1862e6654f"/>
+			</line>
+			<image>
+				<reportElement x="60" y="10" width="30" height="44" uuid="d96b54dd-e06c-4d91-893f-abf5aaaa921b"/>
+				<imageExpression><![CDATA["C:/Users/Victor Vásquez/Pictures/lemans/bandera.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="322">
+			<staticText>
+				<reportElement x="244" y="30" width="320" height="30" uuid="954aac1d-9f2f-49cb-b55a-b54bc6af3068"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numeros de Abandono]]></text>
+			</staticText>
+			<line>
+				<reportElement x="235" y="60" width="339" height="1" uuid="4fffef83-a004-405f-83ac-8d1fb66a3152"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="78" width="153" height="50" uuid="45ccf1fd-cf63-45f6-a263-167f48df8dca"/>
+				<textElement textAlignment="Left">
+					<font size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="128" width="159" height="50" uuid="77d9ce5d-5557-4386-9f04-7b3dd7b8cd4c"/>
+				<textElement textAlignment="Left">
+					<font size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="178" width="189" height="50" uuid="baa18a1f-37c0-41eb-ab65-f2fb0fe12251"/>
+				<textElement textAlignment="Left">
+					<font size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nacionalidad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="121" y="80" width="160" height="48" uuid="90c5cb39-a299-4b31-83ab-52c12b32f1a2"/>
+				<textElement textAlignment="Left">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pnombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="80" width="169" height="48" uuid="ec11db11-7e8f-4bb2-b090-e86c1e4faf78"/>
+				<textElement textAlignment="Left">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{snombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="120" width="169" height="50" uuid="e5e19db3-c3dd-4927-ab3b-4cfa8c65d1c8"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{papellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="272" y="122" width="171" height="48" uuid="22535b6b-4423-4151-90ff-3c4f9b2cd0fc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sapellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="186" y="173" width="251" height="48" uuid="81d4da6c-038d-4c8b-9585-83c49889154d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nacionalidad_piloto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="602" y="30" width="48" height="40" uuid="fae656fd-cae7-48e3-812e-02021b109c8b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{numero_abandonos}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="496" y="88" width="240" height="230" uuid="f3a4c5c3-13e5-4bf9-9b9c-de23497167ac"/>
+				<imageExpression><![CDATA[$F{foto_piloto}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="20" width="820" height="11" backcolor="#000000" uuid="0318cc9d-d50d-48b6-b656-284bcb4941bd"/>
+			</rectangle>
+		</band>
+	</pageFooter>
+</jasperReport>

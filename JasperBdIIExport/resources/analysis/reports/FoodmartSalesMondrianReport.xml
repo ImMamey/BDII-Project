@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reportUnit exportedWithPermissions="true">
+    <folder>/analysis/reports</folder>
+    <name>FoodmartSalesMondrianReport</name>
+    <version>0</version>
+    <label>Foodmart Mondrian Sales Report</label>
+    <description>Report with Mondrian Datasource</description>
+    <creationDate>2021-02-02T02:49:55.276-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.669-04:00</updateDate>
+    <mainReport>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false"
+            dataFile="FoodmartSalesReportJRXML.data" xsi:type="fileResource">
+            <folder>/analysis/reports/FoodmartSalesMondrianReport_files</folder>
+            <name>FoodmartSalesReportJRXML</name>
+            <version>0</version>
+            <label>FoodmartSalesReportJRXML</label>
+            <creationDate>2021-02-02T02:49:55.276-04:00</creationDate>
+            <updateDate>2019-12-06T18:54:36.669-04:00</updateDate>
+            <fileType>jrxml</fileType>
+        </localResource>
+    </mainReport>
+    <dataSource>
+        <uri>/analysis/connections/Foodmart</uri>
+    </dataSource>
+    <alwaysPromptControls>false</alwaysPromptControls>
+    <controlsLayout>1</controlsLayout>
+</reportUnit>

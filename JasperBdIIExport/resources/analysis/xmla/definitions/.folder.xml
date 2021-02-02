@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/analysis/xmla</parent>
+    <name>definitions</name>
+    <label>definitions</label>
+    <description>definitions folder</description>
+    <creationDate>2021-02-02T02:49:54.674-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.564-04:00</updateDate>
+    <resource>FoodmartXmlaDefinition</resource>
+    <resource>SugarCRMXmlaDefinition</resource>
+</folder>

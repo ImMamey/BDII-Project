@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>id_v</name>
+    <version>1</version>
+    <label>vehiculo</label>
+    <description></description>
+    <creationDate>2021-02-02T13:29:43.800-04:00</creationDate>
+    <updateDate>2021-02-02T17:25:00.278-04:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/reports/id_v_files</folder>
+            <name>id_v</name>
+            <version>0</version>
+            <label>id_v</label>
+            <description></description>
+            <creationDate>2021-02-02T13:29:43.800-04:00</creationDate>
+            <updateDate>2021-02-02T13:29:43.800-04:00</updateDate>
+            <language>sql</language>
+            <queryString>SELECT v.id_dimension_vehiculo,v.marca,v.nombre FROM DIMENSION_VEHICULO v</queryString>
+            <dataSource>
+                <uri>/datasources/Base_de_datos_estrella</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>marca</queryVisibleColumn>
+    <queryVisibleColumn>nombre</queryVisibleColumn>
+    <queryValueColumn>id_dimension_vehiculo</queryValueColumn>
+</inputControl>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<virtualDataSource exportedWithPermissions="true">
+    <folder>/datasources</folder>
+    <name>SugarFoodmartVDS</name>
+    <version>0</version>
+    <label>SugarCRM-Foodmart Virtual Data Source</label>
+    <description>Virtual Data Source Combining SugarCRM and Foodmart</description>
+    <creationDate>2021-02-02T02:49:54.964-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.293-04:00</updateDate>
+    <dataSource>
+        <alias>FoodmartDataSource</alias>
+        <dataSourceReference>
+            <uri>/analysis/datasources/FoodmartDataSourceJNDI</uri>
+        </dataSourceReference>
+    </dataSource>
+    <dataSource>
+        <alias>SugarCRMDataSource</alias>
+        <dataSourceReference>
+            <uri>/analysis/datasources/SugarCRMDataSourceJNDI</uri>
+        </dataSourceReference>
+    </dataSource>
+</virtualDataSource>

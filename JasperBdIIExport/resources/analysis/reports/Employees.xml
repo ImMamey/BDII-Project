@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reportUnit exportedWithPermissions="true">
+    <folder>/analysis/reports</folder>
+    <name>Employees</name>
+    <version>0</version>
+    <label>Employee List</label>
+    <description>Employee List</description>
+    <creationDate>2021-02-02T02:49:55.253-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.817-04:00</updateDate>
+    <mainReport>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false"
+            dataFile="EmployeesJRXML.data" xsi:type="fileResource">
+            <folder>/analysis/reports/Employees_files</folder>
+            <name>EmployeesJRXML</name>
+            <version>0</version>
+            <label>EmployeesJRXML Label</label>
+            <description>EmployeesJRXML description</description>
+            <creationDate>2021-02-02T02:49:55.253-04:00</creationDate>
+            <updateDate>2019-12-06T18:54:36.817-04:00</updateDate>
+            <fileType>jrxml</fileType>
+        </localResource>
+    </mainReport>
+    <dataSource>
+        <uri>/datasources/JServerJNDIDS</uri>
+    </dataSource>
+    <alwaysPromptControls>false</alwaysPromptControls>
+    <controlsLayout>1</controlsLayout>
+</reportUnit>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>marca_a</name>
+    <version>0</version>
+    <label>marca</label>
+    <description></description>
+    <creationDate>2021-02-02T18:16:30.531-04:00</creationDate>
+    <updateDate>2021-02-02T18:16:30.531-04:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/reports/marca_a_files</folder>
+            <name>marca_a</name>
+            <version>0</version>
+            <label>marca_a</label>
+            <description></description>
+            <creationDate>2021-02-02T18:16:30.531-04:00</creationDate>
+            <updateDate>2021-02-02T18:16:30.531-04:00</updateDate>
+            <language>sql</language>
+            <queryString>SELECT DISTINCT v.marca FROM DIMENSION_VEHICULO v</queryString>
+            <dataSource>
+                <uri>/datasources/Base_de_datos_estrella</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>marca</queryVisibleColumn>
+    <queryValueColumn>marca</queryValueColumn>
+</inputControl>

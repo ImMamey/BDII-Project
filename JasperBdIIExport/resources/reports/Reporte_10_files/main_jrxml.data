@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.11.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte_10" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4f1e9db0-da24-4e7d-8605-287a891dbef9">
+	<property name="ireport.jasperserver.url" value="http://localhost:8081/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/Reporte_10_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/Reporte_10"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Base de Datos Estrella"/>
+	<parameter name="id_f" class="java.lang.Integer"/>
+	<queryString language="plsql">
+		<![CDATA[SELECT * FROM PRIMERA_VICTORIA_PARTICIPACION($P{id_f})]]>
+	</queryString>
+	<field name="pnombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="pnombre"/>
+		<property name="com.jaspersoft.studio.field.name" value="pnombre"/>
+	</field>
+	<field name="snombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="snombre"/>
+		<property name="com.jaspersoft.studio.field.name" value="snombre"/>
+	</field>
+	<field name="papellido" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="papellido"/>
+		<property name="com.jaspersoft.studio.field.name" value="papellido"/>
+	</field>
+	<field name="sapellido" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="sapellido"/>
+		<property name="com.jaspersoft.studio.field.name" value="sapellido"/>
+	</field>
+	<field name="nacionalidad_piloto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nacionalidad_piloto"/>
+		<property name="com.jaspersoft.studio.field.name" value="nacionalidad_piloto"/>
+	</field>
+	<field name="foto_piloto" class="java.lang.Object">
+		<property name="com.jaspersoft.studio.field.label" value="foto_piloto"/>
+		<property name="com.jaspersoft.studio.field.name" value="foto_piloto"/>
+	</field>
+	<field name="anno_carrera" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="anno_carrera"/>
+		<property name="com.jaspersoft.studio.field.name" value="anno_carrera"/>
+	</field>
+	<title>
+		<band height="157" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="72" width="100" height="30" uuid="a66b1ba0-620b-460d-8c5f-e059212029e2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="72" width="100" height="30" uuid="a854ce97-4c56-4b93-aefc-7e9bb8418f1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="164" y="10" width="516" height="140" uuid="6c6aaba9-d96c-42dd-9b7c-a80ed2729d8d"/>
+				<imageExpression><![CDATA["repo:logo_lemans_24_horas.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="107" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="15" width="820" height="11" backcolor="#000000" uuid="7d6882f9-0d17-423f-a88f-a968b69b19ab"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="95" y="39" width="571" height="46" forecolor="#453691" uuid="01a787f1-cbcd-4017-b966-234fe17a6609"/>
+				<box>
+					<pen lineColor="#030303"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="22"/>
+				</textElement>
+				<text><![CDATA[Ganador en su primera participación]]></text>
+			</staticText>
+			<line>
+				<reportElement x="130" y="81" width="505" height="1" uuid="46659846-436d-419a-97f6-2247492e7a88"/>
+			</line>
+			<image>
+				<reportElement x="90" y="39" width="50" height="50" uuid="f2dc319e-9c03-4687-b540-bec1510139fc"/>
+				<imageExpression><![CDATA["repo:bandera.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="274">
+			<staticText>
+				<reportElement x="244" y="20" width="320" height="30" uuid="d8a500f1-e91e-4c3d-a5d2-eda68e6694eb"/>
+				<textElement textAlignment="Center">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Año de la Carrera]]></text>
+			</staticText>
+			<line>
+				<reportElement x="235" y="50" width="505" height="1" uuid="fb018771-4224-4548-8139-7c9ea93d8ef8"/>
+			</line>
+			<staticText>
+				<reportElement x="5" y="60" width="153" height="50" uuid="855adc4f-6a0a-4d73-9766-e76cf028d9e9"/>
+				<textElement textAlignment="Left">
+					<font size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="125" width="159" height="50" uuid="691bef9d-1676-4dc8-9634-8e036867f077"/>
+				<textElement textAlignment="Left">
+					<font size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellido:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="189" width="189" height="50" uuid="a1c7e095-ecbd-4c20-aea4-51ba372e7d82"/>
+				<textElement textAlignment="Left">
+					<font size="27" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nacionalidad:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="57" width="170" height="40" uuid="45fe5edc-68fb-44d1-8741-b49bcddca866"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pnombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="57" width="160" height="40" uuid="8e7ac4b5-a6d1-465c-b131-f7459424fccd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{snombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="123" y="125" width="180" height="35" uuid="67e06297-cae9-477e-878c-011284f91965"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{papellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="125" width="147" height="35" uuid="348237e4-ae03-4ac4-8471-fb11d1c7249c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sapellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="187" width="206" height="41" uuid="8f5bbbb1-0420-4917-921a-9e0a87a2208b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nacionalidad_piloto}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="523" y="80" width="205" height="185" uuid="38758946-a930-45f1-a25c-65c729eb714d"/>
+				<imageExpression><![CDATA[$F{foto_piloto}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="590" y="10" width="138" height="40" uuid="3a24e9f1-6f8e-4ce4-87d3-ebff96eec774"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anno_carrera}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="20" width="820" height="11" backcolor="#000000" uuid="02487f18-85a2-4211-a5fa-524966de325b"/>
+			</rectangle>
+		</band>
+	</pageFooter>
+</jasperReport>

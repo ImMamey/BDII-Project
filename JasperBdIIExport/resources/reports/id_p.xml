@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>id_p</name>
+    <version>1</version>
+    <label>nombre_piloto</label>
+    <description></description>
+    <creationDate>2021-02-02T13:23:39.816-04:00</creationDate>
+    <updateDate>2021-02-02T17:20:08.809-04:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/reports/id_p_files</folder>
+            <name>id_p</name>
+            <version>0</version>
+            <label>id_p</label>
+            <description></description>
+            <creationDate>2021-02-02T13:23:39.816-04:00</creationDate>
+            <updateDate>2021-02-02T13:23:39.816-04:00</updateDate>
+            <language>sql</language>
+            <queryString>SELECT p.id_dimension_piloto,p.primer_nombre,p.segundo_nombre,p.primer_apellido,p.segundo_apellido from DIMENSION_PILOTO p</queryString>
+            <dataSource>
+                <uri>/datasources/Base_de_datos_estrella</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>primer_nombre</queryVisibleColumn>
+    <queryVisibleColumn>segundo_nombre</queryVisibleColumn>
+    <queryVisibleColumn>primer_apellido</queryVisibleColumn>
+    <queryVisibleColumn>segundo_apellido</queryVisibleColumn>
+    <queryValueColumn>id_dimension_piloto</queryValueColumn>
+</inputControl>

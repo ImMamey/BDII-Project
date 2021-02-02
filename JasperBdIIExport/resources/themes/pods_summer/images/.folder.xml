@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/themes/pods_summer</parent>
+    <name>images</name>
+    <label>images</label>
+    <creationDate>2021-02-02T02:49:54.764-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:23.714-04:00</updateDate>
+    <resource>adhoc_toolbar_buttons_sprite.png</resource>
+    <resource>banner_bkgd.png</resource>
+    <resource>bg_signin.jpg</resource>
+    <resource>body_bkgnd.png</resource>
+    <resource>button_action_primary_sprite.png</resource>
+    <resource>button_capsule_sprite.png</resource>
+    <resource>disclosure_indicators_icons_sprite@1x.png</resource>
+    <resource>disclosure_indicators_icons_sprite@2x.png</resource>
+    <resource>disclosure_indicators_sprite.png</resource>
+    <resource>footer_bkgd.png</resource>
+    <resource>gr-link-theme.png</resource>
+    <resource>lists_sprite.png</resource>
+    <resource>logo_welcome.svg</resource>
+    <resource>search_icons_sprite@1x.png</resource>
+    <resource>search_icons_sprite@2x.png</resource>
+    <resource>tabs_horizontal_sprite.png</resource>
+    <resource>tabs_vertical_sprite.png</resource>
+</folder>

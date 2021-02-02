@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<organization>
+    <id>organizations</id>
+    <alias>organizations</alias>
+    <tenantName>root</tenantName>
+    <tenantDesc>organizations</tenantDesc>
+    <tenantNote> </tenantNote>
+    <tenantUri>/</tenantUri>
+    <tenantFolderUri>/</tenantFolderUri>
+    <attribute>
+        <name>domainWhitelist</name>
+        <value>*</value>
+    </attribute>
+    <theme>default</theme>
+</organization>

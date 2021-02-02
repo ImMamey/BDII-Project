@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/</parent>
+    <name>reports</name>
+    <label>Reports</label>
+    <description>Reports</description>
+    <creationDate>2021-02-02T02:49:54.440-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.850-04:00</updateDate>
+    <folder>interactive</folder>
+    <resource>anno_c</resource>
+    <resource>id_f</resource>
+    <resource>id_p</resource>
+    <resource>id_v</resource>
+    <resource>limite</resource>
+    <resource>marca_a</resource>
+    <resource>marca_caucho</resource>
+    <resource>num_equipo</resource>
+    <resource>Reporte_10</resource>
+    <resource>Reporte_11</resource>
+    <resource>Reporte_12</resource>
+    <resource>Reporte_14</resource>
+    <resource>Reporte_15</resource>
+    <resource>Reporte_16</resource>
+    <resource>Reporte_4.1</resource>
+    <resource>Reporte_5_1</resource>
+    <resource>Reporte_6.1</resource>
+    <resource>Reporte_7</resource>
+    <resource>Reporte_8</resource>
+    <resource>Reporte_9</resource>
+    <resource>Reportes_13</resource>
+    <permission>
+        <permissionMask>30</permissionMask>
+        <recipient recipientType="role">ROLE_USER</recipient>
+    </permission>
+</folder>

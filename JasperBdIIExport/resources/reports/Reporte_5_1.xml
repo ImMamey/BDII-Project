@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reportUnit exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>Reporte_5_1</name>
+    <version>1</version>
+    <label>Reporte_5_1</label>
+    <description></description>
+    <creationDate>2021-02-02T17:19:07.397-04:00</creationDate>
+    <updateDate>2021-02-02T17:20:52.000-04:00</updateDate>
+    <mainReport>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" dataFile="main_jrxml.data" xsi:type="fileResource">
+            <folder>/reports/Reporte_5_1_files</folder>
+            <name>main_jrxml</name>
+            <version>0</version>
+            <label>Main jrxml</label>
+            <creationDate>2021-02-02T17:19:07.397-04:00</creationDate>
+            <updateDate>2021-02-02T17:19:07.397-04:00</updateDate>
+            <fileType>jrxml</fileType>
+        </localResource>
+    </mainReport>
+    <dataSource>
+        <uri>/datasources/Base_de_datos_estrella</uri>
+    </dataSource>
+    <inputControl>
+        <uri>/reports/id_p</uri>
+    </inputControl>
+    <resource>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" dataFile="bandera.png.data" xsi:type="fileResource">
+            <folder>/reports/Reporte_5_1_files</folder>
+            <name>bandera.png</name>
+            <version>0</version>
+            <label>bandera.png</label>
+            <creationDate>2021-02-02T17:19:07.397-04:00</creationDate>
+            <updateDate>2021-02-02T17:19:07.397-04:00</updateDate>
+            <fileType>img</fileType>
+        </localResource>
+    </resource>
+    <resource>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false"
+            dataFile="logo_lemans_24_horas.png.data" xsi:type="fileResource">
+            <folder>/reports/Reporte_5_1_files</folder>
+            <name>logo_lemans_24_horas.png</name>
+            <version>0</version>
+            <label>logo_lemans_24_horas.png</label>
+            <creationDate>2021-02-02T17:19:07.397-04:00</creationDate>
+            <updateDate>2021-02-02T17:19:07.397-04:00</updateDate>
+            <fileType>img</fileType>
+        </localResource>
+    </resource>
+    <inputControlRenderingView></inputControlRenderingView>
+    <alwaysPromptControls>true</alwaysPromptControls>
+    <controlsLayout>1</controlsLayout>
+</reportUnit>

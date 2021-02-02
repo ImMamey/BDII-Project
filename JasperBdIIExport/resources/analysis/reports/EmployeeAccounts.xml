@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reportUnit exportedWithPermissions="true">
+    <folder>/analysis/reports</folder>
+    <name>EmployeeAccounts</name>
+    <version>0</version>
+    <label>Employee Accounts</label>
+    <description>List of Accounts per Employee</description>
+    <creationDate>2021-02-02T02:49:55.209-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.777-04:00</updateDate>
+    <mainReport>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false"
+            dataFile="EmployeeAccountsJRXML.data" xsi:type="fileResource">
+            <folder>/analysis/reports/EmployeeAccounts_files</folder>
+            <name>EmployeeAccountsJRXML</name>
+            <version>0</version>
+            <label>EmployeeAccountsJRXML Label</label>
+            <description>EmployeeAccountsJRXML description</description>
+            <creationDate>2021-02-02T02:49:55.209-04:00</creationDate>
+            <updateDate>2019-12-06T18:54:36.777-04:00</updateDate>
+            <fileType>jrxml</fileType>
+        </localResource>
+    </mainReport>
+    <dataSource>
+        <uri>/datasources/JServerJNDIDS</uri>
+    </dataSource>
+    <inputControl>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="inputControl">
+            <folder>/analysis/reports/EmployeeAccounts_files</folder>
+            <name>EmployeeID</name>
+            <version>0</version>
+            <label>Employee</label>
+            <creationDate>2021-02-02T02:49:55.209-04:00</creationDate>
+            <updateDate>2019-12-06T18:54:36.777-04:00</updateDate>
+            <type>4</type>
+            <mandatory>true</mandatory>
+            <readOnly>false</readOnly>
+            <visible>true</visible>
+            <query>
+                <localResource exportedWithPermissions="false" xsi:type="query">
+                    <folder>/analysis/reports/EmployeeAccounts_files/EmployeeID_files</folder>
+                    <name>EmployeeQuery</name>
+                    <version>0</version>
+                    <label>Employee Query</label>
+                    <creationDate>2021-02-02T02:49:55.209-04:00</creationDate>
+                    <updateDate>2019-12-06T18:54:36.777-04:00</updateDate>
+                    <language>sql</language>
+                    <queryString>SELECT id, user_name FROM users WHERE employee_status = 'Active'</queryString>
+                </localResource>
+            </query>
+            <queryVisibleColumn>user_name</queryVisibleColumn>
+            <queryValueColumn>id</queryValueColumn>
+        </localResource>
+    </inputControl>
+    <alwaysPromptControls>false</alwaysPromptControls>
+    <controlsLayout>1</controlsLayout>
+</reportUnit>

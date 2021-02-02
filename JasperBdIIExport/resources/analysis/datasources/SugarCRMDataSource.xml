@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jdbcDataSource exportedWithPermissions="true">
+    <folder>/analysis/datasources</folder>
+    <name>SugarCRMDataSource</name>
+    <version>0</version>
+    <label>SugarCRM Data Source</label>
+    <description>SugarCRM Data Source</description>
+    <creationDate>2021-02-02T02:49:55.166-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.253-04:00</updateDate>
+    <driver>org.postgresql.Driver</driver>
+    <connectionUrl>jdbc:postgresql://ci-catalogs-postgresql.jaspersoft.com:5432/sugarcrm</connectionUrl>
+    <connectionUser>ci_agent</connectionUser>
+    <connectionPassword>ENC&lt;4A5253495600000010AEE1EDE16E94A9F3D03F990233352C9C9AF4179ADC6794A9074B52B1042586EA&gt;</connectionPassword>
+</jdbcDataSource>

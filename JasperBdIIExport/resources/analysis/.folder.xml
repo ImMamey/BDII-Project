@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/</parent>
+    <name>analysis</name>
+    <label>Analysis Components</label>
+    <description>Analysis Components</description>
+    <creationDate>2021-02-02T02:49:54.341-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:35.880-04:00</updateDate>
+    <folder>connections</folder>
+    <folder>datasources</folder>
+    <folder>reports</folder>
+    <folder>schemas</folder>
+    <folder>views</folder>
+    <folder>xmla</folder>
+</folder>

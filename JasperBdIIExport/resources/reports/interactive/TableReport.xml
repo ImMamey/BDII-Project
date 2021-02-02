@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reportUnit exportedWithPermissions="true">
+    <folder>/reports/interactive</folder>
+    <name>TableReport</name>
+    <version>0</version>
+    <label>Table Report</label>
+    <description>Table Report</description>
+    <creationDate>2021-02-02T02:49:55.476-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.990-04:00</updateDate>
+    <mainReport>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" dataFile="TableReport.data" xsi:type="fileResource">
+            <folder>/reports/interactive/TableReport_files</folder>
+            <name>TableReport</name>
+            <version>0</version>
+            <label>Table Report</label>
+            <description>Table Report</description>
+            <creationDate>2021-02-02T02:49:55.476-04:00</creationDate>
+            <updateDate>2019-12-06T18:54:36.990-04:00</updateDate>
+            <fileType>jrxml</fileType>
+        </localResource>
+    </mainReport>
+    <alwaysPromptControls>false</alwaysPromptControls>
+    <controlsLayout>1</controlsLayout>
+</reportUnit>

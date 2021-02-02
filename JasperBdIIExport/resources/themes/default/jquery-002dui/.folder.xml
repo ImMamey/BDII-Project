@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/themes/default</parent>
+    <name>jquery-ui</name>
+    <label>jquery-ui</label>
+    <creationDate>2021-02-02T02:49:54.742-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:17.982-04:00</updateDate>
+    <folder>images</folder>
+    <resource>jquery-ui.css</resource>
+</folder>

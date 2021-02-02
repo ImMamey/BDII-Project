@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmlaConnection exportedWithPermissions="true">
+    <folder>/analysis/connections</folder>
+    <name>SugarCRMXmlaConnection</name>
+    <version>0</version>
+    <label>SugarCRM XML/A Connection</label>
+    <description>SugarCRM XML/A Connection</description>
+    <creationDate>2021-02-02T02:49:55.136-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.443-04:00</updateDate>
+    <connectionURL>http://localhost:8080/jasperserver/xmla</connectionURL>
+    <dataSource>Provider=Mondrian;DataSource=JRS</dataSource>
+    <catalog>SugarCRM</catalog>
+    <connectionUser>jasperadmin</connectionUser>
+    <connectionPassword>ENC&lt;4A5253495600000010D582E6DFFA4571FC79E99952C7B15D08E67E5FD4BC905484A270FBE56212D30A&gt;</connectionPassword>
+</xmlaConnection>

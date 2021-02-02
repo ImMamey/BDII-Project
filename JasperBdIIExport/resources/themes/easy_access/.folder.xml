@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/themes</parent>
+    <name>easy_access</name>
+    <label>easy_access</label>
+    <creationDate>2021-02-02T02:49:54.643-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:20.307-04:00</updateDate>
+    <resource>overrides_custom.css</resource>
+</folder>

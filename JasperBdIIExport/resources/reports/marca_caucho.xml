@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>marca_caucho</name>
+    <version>0</version>
+    <label>marca_caucho</label>
+    <description></description>
+    <creationDate>2021-02-02T18:18:46.272-04:00</creationDate>
+    <updateDate>2021-02-02T18:18:46.272-04:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/reports/marca_caucho_files</folder>
+            <name>marca_caucho</name>
+            <version>0</version>
+            <label>marca_caucho</label>
+            <description></description>
+            <creationDate>2021-02-02T18:18:46.272-04:00</creationDate>
+            <updateDate>2021-02-02T18:18:46.272-04:00</updateDate>
+            <language>sql</language>
+            <queryString>SELECT DISTINCT r.marca_de_caucho FROM DIMENSION_RANKING r</queryString>
+            <dataSource>
+                <uri>/datasources/Base_de_datos_estrella</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>marca_de_caucho</queryVisibleColumn>
+    <queryValueColumn>marca_de_caucho</queryValueColumn>
+</inputControl>

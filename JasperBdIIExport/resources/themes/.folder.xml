@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/</parent>
+    <name>themes</name>
+    <label>Themes</label>
+    <creationDate>2021-02-02T02:49:54.468-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:10.332-04:00</updateDate>
+    <folder>default</folder>
+    <folder>easy_access</folder>
+    <folder>jasper_dark</folder>
+    <folder>pods_summer</folder>
+    <permission>
+        <permissionMask>32</permissionMask>
+        <recipient recipientType="role">ROLE_USER</recipient>
+    </permission>
+</folder>

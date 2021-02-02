@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fileResource exportedWithPermissions="true" dataFile="overrides_custom.css.data">
+    <folder>/themes/jasper_dark</folder>
+    <name>overrides_custom.css</name>
+    <version>0</version>
+    <label>overrides_custom.css</label>
+    <creationDate>2021-02-02T02:49:56.452-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:22.640-04:00</updateDate>
+    <fileType>css</fileType>
+</fileResource>

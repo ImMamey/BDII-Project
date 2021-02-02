@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>num_equipo</name>
+    <version>0</version>
+    <label>numero_equipo</label>
+    <description></description>
+    <creationDate>2021-02-02T12:12:08.314-04:00</creationDate>
+    <updateDate>2021-02-02T12:12:08.314-04:00</updateDate>
+    <type>2</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <dataType>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="dataType">
+            <folder>/reports/num_equipo_files</folder>
+            <name>num_equipo</name>
+            <version>0</version>
+            <label>num_equipo</label>
+            <description></description>
+            <creationDate>2021-02-02T12:12:08.314-04:00</creationDate>
+            <updateDate>2021-02-02T12:12:08.314-04:00</updateDate>
+            <type>2</type>
+            <minValue xmlns:java="http://java.sun.com" xsi:type="java:java.lang.String">0</minValue>
+            <strictMin>false</strictMin>
+            <strictMax>false</strictMax>
+        </localResource>
+    </dataType>
+</inputControl>

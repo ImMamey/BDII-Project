@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<olapUnit exportedWithPermissions="true">
+    <folder>/analysis/views</folder>
+    <name>Foodmart_sample</name>
+    <version>0</version>
+    <label>Foodmart Sample Analysis View</label>
+    <description>Sample Analysis View: Foodmart Unit Sales</description>
+    <creationDate>2021-02-02T02:49:55.324-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.470-04:00</updateDate>
+    <olapClientConnection>
+        <uri>/analysis/connections/Foodmart</uri>
+    </olapClientConnection>
+    <mdxQuery>select {[Measures].[Unit Sales], [Measures].[Store Cost], [Measures].[Store Sales]} on columns, {([Promotion Media].[All Media], [Product].[All Products])} ON rows from Sales </mdxQuery>
+</olapUnit>

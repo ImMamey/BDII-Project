@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inputControl exportedWithPermissions="true">
+    <folder>/reports</folder>
+    <name>anno_c</name>
+    <version>0</version>
+    <label>año</label>
+    <description></description>
+    <creationDate>2021-02-02T12:02:37.734-04:00</creationDate>
+    <updateDate>2021-02-02T12:02:37.734-04:00</updateDate>
+    <type>4</type>
+    <mandatory>false</mandatory>
+    <readOnly>false</readOnly>
+    <visible>true</visible>
+    <query>
+        <localResource
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            exportedWithPermissions="false" xsi:type="query">
+            <folder>/reports/anno_c_files</folder>
+            <name>anno_c</name>
+            <version>0</version>
+            <label>anno_c</label>
+            <description></description>
+            <creationDate>2021-02-02T12:02:37.734-04:00</creationDate>
+            <updateDate>2021-02-02T12:02:37.734-04:00</updateDate>
+            <language>sql</language>
+            <queryString>SELECT f.id_dimension_fecha,f.anno FROM DIMENSION_FECHA f</queryString>
+            <dataSource>
+                <uri>/datasources/Base_de_datos_estrella</uri>
+            </dataSource>
+        </localResource>
+    </query>
+    <queryVisibleColumn>anno</queryVisibleColumn>
+    <queryValueColumn>id_dimension_fecha</queryValueColumn>
+</inputControl>

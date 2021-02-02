@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/analysis</parent>
+    <name>schemas</name>
+    <label>Analysis Schemas</label>
+    <description>Schemas used by Analysis</description>
+    <creationDate>2021-02-02T02:49:54.536-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:35.897-04:00</updateDate>
+    <resource>FoodmartSchema</resource>
+    <resource>FoodmartSchemaUpper</resource>
+    <resource>SugarCRMSchema</resource>
+    <resource>SugarCRMSchemaUpper</resource>
+</folder>

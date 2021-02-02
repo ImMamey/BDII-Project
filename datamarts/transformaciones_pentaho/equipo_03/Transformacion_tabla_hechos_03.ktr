@@ -1018,12 +1018,12 @@
  initcap(motor.nombre) as nombre_motor,
 
 --fecha
-  to_date(CONCAT((evento.ano).dia,'-',(evento.ano).mes,'-',(evento.ano).ano),'DD-MM-YYYY') as fecha,
+ to_date(CONCAT((evento.ano).dia,'-',(evento.ano).mes,'-',(evento.ano).ano),'DD-MM-YYYY') as fecha,
 
 --ranking
-  ranking.id as id_ranking_vieja,
-  ranking.puesto as puesto_ranking,
-  ranking.distancia_km as distancia_km_ranking,
+ ranking.id as id_ranking_vieja,
+ ranking.puesto as puesto_ranking,
+ ranking.distancia_km as distancia_km_ranking,
  
 --evento
  evento.id as id_evento_vieja,
@@ -1032,7 +1032,7 @@
 --equipo
  equipo.id as id_equipo_vieja,
  initcap(equipo.nombre) as nombre_equipo,
-e_r.numero_equipo as numero_equipo
+ e_r.numero_equipo as numero_equipo
 
 FROM E_R, E_P, piloto, equipo, v_m, vehiculo, motor, ranking, evento
 WHERE E_R.fk_e_p_id = E_P.id and
@@ -1044,7 +1044,52 @@ WHERE E_R.fk_e_p_id = E_P.id and
       v_m.fk_motor_id = motor.id and
       E_R.fk_ranking_id = ranking.id and
       ranking.fk_evento_id = evento.id and
-      evento.tipo = 'Carrera'
+      evento.tipo ilike 'Carrera'
+UNION
+SELECT 
+
+--pilotos
+ piloto.id as id_piloto_vieja,
+ initcap((piloto.identificacion).primer_nombre) as nombre_piloto,
+ initcap((piloto.identificacion).primer_apellido) as apellido_piloto,
+ initcap(piloto.nacionalidad) as nacionalidad,
+--genero M
+
+--vehiculos
+ vehiculo.id as id_vehiculo_vieja,
+ initcap(vehiculo.nombre) as nombre_vehiculo,
+ initcap(motor.nombre) as nombre_motor,
+
+--fecha
+ to_date(CONCAT((evento.ano).dia,'-',(evento.ano).mes,'-',(evento.ano).ano),'DD-MM-YYYY') as fecha,
+
+--ranking
+ ranking.id as id_ranking_vieja,
+ ranking.puesto as puesto_ranking,
+ ranking.distancia_km as distancia_km_ranking,
+ 
+--evento
+ evento.id as id_evento_vieja,
+ evento.tipo as tipo_evento,
+
+--equipo
+ equipo.id as id_equipo_vieja,
+ initcap(equipo.nombre) as nombre_equipo,
+ e_r.numero_equipo as numero_equipo
+
+FROM E_R, E_P, piloto, equipo, v_m, vehiculo, motor, ranking, evento
+WHERE E_R.fk_e_p_id+1 = E_P.id and
+      E_P.fk_piloto_id = piloto.id and
+      E_P.fk_equipo_id = equipo.id and
+      equipo.fk_v_m_motor_id = v_m.fk_motor_id and
+      equipo.fk_v_m_vehiculo_id = v_m.fk_vehiculo_id and
+      v_m.fk_vehiculo_id = vehiculo.id and
+      v_m.fk_motor_id = motor.id and
+      E_R.fk_ranking_id = ranking.id and
+      ranking.fk_evento_id = evento.id and
+      evento.tipo ilike 'Carrera'
+-----
+
 -----
 </sql>
     <limit>0</limit>

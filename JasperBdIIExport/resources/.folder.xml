@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <name>/</name>
+    <label>root</label>
+    <description>Root of the folder hierarchy</description>
+    <creationDate>2021-02-02T02:49:54.264-04:00</creationDate>
+    <updateDate>2019-12-06T18:47:58.124-04:00</updateDate>
+    <folder>analysis</folder>
+    <folder>ContentFiles</folder>
+    <folder>datasources</folder>
+    <folder>images</folder>
+    <folder>reports</folder>
+    <folder>themes</folder>
+    <permission>
+        <permissionMask>1</permissionMask>
+        <recipient recipientType="role">ROLE_ADMINISTRATOR</recipient>
+    </permission>
+    <permission>
+        <permissionMask>2</permissionMask>
+        <recipient recipientType="role">ROLE_USER</recipient>
+    </permission>
+</folder>

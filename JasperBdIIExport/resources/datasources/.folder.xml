@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/</parent>
+    <name>datasources</name>
+    <label>Data Sources</label>
+    <description>Data Sources used by reports</description>
+    <creationDate>2021-02-02T02:49:54.385-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:35.798-04:00</updateDate>
+    <resource>Base_de_datos_estrella</resource>
+    <resource>JServerJdbcDS</resource>
+    <resource>JServerJNDIDS</resource>
+    <resource>repositoryDS</resource>
+    <resource>SugarFoodmartVDS</resource>
+    <permission>
+        <permissionMask>32</permissionMask>
+        <recipient recipientType="role">ROLE_USER</recipient>
+    </permission>
+</folder>

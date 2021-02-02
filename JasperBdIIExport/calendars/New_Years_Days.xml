@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<holiday-calendar>
+    <name>New Years Days</name>
+    <description>New Years Days</description>
+    <timezone>America/Los_Angeles</timezone>
+    <excludedDate>2012-01-01T03:30:00.000-04:30</excludedDate>
+    <excludedDate>2013-01-01T03:30:00.000-04:30</excludedDate>
+    <excludedDate>2014-01-01T03:30:00.000-04:30</excludedDate>
+    <excludedDate>2015-01-01T03:30:00.000-04:30</excludedDate>
+    <excludedDate>2016-01-01T03:30:00.000-04:30</excludedDate>
+    <excludedDate>2017-01-01T04:00:00.000-04:00</excludedDate>
+    <excludedDate>2018-01-01T04:00:00.000-04:00</excludedDate>
+    <excludedDate>2019-01-01T04:00:00.000-04:00</excludedDate>
+    <excludedDate>2020-01-01T04:00:00.000-04:00</excludedDate>
+    <excludedDate>2021-01-01T04:00:00.000-04:00</excludedDate>
+    <excludedDate>2022-01-01T04:00:00.000-04:00</excludedDate>
+</holiday-calendar>

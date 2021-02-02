@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/analysis</parent>
+    <name>xmla</name>
+    <label>xmla</label>
+    <description>xmla folder</description>
+    <creationDate>2021-02-02T02:49:54.564-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:36.557-04:00</updateDate>
+    <folder>definitions</folder>
+</folder>

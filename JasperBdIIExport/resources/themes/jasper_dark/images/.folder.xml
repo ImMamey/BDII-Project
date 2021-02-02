@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<folder exportedWithPermissions="true">
+    <parent>/themes/jasper_dark</parent>
+    <name>images</name>
+    <label>images</label>
+    <creationDate>2021-02-02T02:49:54.752-04:00</creationDate>
+    <updateDate>2019-12-06T18:54:21.413-04:00</updateDate>
+    <resource>adhoc_datatree_icons_sprite.png</resource>
+    <resource>banner_bkgd.png</resource>
+    <resource>button_action_primary_sprite.png</resource>
+    <resource>button_capsule_sprite.png</resource>
+    <resource>dashboard_designer_sprite.png</resource>
+    <resource>dialog_button_sprite.png</resource>
+    <resource>disclosure_indicators_icons_sprite@1x.png</resource>
+    <resource>disclosure_indicators_icons_sprite@2x.png</resource>
+    <resource>disclosure_indicators_sprite.png</resource>
+    <resource>footer_bkgd.png</resource>
+    <resource>home_bkgd.png</resource>
+    <resource>home_icons_sprite.png</resource>
+    <resource>homePages_icons_sprite.png</resource>
+    <resource>homePages_icons_sprite-2x.png</resource>
+    <resource>list_node_animation.gif</resource>
+    <resource>lists_sprite.png</resource>
+    <resource>login_devices-2x.png</resource>
+    <resource>logo_welcome.svg</resource>
+    <resource>menu_primaryNav_sprite.png</resource>
+    <resource>search_sprite.png</resource>
+    <resource>tabs_horizontal_sprite.png</resource>
+    <resource>tabs_vertical_sprite.png</resource>
+    <resource>tree_icons_sprite.svg</resource>
+    <resource>ui-icons_469bdd_256x240.png</resource>
+    <resource>wait_animation_large.gif</resource>
+</folder>
