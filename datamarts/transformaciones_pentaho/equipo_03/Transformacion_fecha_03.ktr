@@ -612,6 +612,7 @@
 to_date(CONCAT((evento.ano).dia,'-',(evento.ano).mes,'-',(evento.ano).ano),'DD-MM-YYYY') as fecha_inicial
 
 FROM evento
+Where evento.tipo='Carrera'
 ORDER BY 1</sql>
     <limit>0</limit>
     <lookup/>

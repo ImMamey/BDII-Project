@@ -1534,7 +1534,7 @@ WHERE participacion.id=piloto_participacion.participacion_id and
       </key>
       <value>
         <name>num_equipo</name>
-        <rename>id_dimension_equipo_new</rename>
+        <rename>numero_equipo</rename>
       </value>
       <value>
         <name>puesto</name>
