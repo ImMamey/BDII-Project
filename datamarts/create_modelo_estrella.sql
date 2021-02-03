@@ -14,6 +14,10 @@ CREATE TABLE DIMENSION_PILOTO(
  PRIMARY KEY (id_Dimension_Piloto,id_tabla_original_piloto)
 );
 
+CREATE INDEX DIMENSION_PILOTO_ids ON  DIMENSION_PILOTO (id_Dimension_Piloto,fecha_nacimiento);
+--debido a la utilizacion de fotos dentro de esta tabla, los updates toman demasiado tiempo en hacer fetch, por lo tanto se uso el indice
+--para evadir la busqueda de toda la tabla, y negar la visualizacion de fotos.
+
 CREATE TABLE DIMENSION_VEHICULO(
     id_Dimension_Vehiculo INT NOT NULL,
     id_tabla_original_vehiculo INT NOT NULL,
@@ -49,6 +53,10 @@ CREATE TABLE DIMENSION_RANKING(
     foto BYTEA,
     PRIMARY KEY ( id_Dimension_Ranking,id_tabla_original_ranking)
 );
+
+CREATE INDEX DIMENSION_PILOTO_ids ON  DIMENSION_PILOTO (id_Dimension_Ranking,id_tabla_original_ranking,puesto);
+--debido a la utilizacion de fotos dentro de esta tabla, los updates toman demasiado tiempo en hacer fetch, por lo tanto se uso el indice
+--para evadir la busqueda de toda la tabla, y negar la visualizacion de fotos.
 
 CREATE TABLE DIMENSION_EVENTO(
     id_Dimension_Evento INT NOT NULL,
