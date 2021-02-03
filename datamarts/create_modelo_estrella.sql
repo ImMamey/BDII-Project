@@ -54,7 +54,7 @@ CREATE TABLE DIMENSION_RANKING(
     PRIMARY KEY ( id_Dimension_Ranking,id_tabla_original_ranking)
 );
 
-CREATE INDEX DIMENSION_PILOTO_ids ON  DIMENSION_PILOTO (id_Dimension_Ranking,id_tabla_original_ranking,puesto);
+CREATE INDEX DIMENSION_RANKING_ids ON  DIMENSION_RANKING(id_Dimension_Ranking,id_tabla_original_ranking,puesto);
 --debido a la utilizacion de fotos dentro de esta tabla, los updates toman demasiado tiempo en hacer fetch, por lo tanto se uso el indice
 --para evadir la busqueda de toda la tabla, y negar la visualizacion de fotos.
 
