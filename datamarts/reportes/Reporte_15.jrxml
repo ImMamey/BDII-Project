@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Reporte_15" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01b4e23d-ab1f-488e-9390-ba94ac37f8d9">
+	<property name="ireport.jasperserver.url" value="http://localhost:8081/jasperserver/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin"/>
+	<property name="ireport.jasperserver.report.resource" value="/reports/Reporte_15_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/reports/Reporte_15"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Base de Datos Estrella"/>
+	<parameter name="marca_a" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<parameter name="marca_caucho" class="java.lang.String">
+		<defaultValueExpression><![CDATA[null]]></defaultValueExpression>
+	</parameter>
+	<queryString language="plsql">
+		<![CDATA[SELECT * FROM VICTORIAS_POR_MARCA($P{marca_a}, $P{marca_caucho})]]>
+	</queryString>
+	<field name="marca" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="marca"/>
+		<property name="com.jaspersoft.studio.field.label" value="marca"/>
+	</field>
+	<field name="victorias" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="victorias"/>
+		<property name="com.jaspersoft.studio.field.label" value="victorias"/>
+	</field>
+	<field name="marca_de_caucho" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="marca_de_caucho"/>
+		<property name="com.jaspersoft.studio.field.label" value="marca_de_caucho"/>
+	</field>
+	<title>
+		<band height="157" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="0" y="72" width="100" height="30" uuid="59ae9ca3-e813-4e24-9938-168f39fec4a4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="702" y="72" width="100" height="30" uuid="eb6acb33-11b0-4f93-9a67-cca944c28601"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="22"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="110" y="-10" width="634" height="167" uuid="075431c9-8d16-48da-9458-b7ca6e2af7b1"/>
+				<imageExpression><![CDATA["C:/Users/Victor Vásquez/Pictures/lemans/logo_lemans_24_horas.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="76" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="15" width="820" height="11" backcolor="#000000" uuid="935fcddf-99f8-4925-8841-7c302c5dc3ed"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="23" width="710" height="46" forecolor="#453691" uuid="41501799-4f1e-4356-b208-cd8f1c085689"/>
+				<box>
+					<pen lineColor="#030303"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial Black" size="22"/>
+				</textElement>
+				<text><![CDATA[Victorias por marca]]></text>
+			</staticText>
+			<line>
+				<reportElement x="220" y="66" width="339" height="1" uuid="b449efdd-a563-475c-aae1-63f0bf150897"/>
+			</line>
+			<image>
+				<reportElement x="180" y="26" width="50" height="50" uuid="b4ba08fe-4302-4ffa-9a5a-90960aa049df"/>
+				<imageExpression><![CDATA["C:/Users/Victor Vásquez/Pictures/lemans/bandera.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="210">
+			<staticText>
+				<reportElement x="35" y="41" width="100" height="50" uuid="102c8d03-42ee-4749-b159-32a83fdfe9c1"/>
+				<textElement textAlignment="Left">
+					<font size="31" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marca:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="101" width="159" height="50" uuid="11d866b6-b4ef-4f43-8d19-af1e4c990c0d"/>
+				<textElement textAlignment="Left">
+					<font size="31" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="41" width="319" height="50" uuid="14ae68e8-2638-49eb-90ee-5fcf651bb373"/>
+				<textElement textAlignment="Left">
+					<font size="31" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numero de Victorias:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="415" y="81" width="339" height="1" uuid="129f6997-9dfc-4308-b36d-f1ef38555aba"/>
+			</line>
+			<textField>
+				<reportElement x="125" y="42" width="238" height="49" uuid="12146ea4-d2ed-4cb7-ad4a-989fb6bada6b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="545" y="112" width="80" height="80" uuid="9994181f-3007-49d1-8cf9-a0e46532be1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{victorias}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="195" y="101" width="290" height="50" uuid="9168648f-000a-4d78-af18-7a99b69fa10e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{marca_de_caucho}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-10" y="20" width="820" height="11" backcolor="#000000" uuid="a07236ff-3d3c-42d6-b330-e83e127b5b09"/>
+			</rectangle>
+		</band>
+	</pageFooter>
+</jasperReport>
